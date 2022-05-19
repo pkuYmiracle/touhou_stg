@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>people/boss.png</file>
+        <file>people/orange.png</file>
+        <file>people/qi.png</file>
+        <file>people/wu (2).png</file>
+        <file>people/wu.png</file>
+        <file>backboard/1.jpg</file>
+        <file>backboard/2.jpg</file>
+        <file>backboard/3.jpg</file>
+        <file>backboard/game.jpg</file>
+        <file>backboard/icon.png</file>
+        <file>backboard/start.png</file>
+        <file>backboard/back.png</file>
+    </qresource>
+</RCC>

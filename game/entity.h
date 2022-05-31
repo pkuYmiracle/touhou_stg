@@ -4,12 +4,13 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QPoint>
+#include <QVector2D>
 
 class Entity : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 protected:
-    QPointF speed = {0, 0}; //speed vector per frame.
+    QVector2D speed = {0, 0}; //speed vector per frame.
 public:
     explicit Entity();
 
@@ -17,8 +18,8 @@ public:
     void    advance(int phase) override;
 
 
-    QPointF getSpeed() const;
-    void setSpeed(QPointF newSpeed);
+    QVector2D getSpeed() const;
+    void setSpeed(QVector2D newSpeed);
 };
 
 #endif // ENTITY_H

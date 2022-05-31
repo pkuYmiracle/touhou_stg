@@ -7,7 +7,7 @@
 #include <QEvent>
 #include <QKeyEvent>
 #include <QDebug>
-
+#include <QMouseEvent>
 class KeyboardHandler : public QObject
 {
     std::set<int> pressedKeys;
@@ -20,6 +20,14 @@ public:
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event) {
+
+        //for developer to conveniently locate.
+        if (event->type() == QEvent::MouseButtonPress) {
+            QMouseEvent *e = dynamic_cast<QMouseEvent*>(event);
+            qDebug() << e->pos() << endl;
+            return true;
+        }
+
         if (event->type() == QEvent::KeyPress ||
             event->type() == QEvent::KeyRelease) {
             QKeyEvent *keyevent = dynamic_cast<QKeyEvent*>(event);

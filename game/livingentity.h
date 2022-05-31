@@ -6,7 +6,7 @@
 
 class LivingEntity : public Entity
 {
-    float hp; //short for health point
+    qreal hp; //short for health point
 
 public:
     explicit LivingEntity();
@@ -16,7 +16,7 @@ public:
 
 
     float getHp() const;
-    void setHp(float newHp);
+    void setHp(qreal newHp);
 };
 
 #endif // LIVINGENTITY_H

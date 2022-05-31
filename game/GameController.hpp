@@ -29,18 +29,16 @@ public:
     {
         view->setFixedSize(WIDTH, HEIGHT);
 
-        QRect sceneRect = QRect(50, 50, WIDTH - 50, HEIGHT - 50);
+        QRect sceneRect = QRect(5, 5, WIDTH - 5, HEIGHT - 5);
         view->setScene(scene);
         player->setPos(sceneRect.center());
         scene->setSceneRect(sceneRect);
         QObject::connect(frame_timer, SIGNAL(timeout()), scene, SLOT(advance()));
         view->installEventFilter(kbhandler);
         scene->addItem(player);
-        scene->setBackgroundBrush(QBrush(QPixmap(":/backboard/2.jpg")));
+        view->setBackgroundBrush(QBrush(QPixmap(":/backboard/2.jpg")));
         view->show();
         frame_timer->start(1000 / FPS);
-
-//        view->paintEngine()->drawLines(new QLine(0,0,500,500), 1);
     }
 
     ~GameController() {

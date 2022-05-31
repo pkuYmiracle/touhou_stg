@@ -5,7 +5,7 @@ float LivingEntity::getHp() const
     return hp;
 }
 
-void LivingEntity::setHp(float newHp)
+void LivingEntity::setHp(qreal newHp)
 {
     hp = newHp;
 }

@@ -30,15 +30,15 @@ void Player::advance(int phase)
     if (kb->isKeyPressed(Qt::Key_Right)) {
         speed += {+1, 0};
     }
-    if (speed.dotProduct(speed, speed) > 0.001) {
-        speed /= sqrt(speed.dotProduct(speed, speed));
-        speed *= PLAYER_MOVING_SPEED;
+    if (speed.length() != 0) {
+        speed *= PLAYER_MOVING_SPEED / speed.length();
     }
+
     //shoot
     if (kb->isKeyPressed(Qt::Key_Z)) {
         Bullet *bullet = new Bullet();
         bullet->setPos(x(), y() - 10);
-        bullet->setSpeed(QPointF(0, -BULLET_SPEED));
+        bullet->setSpeed(QVector2D(0, -BULLET_SPEED));
         this->scene()->addItem(bullet);
     }
 }

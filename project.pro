@@ -9,21 +9,36 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    game/bonus.cpp \
+    game/bullet.cpp \
+    game/enemy.cpp \
+    game/entity.cpp \
+    game/gamecontroller.hpp \
+    game/livingentity.cpp \
+    game/player.cpp \
     game_board.cpp \
+    game/keyboardhandler.hpp \
     level_menu.cpp \
     main.cpp \
     baseboard.cpp \
     mypushbottom.cpp \
     select_level.cpp \
-    startboard.cpp
+    startboard.cpp \
 
 HEADERS += \
-    baseboard.h \
+    game/bonus.h \
+    game/bullet.h \
+    game/enemy.h \
+    game/config.h \
+    game/entity.h \
+    game/livingentity.h \
+    game/player.h \
     game_board.h \
     level_menu.h \
     mypushbottom.h \
     select_level.h \
-    startboard.h
+    startboard.h \
+    baseboard.h \
 
 FORMS += \
     baseboard.ui

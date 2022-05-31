@@ -8,6 +8,7 @@
 class Entity : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
+protected:
     QPointF speed = {0, 0}; //speed vector per frame.
 public:
     explicit Entity();

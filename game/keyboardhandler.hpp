@@ -6,14 +6,19 @@
 #include <set>
 #include <QEvent>
 #include <QKeyEvent>
+#include <QDebug>
 
 class KeyboardHandler : public QObject
 {
-    Q_OBJECT
     std::set<int> pressedKeys;
 public:
-    explicit KeyboardHandler(QObject *parent);
+    explicit KeyboardHandler(QObject *parent)
+        : QObject(parent)
+    {
 
+    }
+
+protected:
     bool eventFilter(QObject *obj, QEvent *event) {
         if (event->type() == QEvent::KeyPress ||
             event->type() == QEvent::KeyRelease) {
@@ -29,10 +34,10 @@ public:
         }
     }
 
+public:
     bool isKeyPressed(Qt::Key key) {
         return pressedKeys.count(key);
     }
-signals:
 
 };
 

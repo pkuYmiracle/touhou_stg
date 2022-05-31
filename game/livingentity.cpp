@@ -14,3 +14,9 @@ LivingEntity::LivingEntity()
 {
 
 }
+
+void LivingEntity::advance(int phase)
+{
+    if (phase == 1) return;
+    Entity::advance(phase);
+}

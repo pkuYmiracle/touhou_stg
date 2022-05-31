@@ -2,5 +2,5 @@
 
 Bullet::Bullet()
 {
-
+    this->setPixmap(QPixmap(":/people/orange.png"));
 }

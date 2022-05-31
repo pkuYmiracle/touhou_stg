@@ -10,7 +10,7 @@ class Entity : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
     QPointF speed = {0, 0}; //speed vector per frame.
 public:
-    explicit Entity(QObject *parent);
+    explicit Entity();
 
     //实现位置的移动
     void    advance(int phase) override;

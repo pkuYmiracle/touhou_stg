@@ -8,7 +8,7 @@ class Bonus : public Entity
 {
     Q_OBJECT
 public:
-    explicit Bonus(QObject *parent);
+    explicit Bonus();
 };
 
 #endif // BONUS_H

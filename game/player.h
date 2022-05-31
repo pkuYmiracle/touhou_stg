@@ -7,7 +7,7 @@
 class Player : public LivingEntity
 {
 public:
-    explicit Player(QObject *parent);
+    explicit Player();
 
 //    每frame调用一次
 //    功能：发射子弹，更新速度向量

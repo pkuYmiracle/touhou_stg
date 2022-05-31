@@ -8,7 +8,7 @@ class Enemy : public LivingEntity
 {
     Q_OBJECT
 public:
-    explicit Enemy(QObject *parent);
+    explicit Enemy();
 };
 
 #endif // ENEMY_H

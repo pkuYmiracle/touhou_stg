@@ -10,8 +10,7 @@ void LivingEntity::setHp(float newHp)
     hp = newHp;
 }
 
-LivingEntity::LivingEntity(QObject *parent)
-    : Entity(parent)
+LivingEntity::LivingEntity()
 {
 
 }

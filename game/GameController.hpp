@@ -23,7 +23,7 @@ public:
         view(new QGraphicsView()),
         scene(new QGraphicsScene(this)),
         frame_timer(new QTimer(this)),
-        player(new Player(this)),
+        player(new Player()),
         kbhandler(new KeyboardHandler(this))
     {
         assert(parent != NULL);

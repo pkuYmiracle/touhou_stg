@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "qgraphicsitem.h"
 
 
 QPointF Entity::getSpeed() const
@@ -11,7 +12,7 @@ void Entity::setSpeed(QPointF newSpeed)
     speed = newSpeed;
 }
 
-Entity::Entity(QObject *parent)
+Entity::Entity()
 {
 
 }

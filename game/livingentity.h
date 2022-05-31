@@ -9,7 +9,7 @@ class LivingEntity : public Entity
     float hp; //short for health point
 
 public:
-    explicit LivingEntity(QObject *parent);
+    explicit LivingEntity();
 
     //处理子弹和生物的碰撞
 //    void advance(int phase) override;

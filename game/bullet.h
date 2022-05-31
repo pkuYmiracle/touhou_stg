@@ -8,7 +8,7 @@ class Bullet : public Entity
 {
     Q_OBJECT
 public:
-    explicit Bullet(QObject *parent);
+    explicit Bullet();
 };
 
 #endif // BULLET_H

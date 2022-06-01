@@ -7,7 +7,7 @@
 
 Player::Player(GameController *gc) : gc(gc)
 {
-    this->setPixmap(QPixmap(":/people/orange.png"));
+    this->setPixmap(QPixmap(":/game/assets/player.png"));
 }
 
 void Player::advance(int phase)

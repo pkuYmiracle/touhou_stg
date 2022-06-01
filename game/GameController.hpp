@@ -1,5 +1,5 @@
-#ifndef GAMECONTROLLER_H
-#define GAMECONTROLLER_H
+#ifndef GAMECONTROLLER_HPP
+#define GAMECONTROLLER_HPP
 
 #include <QObject>
 #include <QGraphicsView>
@@ -15,7 +15,7 @@
 class GameController : public QObject {
     QGraphicsView       *view;
     QGraphicsScene      *scene;
-    QTimer              *frame_timer;
+    QTimer              *frameTimer;
     Player              *player;
     KeyboardHandler     *kbhandler;
 public:
@@ -23,7 +23,7 @@ public:
         QObject(parent),
         view(new QGraphicsView()),
         scene(new QGraphicsScene(this)),
-        frame_timer(new QTimer(this)),
+        frameTimer(new QTimer(this)),
         player(new Player(this)),
         kbhandler(new KeyboardHandler(this))
     {
@@ -33,12 +33,12 @@ public:
         view->setScene(scene);
         player->setPos(sceneRect.center());
         scene->setSceneRect(sceneRect);
-        QObject::connect(frame_timer, SIGNAL(timeout()), scene, SLOT(advance()));
+        QObject::connect(frameTimer, SIGNAL(timeout()), scene, SLOT(advance()));
         view->installEventFilter(kbhandler);
         scene->addItem(player);
-        view->setBackgroundBrush(QBrush(QPixmap(":/backboard/2.jpg")));
+        view->setBackgroundBrush(QBrush(QPixmap(":/game/assets/background.jpg")));
         view->show();
-        frame_timer->start(1000 / FPS);
+        frameTimer->start(1000 / FPS);
     }
 
     ~GameController() {
@@ -59,4 +59,4 @@ inline KeyboardHandler *GameController::getKbhandler() const
     return kbhandler;
 }
 
-#endif  //GAMECONTROLLER_H
+#endif  //GAMECONTROLLER_HPP

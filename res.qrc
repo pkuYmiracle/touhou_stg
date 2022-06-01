@@ -12,5 +12,8 @@
         <file>backboard/icon.png</file>
         <file>backboard/start.png</file>
         <file>backboard/back.png</file>
+        <file>game/assets/background.jpg</file>
+        <file>game/assets/player.png</file>
+        <file>game/assets/playerbullet.png</file>
     </qresource>
 </RCC>

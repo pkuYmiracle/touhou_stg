@@ -1,3 +1,4 @@
+#include "enemy.h"
 #include "entity.h"
 #include "qgraphicsitem.h"
 #include <QGraphicsScene>
@@ -23,7 +24,7 @@ void Entity::advance(int phase)
 {
     if (phase == 1) return;
     this->setPos(getSpeed().toPointF() + this->pos());
-    if (dynamic_cast<Player*>(this)) {
+    if (this->isPlayer()) {
         //Player要完整在框内.
         if (scene()->sceneRect().contains(this->mapRectToScene(this->boundingRect())) == false) {
             this->setPos(this->pos() - getSpeed().toPoint()); //撤销.
@@ -34,4 +35,14 @@ void Entity::advance(int phase)
             scene()->removeItem(this);
         }
     }
+}
+
+bool Entity::isPlayer() const
+{
+    return dynamic_cast<const Player*>(this) != 0;
+}
+
+bool Entity::isEnemy() const
+{
+    return dynamic_cast<const Enemy*>(this) != 0;
 }

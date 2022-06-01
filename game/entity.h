@@ -17,7 +17,8 @@ public:
     //实现位置的移动
     void    advance(int phase) override;
 
-
+    bool    isPlayer() const;
+    bool    isEnemy() const;
     QVector2D getSpeed() const;
     void setSpeed(QVector2D newSpeed);
 };

@@ -10,8 +10,8 @@ class BulletPrototype
 {
     QVector2D   delta;
     QVector2D   speed;
-    QString     picUrl;
     qreal       atk;
+    QString     picUrl;
 public:
     explicit BulletPrototype(QVector2D _delta, QVector2D _speed, qreal atk = DEFAULT_ATK, QString _picUrl = ":/game/assets/bullet.png");
     Bullet*     spawnBulletFrom(LivingEntity *e) const;

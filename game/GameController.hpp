@@ -46,6 +46,8 @@ public:
         view->show();
         frameTimer->start(1000 / FPS);
 
+
+        //test code.
         enemyPrototype[0]->spawnIt(scene, sceneRect.center());
     }
 

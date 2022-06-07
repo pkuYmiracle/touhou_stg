@@ -12,7 +12,6 @@ class Scenario
 {
     //dont learn me.
     QVector<QPair<QPair<qreal, QPointF>, EnemyPrototype>> enemies;
-    Enemy *boss;
     //((time, loc), ep)
     //the last one is boss
     //when boss die, the scenario is completed.

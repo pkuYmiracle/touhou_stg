@@ -15,14 +15,14 @@ Scenario &Scenario::add(qreal time, QPointF loc, EnemyPrototype &ep) {
 void Scenario::start(QGraphicsScene *scene) {
     for(auto p : enemies) {
         QTimer::singleShot(p.first.first * 1000, scene, [=]{
-            this->boss = p.second.spawnIt(scene, p.first.second);
+            p.second.spawnIt(scene, p.first.second);
         });
     }
 }
 
-bool Scenario::isCompleted() const {
-    return boss->scene() != 0;
-}
+//bool Scenario::isCompleted() const {
+//    return boss->scene() != 0;
+//}
 
 
 std::vector<Scenario> scenarios;

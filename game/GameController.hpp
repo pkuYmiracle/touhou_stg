@@ -48,12 +48,12 @@ public:
 
 
         //test code.
-        enemyPrototype[0]->spawnIt(scene, sceneRect.center());
+        enemyPrototypes[0]->spawnIt(scene, sceneRect.center());
     }
 
     ~GameController() {
         view->deleteLater();
-        for (auto ep : enemyPrototype) {
+        for (auto ep : enemyPrototypes) {
             delete ep;
         }
         //其余成员被Qt自动析构.

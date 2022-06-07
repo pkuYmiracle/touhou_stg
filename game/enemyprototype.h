@@ -23,7 +23,7 @@ public:
     ~EnemyPrototype();
 };
 
-extern std::vector<EnemyPrototype*> enemyPrototype;
+extern std::vector<EnemyPrototype*> enemyPrototypes;
 void makeEnemyPrototypes();
 
 #endif // ENEMYPROTOTYPE_H

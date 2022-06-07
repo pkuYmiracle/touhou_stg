@@ -60,7 +60,7 @@ EnemyPrototype::~EnemyPrototype() {
 }
 
 
-std::vector<EnemyPrototype*> enemyPrototype;
+std::vector<EnemyPrototype*> enemyPrototypes;
 void makeEnemyPrototypes() {
     //以下是一个预置EP实例
     EnemyPrototype *ep = new EnemyPrototype();
@@ -70,6 +70,6 @@ void makeEnemyPrototypes() {
             >> (new Attack(bulletGroups[0], 1))
             >> (new Move({1, 1}, 3))
             >> (new Move({0, 0}, 3));
-    enemyPrototype.push_back(ep);
+    enemyPrototypes.push_back(ep);
 }
 

@@ -12,6 +12,7 @@
 #include "game/enemy.h"
 #include "game/keyboardhandler.hpp"
 #include "game/player.h"
+#include "game/scenario.h"
 #include "qobjectdefs.h"
 #include "game/enemyprototype.h"
 
@@ -32,11 +33,15 @@ public:
     {
         makeBulletGroups();
         makeEnemyPrototypes();
+        makeScenarios();
+
         QRect sceneRect = QRect(0, 0, WIDTH, HEIGHT);
         view->setScene(scene);
         player->setPos(sceneRect.center());
         scene->setSceneRect(sceneRect);
-        QObject::connect(frameTimer, SIGNAL(timeout()), scene, SLOT(advance()));
+        QObject::connect(frameTimer, &QTimer::timeout, [=]{
+            scene->advance();
+        });
         view->installEventFilter(kbhandler);
         scene->addItem(player);
         view->setBackgroundBrush(QBrush(QPixmap(":/game/assets/background.jpg")));
@@ -46,9 +51,8 @@ public:
         view->show();
         frameTimer->start(1000 / FPS);
 
-
         //test code.
-        enemyPrototypes[0]->spawnIt(scene, sceneRect.center());
+        scenarios[0].start(scene);
     }
 
     ~GameController() {

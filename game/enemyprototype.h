@@ -7,6 +7,7 @@
 #include "qpoint.h"
 #include <vector>
 
+//为了使用Action的多态而引出的一堆极其丑陋的代码
 class EnemyPrototype
 {
     std::vector<Action*>
@@ -16,9 +17,15 @@ class EnemyPrototype
 public:
     EnemyPrototype(QString picUrl = ":/game/assets/enemy.png");
 
-    // a terrible impl.
-    EnemyPrototype& operator>>(Action *action);
-    Enemy*          spawnIt(QGraphicsScene *scene, QPointF initLoc);
+    EnemyPrototype(const EnemyPrototype &e);
+    EnemyPrototype(EnemyPrototype &&e);
+
+    EnemyPrototype& operator=(const EnemyPrototype &e);
+    EnemyPrototype& operator=(EnemyPrototype &&e) = delete;
+
+    // it takes the ownership of *action.
+    EnemyPrototype& operator<<(Action *action);
+    Enemy*          spawnIt(QGraphicsScene *scene, QPointF initLoc) const;
 
     ~EnemyPrototype();
 };

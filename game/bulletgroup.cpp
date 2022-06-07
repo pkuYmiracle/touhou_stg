@@ -6,7 +6,7 @@ BulletGroup::BulletGroup()
 
 }
 
-void BulletGroup::spawnBullteGroupFrom(LivingEntity *e) const
+void BulletGroup::spawnBulletGroupFrom(LivingEntity *e) const
 {
     for(const auto &pt : bullets) {
         pt.spawnBulletFrom(e);

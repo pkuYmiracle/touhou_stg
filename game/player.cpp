@@ -14,6 +14,7 @@ Player::Player(GameController *gc) : gc(gc)
 void Player::advance(int phase)
 {
     if (phase == 1) return;
+    if (scene() == 0) return;
     LivingEntity::advance(phase);
 
     // updating speed vector
@@ -37,11 +38,15 @@ void Player::advance(int phase)
 
     //shoot
     if (kb->isKeyPressed(Qt::Key_Z)) {
-        Bullet *bullet = new Bullet(this);
-        bullet->setAtk(PLAYER_ATK);
+        static int cnt = 0;
+        if ((++cnt) == PLAYER_SHOOT_PERIOD) {
+            cnt = 0;
+            Bullet *bullet = new Bullet(this);
+            bullet->setAtk(PLAYER_ATK);
 
-        bullet->setPos(x(), y() - 10);
-        bullet->setSpeed(QVector2D(0, -BULLET_SPEED));
-        this->scene()->addItem(bullet);
+            bullet->setPos(x(), y() - 10);
+            bullet->setSpeed(QVector2D(0, -BULLET_SPEED));
+            this->scene()->addItem(bullet);
+        }
     }
 }

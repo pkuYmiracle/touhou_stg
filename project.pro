@@ -20,6 +20,7 @@ SOURCES += \
     game/gamecontroller.hpp \
     game/livingentity.cpp \
     game/player.cpp \
+    game/scenario.cpp \
     game_board.cpp \
     game/keyboardhandler.hpp \
     level_menu.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     game/entity.h \
     game/livingentity.h \
     game/player.h \
+    game/scenario.h \
     game_board.h \
     level_menu.h \
     mypushbottom.h \

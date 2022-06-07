@@ -22,6 +22,7 @@ LivingEntity::LivingEntity()
 void LivingEntity::advance(int phase)
 {
     if (phase == 1) return;
+    if (scene() == 0) return;
     Entity::advance(phase);
 
     //处理子弹打实体的部分
@@ -38,10 +39,8 @@ void LivingEntity::advance(int phase)
             if ((this->isPlayer() && bullet->getLauncher()->isEnemy())
                 || (this->isEnemy() && bullet->getLauncher()->isPlayer())) { //Player to Enemy, or, Enemy to Player
                 this->hp -= bullet->getAtk();
-                if (this->isPlayer()) {
-                    qDebug() << hp << endl;
-                }
                 this->scene()->removeItem(bullet);
+                bullet->deleteLater();
             }
         }
     }
@@ -49,5 +48,6 @@ void LivingEntity::advance(int phase)
     // die:
     if (this->hp <= 0) {
         this->scene()->removeItem(this);
+        this->deleteLater();
     }
 }

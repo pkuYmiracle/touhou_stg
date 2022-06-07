@@ -13,7 +13,7 @@ class BulletGroup
 public:
     BulletGroup();
     std::vector<BulletPrototype> bullets;
-    void spawnBullteGroupFrom(LivingEntity *e) const;
+    void spawnBulletGroupFrom(LivingEntity *e) const;
 
 
 };

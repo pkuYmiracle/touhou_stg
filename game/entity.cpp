@@ -29,21 +29,18 @@ void Entity::advance(int phase)
     if (scene() == 0) return;
 
     this->setPos(getSpeed().toPointF() + this->pos());
-    qDebug() << "remove" << endl;
     if (this->isPlayer()) {
         //Player要完整在框内.
         if (scene()->sceneRect().contains(this->mapRectToScene(this->boundingRect())) == false) {
             this->setPos(this->pos() - getSpeed().toPoint()); //撤销.
         }
     } else {
-//        qDebug() << scene()->sceneRect().adjusted(-HIDEN_EDGE, -HIDEN_EDGE, HIDEN_EDGE, HIDEN_EDGE) << endl;
         if (scene()->sceneRect().adjusted(-HIDEN_EDGE, -HIDEN_EDGE, HIDEN_EDGE, HIDEN_EDGE).intersects(
                     this->mapRectToScene(this->boundingRect())) == false) {
             scene()->removeItem(this);
 //            this->deleteLater();
         }
     }
-    qDebug() << 1 << endl;
 }
 
 bool Entity::isPlayer() const

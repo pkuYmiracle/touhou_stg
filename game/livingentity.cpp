@@ -40,7 +40,7 @@ void LivingEntity::advance(int phase)
                 || (this->isEnemy() && bullet->getLauncher()->isPlayer())) { //Player to Enemy, or, Enemy to Player
                 this->hp -= bullet->getAtk();
                 this->scene()->removeItem(bullet);
-                bullet->deleteLater();
+//                bullet->deleteLater();
             }
         }
     }
@@ -48,6 +48,6 @@ void LivingEntity::advance(int phase)
     // die:
     if (this->hp <= 0) {
         this->scene()->removeItem(this);
-        this->deleteLater();
+//        this->deleteLater();
     }
 }

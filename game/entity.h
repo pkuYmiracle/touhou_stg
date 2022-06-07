@@ -13,6 +13,7 @@ protected:
     QVector2D speed = {0, 0}; //speed vector per frame.
 public:
     explicit Entity();
+    virtual ~Entity() { };
 
     //实现位置的移动
     void    advance(int phase) override;

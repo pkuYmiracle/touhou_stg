@@ -10,7 +10,6 @@ class LivingEntity : public Entity
 
 public:
     explicit LivingEntity();
-
 //    处理子弹和生物的碰撞
     void advance(int phase) override;
 

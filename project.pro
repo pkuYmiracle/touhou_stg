@@ -9,11 +9,13 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    game/action.hpp \
     game/bonus.cpp \
     game/bullet.cpp \
     game/bulletgroup.cpp \
     game/bulletprototype.cpp \
     game/enemy.cpp \
+    game/enemyprototype.cpp \
     game/entity.cpp \
     game/gamecontroller.hpp \
     game/livingentity.cpp \
@@ -34,6 +36,7 @@ HEADERS += \
     game/bulletprototype.h \
     game/enemy.h \
     game/config.h \
+    game/enemyprototype.h \
     game/entity.h \
     game/livingentity.h \
     game/player.h \

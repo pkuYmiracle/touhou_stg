@@ -13,6 +13,7 @@
 #include "game/keyboardhandler.hpp"
 #include "game/player.h"
 #include "qobjectdefs.h"
+#include "game/enemyprototype.h"
 
 class GameController : public QObject {
     QGraphicsView       *view;
@@ -30,9 +31,8 @@ public:
         kbhandler(new KeyboardHandler(this))
     {
         makeBulletGroups();
-        view->setFixedSize(WIDTH, HEIGHT);
-
-        QRect sceneRect = QRect(5, 5, WIDTH - 5, HEIGHT - 5);
+        makeEnemyPrototypes();
+        QRect sceneRect = QRect(0, 0, WIDTH, HEIGHT);
         view->setScene(scene);
         player->setPos(sceneRect.center());
         scene->setSceneRect(sceneRect);
@@ -40,25 +40,24 @@ public:
         view->installEventFilter(kbhandler);
         scene->addItem(player);
         view->setBackgroundBrush(QBrush(QPixmap(":/game/assets/background.jpg")));
+
+//        view->setFixedSize(WIDTH, HEIGHT);
+        view->setFixedSize(view->sizeHint());
         view->show();
         frameTimer->start(1000 / FPS);
 
-
-
-
-        //test code.
-        Enemy *e = new Enemy();
-        e->setPos(sceneRect.center() - QPointF(100, 100));
-//        scene->addItem(e);
-        bulletGroups.front().spawnBullteGroupFrom(player);
+        enemyPrototype.front()->spawnIt(scene, sceneRect.center());
     }
 
     ~GameController() {
         view->deleteLater();
-        //其余成员是自己的子对象，被Qt自动析构.
+        for (auto ep : enemyPrototype) {
+            delete ep;
+        }
+        //其余成员被Qt自动析构.
     }
     KeyboardHandler *getKbhandler() const;
-    QGraphicsScene *getScene() const;
+    QGraphicsScene  *getScene() const;
 };
 
 inline QGraphicsScene *GameController::getScene() const

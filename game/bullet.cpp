@@ -23,5 +23,6 @@ void Bullet::setAtk(qreal newAtk)
 Bullet::Bullet(LivingEntity *e)
     : launcher(e)
 {
-    this->setPixmap(QPixmap(":/game/assets/playerbullet.png"));
+    //default asset.
+    this->setPixmap(QPixmap(":/game/assets/bullet.png"));
 }

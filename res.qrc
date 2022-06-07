@@ -15,5 +15,7 @@
         <file>game/assets/background.jpg</file>
         <file>game/assets/player.png</file>
         <file>game/assets/playerbullet.png</file>
+        <file>game/assets/bullet.png</file>
+        <file>game/assets/enemy.png</file>
     </qresource>
 </RCC>

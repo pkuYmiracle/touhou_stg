@@ -1,3 +1,4 @@
+#include "bullet.h"
 #include "enemy.h"
 #include "entity.h"
 #include "qgraphicsitem.h"
@@ -45,4 +46,9 @@ bool Entity::isPlayer() const
 bool Entity::isEnemy() const
 {
     return dynamic_cast<const Enemy*>(this) != 0;
+}
+
+bool Entity::isBullet() const
+{
+    return dynamic_cast<const Bullet*>(this) != 0;
 }

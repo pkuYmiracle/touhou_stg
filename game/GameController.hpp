@@ -8,6 +8,7 @@
 #include <cassert>
 #include <QPaintEngine>
 #include "game/config.h"
+#include "game/enemy.h"
 #include "game/keyboardhandler.hpp"
 #include "game/player.h"
 #include "qobjectdefs.h"
@@ -39,6 +40,14 @@ public:
         view->setBackgroundBrush(QBrush(QPixmap(":/game/assets/background.jpg")));
         view->show();
         frameTimer->start(1000 / FPS);
+
+
+
+
+        //for test
+        Enemy *e = new Enemy();
+        e->setPos(sceneRect.center() - QPointF(100, 100));
+        scene->addItem(e);
     }
 
     ~GameController() {

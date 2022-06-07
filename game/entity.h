@@ -19,6 +19,7 @@ public:
 
     bool    isPlayer() const;
     bool    isEnemy() const;
+    bool    isBullet() const;
     QVector2D getSpeed() const;
     void setSpeed(QVector2D newSpeed);
 };

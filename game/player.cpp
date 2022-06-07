@@ -8,6 +8,7 @@
 Player::Player(GameController *gc) : gc(gc)
 {
     this->setPixmap(QPixmap(":/game/assets/player.png"));
+    this->setHp(PLAYER_HP);
 }
 
 void Player::advance(int phase)
@@ -36,7 +37,9 @@ void Player::advance(int phase)
 
     //shoot
     if (kb->isKeyPressed(Qt::Key_Z)) {
-        Bullet *bullet = new Bullet();
+        Bullet *bullet = new Bullet(this);
+        bullet->setAtk(PLAYER_ATK);
+
         bullet->setPos(x(), y() - 10);
         bullet->setSpeed(QVector2D(0, -BULLET_SPEED));
         this->scene()->addItem(bullet);

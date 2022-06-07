@@ -34,7 +34,8 @@ Enemy *EnemyPrototype::spawnIt(QGraphicsScene *scene, QPointF initLoc)
                         Qt::TimerType::PreciseTimer,
                         e,
                         [=]{
-                            e->setSpeed(move->getSpeed());
+                            if(e->scene()) //还没有被scene移除
+                                e->setSpeed(move->getSpeed());
                         });
         } else {
             Attack *atk = dynamic_cast<Attack*>(act);
@@ -42,7 +43,8 @@ Enemy *EnemyPrototype::spawnIt(QGraphicsScene *scene, QPointF initLoc)
                         Qt::TimerType::PreciseTimer,
                         e,
                         [=]{
-                            atk->getBulletGroup().spawnBullteGroupFrom(e);
+                            if(e->scene()) //还没有被scene移除
+                                atk->getBulletGroup().spawnBullteGroupFrom(e);
                         });
         }
         nowTime += act->getDuration();
@@ -62,9 +64,12 @@ std::vector<EnemyPrototype*> enemyPrototype;
 void makeEnemyPrototypes() {
     //以下是一个预置EP实例
     EnemyPrototype *ep = new EnemyPrototype();
-    (*ep)   >> (new Attack(bulletGroups.front(), 2))
-            >> (new Attack(bulletGroups.front(), 2))
-            >> (new Move({1, 1}, 3));
+    (*ep)   >> (new Attack(bulletGroups[0], 1))
+            >> (new Attack(bulletGroups[0], 1))
+            >> (new Attack(bulletGroups[0], 1))
+            >> (new Attack(bulletGroups[0], 1))
+            >> (new Move({1, 1}, 3))
+            >> (new Move({0, 0}, 3));
     enemyPrototype.push_back(ep);
 }
 

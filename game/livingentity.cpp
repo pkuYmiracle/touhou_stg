@@ -38,6 +38,9 @@ void LivingEntity::advance(int phase)
             if ((this->isPlayer() && bullet->getLauncher()->isEnemy())
                 || (this->isEnemy() && bullet->getLauncher()->isPlayer())) { //Player to Enemy, or, Enemy to Player
                 this->hp -= bullet->getAtk();
+                if (this->isPlayer()) {
+                    qDebug() << hp << endl;
+                }
                 this->scene()->removeItem(bullet);
             }
         }

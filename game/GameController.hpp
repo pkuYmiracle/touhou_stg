@@ -46,7 +46,7 @@ public:
         view->show();
         frameTimer->start(1000 / FPS);
 
-        enemyPrototype.front()->spawnIt(scene, sceneRect.center());
+        enemyPrototype[0]->spawnIt(scene, sceneRect.center());
     }
 
     ~GameController() {

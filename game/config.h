@@ -12,4 +12,6 @@ const qreal PLAYER_HP = 10;
 const qreal PLAYER_ATK = 1;
 const qreal ENEMY_HP = 10;
 const qreal ENEMY_ATK = 1;
+const qreal DEFAULT_ATK = 1; //子弹的默认攻击力
+
 #endif // CONFIG_H

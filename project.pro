@@ -11,6 +11,8 @@ CONFIG += c++17
 SOURCES += \
     game/bonus.cpp \
     game/bullet.cpp \
+    game/bulletgroup.cpp \
+    game/bulletprototype.cpp \
     game/enemy.cpp \
     game/entity.cpp \
     game/gamecontroller.hpp \
@@ -28,6 +30,8 @@ SOURCES += \
 HEADERS += \
     game/bonus.h \
     game/bullet.h \
+    game/bulletgroup.h \
+    game/bulletprototype.h \
     game/enemy.h \
     game/config.h \
     game/entity.h \

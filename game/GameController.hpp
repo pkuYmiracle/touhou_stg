@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <cassert>
 #include <QPaintEngine>
+#include "game/bulletgroup.h"
 #include "game/config.h"
 #include "game/enemy.h"
 #include "game/keyboardhandler.hpp"
@@ -28,6 +29,7 @@ public:
         player(new Player(this)),
         kbhandler(new KeyboardHandler(this))
     {
+        makeBulletGroups();
         view->setFixedSize(WIDTH, HEIGHT);
 
         QRect sceneRect = QRect(5, 5, WIDTH - 5, HEIGHT - 5);
@@ -44,10 +46,11 @@ public:
 
 
 
-        //for test
+        //test code.
         Enemy *e = new Enemy();
         e->setPos(sceneRect.center() - QPointF(100, 100));
-        scene->addItem(e);
+//        scene->addItem(e);
+        bulletGroups.front().spawnBullteGroupFrom(player);
     }
 
     ~GameController() {

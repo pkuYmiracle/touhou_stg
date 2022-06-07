@@ -5,6 +5,7 @@
 #include <QObject>
 #include "livingentity.h"
 
+// bullet暂时没有朝向
 class Bullet : public Entity
 {
     Q_OBJECT

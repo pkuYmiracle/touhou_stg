@@ -31,11 +31,14 @@ protected:
         if (event->type() == QEvent::KeyPress ||
             event->type() == QEvent::KeyRelease) {
             QKeyEvent *keyevent = dynamic_cast<QKeyEvent*>(event);
-            if (!keyevent->isAutoRepeat()) {
-                if (!pressedKeys.insert(keyevent->key()).second) { //已经存在
-                    pressedKeys.erase(keyevent->key());
+//            if (!keyevent->isAutoRepeat()) {
+                if (event->type() == QEvent::KeyPress) {
+                    pressedKeys.insert(keyevent->key());
+                } else{
+                    if (pressedKeys.count(keyevent->key()))
+                        pressedKeys.erase(keyevent->key());
                 }
-            }
+//            }
             return true;
         } else {
             return QObject::eventFilter(obj, event);

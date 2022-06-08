@@ -17,7 +17,7 @@ const qreal ENEMY_HP = 10;
 const qreal ENEMY_ATK = 1;
 const qreal DEFAULT_ATK = 1; //子弹的默认攻击力
 const qreal PLAYER_SHOOT_PERIOD = 5;
-const qreal HIDEN_EDGE = 500; //不显示的宽度
+const qreal HIDEN_EDGE = 500; //实际界面大小(-HIDEN_EDGE, -HIDEN_EDGE, WIDTH + HIDEN_EDGE, HEIGHT + HIDEN_EDGE)
 
 //MAGIC NUMBER
 const int BOSS_DATA_TAG = 1;

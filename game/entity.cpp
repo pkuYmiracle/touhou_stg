@@ -28,13 +28,19 @@ void Entity::advance(int phase)
     if (phase == 1) return;
     if (scene() == 0) return;
 
-    this->setPos(getSpeed().toPointF() + this->pos());
     if (this->isPlayer()) {
         //Player要完整在框内.
+        this->setPos(this->x(), this->y() + getSpeed().y());
         if (scene()->sceneRect().contains(this->mapRectToScene(this->boundingRect())) == false) {
-            this->setPos(this->pos() - getSpeed().toPoint()); //撤销.
+            this->setPos(this->x(), this->y() - getSpeed().y());
+        }
+
+        this->setPos(this->x() + getSpeed().x(), this->y());
+        if (scene()->sceneRect().contains(this->mapRectToScene(this->boundingRect())) == false) {
+            this->setPos(this->x() - getSpeed().x(), this->y());
         }
     } else {
+        this->setPos(getSpeed().toPointF() + this->pos());
         if (scene()->sceneRect().adjusted(-HIDEN_EDGE, -HIDEN_EDGE, HIDEN_EDGE, HIDEN_EDGE).intersects(
                     this->mapRectToScene(this->boundingRect())) == false) {
             scene()->removeItem(this);

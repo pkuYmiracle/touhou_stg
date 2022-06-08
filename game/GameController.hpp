@@ -22,6 +22,7 @@ class GameController : public QObject {
     QTimer              *frameTimer;
     Player              *player;
     KeyboardHandler     *kbhandler;
+    Scenario            *scenario;
 public:
     explicit GameController(QObject *parent = nullptr) :
         QObject(parent),
@@ -39,6 +40,7 @@ public:
         view->setScene(scene);
         player->setPos(sceneRect.center());
         scene->setSceneRect(sceneRect);
+        scenario = new Scenario(scenarios[0]); // it can only copy before start.
         QObject::connect(frameTimer, &QTimer::timeout, [=]{
             scene->advance();
         });
@@ -52,7 +54,7 @@ public:
         frameTimer->start(1000 / FPS);
 
         //test code.
-        scenarios[0].start(scene);
+        scenario->start(scene);
     }
 
     ~GameController() {

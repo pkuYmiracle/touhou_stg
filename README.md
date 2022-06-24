@@ -1,6 +1,7 @@
 # Touhou_stg
 北京大学2022春季学期《程序设计实习》大作业.
-仿东方的竖版弹幕设计游戏.
+
+仿东方的竖版弹幕射击游戏.
 
 # 游戏部分 Todo list
 
@@ -8,7 +9,7 @@
 - [x] 玩家的键盘操纵
 - [x] 弹幕系统
 - [x] 战斗逻辑（碰撞，血量，死亡）
-> 弹幕群与敌人动作、关卡预设样例参考GameController中`makeBulletGroups`与`makeEnemyPrototype`, `makeScenario`函数的实现
+> 弹幕群与敌人动作、关卡预设样例参考GameController中`initBulletGroups`与`initEnemyPrototype`, `initScenario`函数的实现
 
 待完成：
 - [ ] 关卡逻辑

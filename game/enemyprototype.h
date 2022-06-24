@@ -31,6 +31,6 @@ public:
 };
 
 extern std::vector<EnemyPrototype*> enemyPrototypes;
-void makeEnemyPrototypes();
+void initEnemyPrototypes();
 
 #endif // ENEMYPROTOTYPE_H

@@ -30,7 +30,7 @@ bool Scenario::isCompleted() const {
 
 
 std::vector<Scenario> scenarios;
-void initScenarios(){
+void makeScenarios(){
     Scenario s;
     s
             .add(0, {-100, -100}, *enemyPrototypes[0]) //在屏幕之外生成不会这么突兀

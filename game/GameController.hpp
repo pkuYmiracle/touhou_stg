@@ -32,16 +32,16 @@ public:
         player(new Player(this)),
         kbhandler(new KeyboardHandler(this))
     {
-        initBulletGroups();
-        initEnemyPrototypes();
-        initScenarios();
+        makeBulletGroups();
+        makeEnemyPrototypes();
+        makeScenarios();
 
         QRect sceneRect = QRect(0, 0, WIDTH, HEIGHT);
         view->setScene(scene);
         player->setPos(sceneRect.center());
         scene->setSceneRect(sceneRect);
         scenario = new Scenario(scenarios[0]); // it can only copy before start.
-        QObject::connect(frameTimer, &QTimer::timeout, scene, [=]{
+        QObject::connect(frameTimer, &QTimer::timeout, [=]{
             scene->advance();
         });
         view->installEventFilter(kbhandler);

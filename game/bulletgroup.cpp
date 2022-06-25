@@ -16,7 +16,7 @@ void BulletGroup::spawnBulletGroupFrom(LivingEntity *e) const
 
 //     预置bullet groups，将会在GC开始时调用
 std::vector<BulletGroup> bulletGroups;
-void initBulletGroups() {
+void makeBulletGroups() {
     //这是一个预置bulletGroups的实例
     BulletGroup bg;
 

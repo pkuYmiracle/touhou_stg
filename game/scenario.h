@@ -26,5 +26,5 @@ public:
 };
 
 extern std::vector<Scenario> scenarios;
-void initScenarios();
+void makeScenarios();
 #endif // SCENARIO_H

@@ -2,6 +2,7 @@
 #define GAMECONTROLLER_H
 
 #include "qdebug.h"
+#include <QGraphicsItem>
 #include <QObject>
 #include <QTimer>
 
@@ -23,6 +24,7 @@ class GameController : public QObject {
         int     remainingTime; // if paused.
     };
     std::vector<Timer>  timers;
+    QGraphicsItem       *pause_sheild;
 public:
     explicit GameController(QObject *parent = nullptr);
 
@@ -34,6 +36,7 @@ public:
     void pause();
     void gameContinue();
 
+    // 此处创建的OneShotTimer会被暂停控制
     template<class T>
     void createOneShotTimer(int interval, QObject *context, T callable) {
         auto timer = new QTimer(this);

@@ -9,14 +9,16 @@ Scenario::Scenario()
 
 }
 
+// loc: 生成的初始位置
+// ep:  使用的EnemyPrototypes
 Scenario &Scenario::add(qreal time, QPointF loc, EnemyPrototype &ep) {
     enemySpawnConfig.push_back({{time, loc}, ep});
     return *this;
 }
 
 void Scenario::start(GameController *gc) {
-    for(const auto p : enemySpawnConfig) {
-        QTimer::singleShot(p.first.first * 1000, gc, [p, gc, this]{
+    for(const auto &p : enemySpawnConfig) {
+        gc->createOneShotTimer(p.first.first * 1000, gc, [p, gc, this]{
             enemies.push_back(p.second.spawnIt(gc, p.first.second));
         });
     }

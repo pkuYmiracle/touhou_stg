@@ -3,6 +3,7 @@
 
 Enemy::Enemy()
 {
-    this->setPixmap(QPixmap(":/game/assets/player.png")); //@TODO
+    //default behaviour
+    this->setPixmap(QPixmap(":/game/assets/player.png"));
     this->setHp(ENEMY_HP);
 }

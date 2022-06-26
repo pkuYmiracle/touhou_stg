@@ -31,7 +31,7 @@ void LivingEntity::advance(int phase)
     for (auto item : itemList) {
         Entity *e = dynamic_cast<Entity*>(item);
         if (!e) {
-            assert(0);
+            continue;
         } else
         if (e->isBullet()) {
             Bullet *bullet = dynamic_cast<Bullet*>(e);

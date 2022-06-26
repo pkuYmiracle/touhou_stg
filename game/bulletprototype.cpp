@@ -12,9 +12,6 @@ Bullet* BulletPrototype::spawnBulletFrom(LivingEntity *e) const
 {
     Bullet *b = new Bullet(e);
     b->setAtk(atk);
-//    qDebug() << e->pos() + QPointF{e->boundingRect().width() / 2, e->boundingRect().height() / 2} << endl;
-//    qDebug() << e->pos() << endl;
-
     b->setPos(e->pos()+ delta.toPointF());
     b->setSpeed(speed);
     b->setPixmap(QPixmap(picUrl));

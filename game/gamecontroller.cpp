@@ -3,6 +3,7 @@
 #include "game/enemyprototype.h"
 #include "game/scenario.h"
 #include "keyboardhandler.hpp"
+#include "qnamespace.h"
 
 #include <qgraphicsview.h>
 
@@ -37,6 +38,7 @@ GameController::GameController(QObject *parent) :
 
     //test code.
     scenario->start(this);
+
 }
 
 GameController::~GameController() {
@@ -63,6 +65,7 @@ void GameController::gameContinue() {
         pair.timer->start();
         pair.remainingTime = 0;
     }
+    scene->removeItem(this->pause_sheild);
 }
 
 void GameController::pause() {
@@ -71,6 +74,8 @@ void GameController::pause() {
         pair.remainingTime = pair.timer->remainingTime();
         pair.timer->stop();
     }
+    this->pause_sheild = scene->addRect(scene->sceneRect(), QPen(), QBrush(QColor(255,255,255,100)));
+
 }
 
 KeyboardHandler *GameController::getKbhandler() const

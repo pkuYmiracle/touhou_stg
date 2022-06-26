@@ -1,7 +1,7 @@
 #include "baseboard.h"
 #include"startboard.h"
 #include <QApplication>
-#include <game/gamecontroller.hpp>
+#include "game/gamecontroller.h"
 #include <QDebug>
 
 int main(int argc, char *argv[])

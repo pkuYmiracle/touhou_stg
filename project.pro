@@ -17,7 +17,7 @@ SOURCES += \
     game/enemy.cpp \
     game/enemyprototype.cpp \
     game/entity.cpp \
-    game/gamecontroller.hpp \
+    game/gamecontroller.cpp \
     game/livingentity.cpp \
     game/player.cpp \
     game/scenario.cpp \
@@ -31,6 +31,7 @@ SOURCES += \
     startboard.cpp \
 
 HEADERS += \
+    game/gamecontroller.h \
     game/bonus.h \
     game/bullet.h \
     game/bulletgroup.h \
@@ -39,6 +40,7 @@ HEADERS += \
     game/config.h \
     game/enemyprototype.h \
     game/entity.h \
+    game/gamecontroller.h \
     game/livingentity.h \
     game/player.h \
     game/scenario.h \

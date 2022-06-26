@@ -1,5 +1,5 @@
 #include "game/bullet.h"
-#include "game/gamecontroller.hpp"
+#include "game/gamecontroller.h"
 #include "game/keyboardhandler.hpp"
 #include "game/livingentity.h"
 #include "qnamespace.h"
@@ -19,6 +19,7 @@ void Player::advance(int phase)
 
     // updating speed vector
     KeyboardHandler *kb = this->gc->getKbhandler();
+
     speed = {0, 0};
     if (kb->isKeyPressed(Qt::Key_Up)) {
         speed += {0, -1};

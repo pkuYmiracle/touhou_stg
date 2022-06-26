@@ -45,7 +45,7 @@ void Player::advance(int phase)
             bullet->setAtk(PLAYER_ATK);
 
 //            bullet->setPos(x(), y() - 10);
-            bullet->setPos(x() - bullet->boundingRect().width() / 2.5, y() - bullet->boundingRect().height());
+            bullet->setPos(x() + this->boundingRect().width() / 2 - bullet->boundingRect().width() / 2, y() - bullet->boundingRect().height());
 //            qDebug() << bullet->pos() << endl;
             bullet->setSpeed(QVector2D(0, -BULLET_SPEED));
             this->scene()->addItem(bullet);

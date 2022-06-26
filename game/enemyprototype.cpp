@@ -89,7 +89,7 @@ EnemyPrototype::~EnemyPrototype() {
 
 
 std::vector<EnemyPrototype*> enemyPrototypes;
-void makeEnemyPrototypes() {
+void initEnemyPrototypes() {
     //以下是一个预置EP实例
     EnemyPrototype *ep = new EnemyPrototype();
     (*ep)   << (new Attack(bulletGroups[0], 1))

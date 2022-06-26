@@ -18,7 +18,7 @@ public:
 
 };
 extern std::vector<BulletGroup> bulletGroups;
-void makeBulletGroups();
+void initBulletGroups();
 
 
 #endif // BULLETGROUP_H

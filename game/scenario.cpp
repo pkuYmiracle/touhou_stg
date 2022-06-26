@@ -32,8 +32,9 @@ bool Scenario::isCompleted() const {
 std::vector<Scenario> scenarios;
 void initScenarios(){
     Scenario s;
+    //一个关卡由很多enemy组成. 一个enemy由一个enemyPrototypes生成
     s
-            .add(0, {-100, -100}, *enemyPrototypes[0]) //在屏幕之外生成不会这么突兀
+            .add(0, {500, 500}, *enemyPrototypes[0]) //在屏幕之外生成不会这么突兀
             .add(5, {-200, 200}, *enemyPrototypes[0]); //屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT) 左右是x，上下是y
 
     scenarios.push_back(s);

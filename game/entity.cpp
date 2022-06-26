@@ -6,6 +6,7 @@
 #include "game/player.h"
 #include <QDebug>
 #include <assert.h>
+#include <assert.h>
 #include "config.h"
 
 QVector2D Entity::getSpeed() const
@@ -16,6 +17,11 @@ QVector2D Entity::getSpeed() const
 void Entity::setSpeed(QVector2D newSpeed)
 {
     speed = newSpeed;
+}
+
+void Entity::setPixmap(const QPixmap &pixmap) {
+    this->QGraphicsPixmapItem::setPixmap(pixmap);
+    this->setOffset(-pixmap.width() / 2, -pixmap.height() / 2);
 }
 
 Entity::Entity()

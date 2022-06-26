@@ -55,6 +55,8 @@ public:
 
         //test code.
         scenario->start(scene);
+//        qDebug() << player->offset() << endl;
+//        player->setOffset(player->boundingRect().width() / 2, player->boundingRect().height() / 2);
     }
 
     ~GameController() {

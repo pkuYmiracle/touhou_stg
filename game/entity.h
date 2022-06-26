@@ -1,6 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include "qpixmap.h"
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QPoint>
@@ -23,6 +24,8 @@ public:
     bool    isBullet() const;
     QVector2D getSpeed() const;
     void setSpeed(QVector2D newSpeed);
+
+    void setPixmap(const QPixmap &pixmap);
 };
 
 #endif // ENTITY_H

@@ -58,13 +58,18 @@ bool GameController::isPaused() {
 
 void GameController::gameContinue() {
     frameTimer->start();
+    for (auto &pair : timers) if (pair.timer->remainingTime() > 0) {
+        pair.timer->setInterval(pair.remainingTime);
+        pair.timer->start();
+        pair.remainingTime = 0;
+    }
 }
 
 void GameController::pause() {
     frameTimer->stop();
-    for (auto t : timers) {
-        qDebug() << t->remainingTime() << endl;
-        t->stop();
+    for (auto &pair : timers) if (pair.timer->remainingTime() > 0) {
+        pair.remainingTime = pair.timer->remainingTime();
+        pair.timer->stop();
     }
 }
 

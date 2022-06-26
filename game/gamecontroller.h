@@ -18,8 +18,11 @@ class GameController : public QObject {
     Player              *player;
     KeyboardHandler     *kbhandler;
     Scenario            *scenario;
-    std::vector<QTimer*>
-                        timers;
+    struct Timer{
+        QTimer* timer;
+        int     remainingTime; // if paused.
+    };
+    std::vector<Timer>  timers;
 public:
     explicit GameController(QObject *parent = nullptr);
 
@@ -36,7 +39,7 @@ public:
         auto timer = new QTimer(this);
         timer->setSingleShot(1);
         QObject::connect(timer, &QTimer::timeout, context, callable);
-        timers.push_back(timer);
+        timers.push_back({timer, /*remaining time*/ 0});
         timer->setInterval(interval);
         timer->start();
     }

@@ -94,7 +94,8 @@ void initEnemyPrototypes() {
             << (new Attack(bulletGroups[0], 1))
             << (new Attack(bulletGroups[0], 1))
             << (new Move({1, 1}, 10))
-            << (new Move({0, 0}, 0));
+            << (new Move({0, 0}, 0)) //停止
+            << (new Move({1, 1}, 100000)); //最后让他离开屏幕一定距离
     enemyPrototypes.push_back(ep);
 }
 

@@ -33,7 +33,8 @@ protected:
         if (event->type() == QEvent::KeyPress ||
             event->type() == QEvent::KeyRelease) {
             QKeyEvent *keyevent = dynamic_cast<QKeyEvent*>(event);
-            if (keyevent->key() == Qt::Key_Escape) {
+
+            if (event->type() == QEvent::KeyPress && keyevent->key() == Qt::Key_Escape) {
                 GameController *gc = (GameController*) parent();
                 if (gc->isPaused()) {
                     gc->gameContinue();
@@ -42,6 +43,7 @@ protected:
                 }
                 return true;
             }
+
             if (!keyevent->isAutoRepeat()) {
                 if (event->type() == QEvent::KeyPress) {
                     pressedKeys.insert(keyevent->key());

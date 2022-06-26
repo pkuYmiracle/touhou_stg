@@ -1,7 +1,9 @@
 #include "game/bullet.h"
+#include "game/config.h"
 #include "game/gamecontroller.h"
 #include "game/keyboardhandler.hpp"
 #include "game/livingentity.h"
+#include "qgraphicsscene.h"
 #include "qnamespace.h"
 #include <QDebug>
 

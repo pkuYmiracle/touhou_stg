@@ -7,6 +7,7 @@
 #include "qpoint.h"
 #include <vector>
 
+class GameController;
 //为了使用Action的多态而引出的一堆极其丑陋的代码
 class EnemyPrototype
 {
@@ -25,7 +26,7 @@ public:
 
     // it takes the ownership of *action.
     EnemyPrototype& operator<<(Action *action);
-    Enemy*          spawnIt(QGraphicsScene *scene, QPointF initLoc) const;
+    Enemy *spawnIt(GameController *gc, QPointF initLoc) const;
 
     ~EnemyPrototype();
 };

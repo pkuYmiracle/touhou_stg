@@ -1,5 +1,10 @@
 #include "gamecontroller.h"
+#include "game/bulletgroup.h"
+#include "game/enemyprototype.h"
+#include "game/scenario.h"
+#include "keyboardhandler.hpp"
 
+#include <qgraphicsview.h>
 
 GameController::GameController(QObject *parent) :
     QObject(parent),
@@ -31,9 +36,7 @@ GameController::GameController(QObject *parent) :
     frameTimer->start(1000 / FPS);
 
     //test code.
-    scenario->start(scene);
-    //        qDebug() << player->offset() << endl;
-    //        player->setOffset(player->boundingRect().width() / 2, player->boundingRect().height() / 2);
+    scenario->start(this);
 }
 
 GameController::~GameController() {
@@ -49,16 +52,20 @@ QGraphicsScene *GameController::getScene() const
     return scene;
 }
 
-bool GameController::is_paused() {
-    return frameTimer->isActive();
+bool GameController::isPaused() {
+    return !frameTimer->isActive();
 }
 
-void GameController::game_continue() {
+void GameController::gameContinue() {
     frameTimer->start();
 }
 
 void GameController::pause() {
     frameTimer->stop();
+    for (auto t : timers) {
+        qDebug() << t->remainingTime() << endl;
+        t->stop();
+    }
 }
 
 KeyboardHandler *GameController::getKbhandler() const

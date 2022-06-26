@@ -1,5 +1,6 @@
 #include "scenario.h"
 #include "game/config.h"
+#include "game/gamecontroller.h"
 #include "qdebug.h"
 
 Scenario::Scenario()
@@ -13,10 +14,10 @@ Scenario &Scenario::add(qreal time, QPointF loc, EnemyPrototype &ep) {
     return *this;
 }
 
-void Scenario::start(QGraphicsScene *scene) {
+void Scenario::start(GameController *gc) {
     for(const auto p : enemySpawnConfig) {
-        QTimer::singleShot(p.first.first * 1000, scene, [p, scene, this]{
-            enemies.push_back(p.second.spawnIt(scene, p.first.second));
+        QTimer::singleShot(p.first.first * 1000, gc, [p, gc, this]{
+            enemies.push_back(p.second.spawnIt(gc, p.first.second));
         });
     }
 }

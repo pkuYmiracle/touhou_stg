@@ -1,18 +1,16 @@
-#include <QObject>
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QTimer>
-#include <cassert>
-#include <QPaintEngine>
-#include "game/bulletgroup.h"
-#include "game/config.h"
-#include "game/enemy.h"
-#include "game/keyboardhandler.hpp"
-#include "game/player.h"
-#include "game/scenario.h"
-#include "qobjectdefs.h"
-#include "game/enemyprototype.h"
+#ifndef GAMECONTROLLER_H
+#define GAMECONTROLLER_H
 
+#include "qdebug.h"
+#include <QObject>
+#include <QTimer>
+
+class Scenario;
+class Player;
+class QGraphicsScene;
+class QGraphicsView;
+
+class KeyboardHandler;
 class GameController : public QObject {
     QGraphicsView       *view;
     QGraphicsScene      *scene;
@@ -20,6 +18,8 @@ class GameController : public QObject {
     Player              *player;
     KeyboardHandler     *kbhandler;
     Scenario            *scenario;
+    std::vector<QTimer*>
+                        timers;
 public:
     explicit GameController(QObject *parent = nullptr);
 
@@ -27,11 +27,22 @@ public:
     KeyboardHandler *getKbhandler() const;
     QGraphicsScene  *getScene() const;
 
-    bool is_paused();
+    bool isPaused();
     void pause();
-    void game_continue();
+    void gameContinue();
+
+    template<class T>
+    void createOneShotTimer(int interval, QObject *context, T callable) {
+        auto timer = new QTimer(this);
+        timer->setSingleShot(1);
+        QObject::connect(timer, &QTimer::timeout, context, callable);
+        timers.push_back(timer);
+        timer->setInterval(interval);
+        timer->start();
+    }
 };
 
+#endif
 
 
 

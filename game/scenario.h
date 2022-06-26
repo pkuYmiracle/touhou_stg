@@ -19,8 +19,8 @@ public:
 
     //time for secs.
     Scenario&   add(qreal time, QPointF loc, EnemyPrototype &ep);
-    void        start(QGraphicsScene *scene);
     bool        isCompleted() const;
+    void        start(GameController *gc);
 };
 
 extern std::vector<Scenario> scenarios;

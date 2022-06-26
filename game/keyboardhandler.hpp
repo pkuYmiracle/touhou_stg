@@ -2,6 +2,7 @@
 #define KEYBOARDHANDLER_HPP
 
 #include "game/player.h"
+#include "gamecontroller.h"
 #include "qnamespace.h"
 #include <QObject>
 #include <set>
@@ -32,8 +33,13 @@ protected:
         if (event->type() == QEvent::KeyPress ||
             event->type() == QEvent::KeyRelease) {
             QKeyEvent *keyevent = dynamic_cast<QKeyEvent*>(event);
-            if (keyevent->type() == QEvent::KeyPress && keyevent->key() == Qt::Key_Escape) {
-//                ((GameController*)this->parent())->pause();
+            if (keyevent->key() == Qt::Key_Escape) {
+                GameController *gc = (GameController*) parent();
+                if (gc->isPaused()) {
+                    gc->gameContinue();
+                } else {
+                    gc->pause();
+                }
                 return true;
             }
             if (!keyevent->isAutoRepeat()) {

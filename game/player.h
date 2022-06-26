@@ -5,7 +5,6 @@
 #include <QObject>
 
 class GameController;
-
 class Player : public LivingEntity
 {
     GameController *gc;

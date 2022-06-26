@@ -1,10 +1,11 @@
 #include "enemyprototype.h"
 #include "game/action.hpp"
+#include "game/gamecontroller.h"
 #include "qdebug.h"
 #include "qgraphicsscene.h"
 #include "qnamespace.h"
 #include <QTimer>
-
+#include <QObject>
 
 EnemyPrototype::EnemyPrototype(QString picUrl)
     : actions(), picUrl(picUrl)
@@ -46,8 +47,9 @@ EnemyPrototype& EnemyPrototype::operator<<(Action *action)
     return *this;
 }
 
-Enemy *EnemyPrototype::spawnIt(QGraphicsScene *scene, QPointF initLoc) const
+Enemy *EnemyPrototype::spawnIt(GameController *gc, QPointF initLoc) const
 {
+    auto scene = gc->getScene();
     qreal nowTime = 0;
     Enemy *e = new Enemy();
     e->setPixmap(QPixmap(picUrl));
@@ -58,22 +60,16 @@ Enemy *EnemyPrototype::spawnIt(QGraphicsScene *scene, QPointF initLoc) const
         if (act->isMove()) {
             Move *move = dynamic_cast<Move*>(act);
             //it would be call only when e has not been destroyed.
-            QTimer::singleShot(nowTime * 1000,
-                        Qt::TimerType::PreciseTimer,
-                        e,
-                        [_ = move->clone(), e]{//此处不clone会造成悬垂指针
-                            if(e->scene()) //还没有被scene移除
-                                e->setSpeed(_->getSpeed());
-                        });
+            gc->createOneShotTimer(nowTime * 1000, e, [_ = move->clone(), e]{//此处不clone会造成悬垂指针
+                if(e->scene()) //还没有被scene移除
+                    e->setSpeed(_->getSpeed());
+            });
         } else {
             Attack *atk = dynamic_cast<Attack*>(act);
-            QTimer::singleShot(nowTime * 1000,
-                        Qt::TimerType::PreciseTimer,
-                        e,
-                        [_ = atk->clone(), e]{//此处不clone会造成悬垂指针
-                            if(e->scene()) //还没有被scene移除
-                                _->getBulletGroup().spawnBulletGroupFrom(e);
-                        });
+            gc->createOneShotTimer(nowTime * 1000, e, [_ = atk->clone(), e]{//此处不clone会造成悬垂指针
+                if(e->scene()) //还没有被scene移除
+                    _->getBulletGroup().spawnBulletGroupFrom(e);
+            });
         }
         nowTime += act->getDuration();
     }

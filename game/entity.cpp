@@ -4,6 +4,7 @@
 #include "qgraphicsitem.h"
 #include <QGraphicsScene>
 #include "game/player.h"
+#include "game/config.h"
 #include <QDebug>
 #include <assert.h>
 #include <assert.h>
@@ -37,17 +38,17 @@ void Entity::advance(int phase)
     if (this->isPlayer()) {
         //Player要完整在框内.
         this->setPos(this->x(), this->y() + getSpeed().y());
-        if (scene()->sceneRect().contains(this->mapRectToScene(this->boundingRect())) == false) {
+        if (GAME_BOARD_RECT.contains(this->mapRectToScene(this->boundingRect())) == false) {
             this->setPos(this->x(), this->y() - getSpeed().y());
         }
 
         this->setPos(this->x() + getSpeed().x(), this->y());
-        if (scene()->sceneRect().contains(this->mapRectToScene(this->boundingRect())) == false) {
+        if (GAME_BOARD_RECT.contains(this->mapRectToScene(this->boundingRect())) == false) {
             this->setPos(this->x() - getSpeed().x(), this->y());
         }
     } else {
         this->setPos(getSpeed().toPointF() + this->pos());
-        if (scene()->sceneRect().adjusted(-HIDEN_EDGE, -HIDEN_EDGE, HIDEN_EDGE, HIDEN_EDGE).intersects(
+        if (GAME_BOARD_RECT.adjusted(-HIDEN_EDGE, -HIDEN_EDGE, HIDEN_EDGE, HIDEN_EDGE).intersects(
                     this->mapRectToScene(this->boundingRect())) == false) {
             scene()->removeItem(this);
 //            this->deleteLater();

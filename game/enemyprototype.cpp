@@ -104,13 +104,14 @@ void initEnemyPrototypes() {
     //以下是一个预置EP实例
     EnemyPrototype *ep = new EnemyPrototype();
     // 为一个EnemyPrototype设置动作序列，参数的意义具体见各个动作的构造函数
-    (*ep)   << (new Attack(bulletGroups[0], 1))
-            << (new Attack(bulletGroups[0], 1))
-            << (new Attack(bulletGroups[0], 1))
-            << (new Attack(bulletGroups[0], 1))
-            << (new Move({10, 10}, 10))
-            << (new Move({0, 0}, 0)) //停止
-            << (new Move({10, 10}, 100000)); //最后让他飞出屏幕就行
+    (*ep)   << (new Attack(bulletGroups[2], 1))
+            << (new Attack(bulletGroups[2], 1))
+            << (new Attack(bulletGroups[2], 1))
+            << (new Attack(bulletGroups[2], 1))
+//            << (new Move({10, 10}, 10))
+            << (new Move({0, 0}, 0)); //停止
+//            << (new Move({10, 10}, 100000)); //最后让他飞出屏幕就行
+    ep->setHp(20);
     enemyPrototypes.push_back(ep);
 }
 

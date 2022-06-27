@@ -19,7 +19,6 @@ SOURCES += \
     game/entity.cpp \
     game/gamecontroller.cpp \
     game/livingentity.cpp \
-    game/pauseboard.cpp \
     game/player.cpp \
     game/scenario.cpp \
     game_board.cpp \
@@ -43,7 +42,6 @@ HEADERS += \
     game/entity.h \
     game/gamecontroller.h \
     game/livingentity.h \
-    game/pauseboard.h \
     game/player.h \
     game/scenario.h \
     game_board.h \

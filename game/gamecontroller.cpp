@@ -2,7 +2,6 @@
 #include "baseboard.h"
 #include "game/bulletgroup.h"
 #include "game/enemyprototype.h"
-#include "game/pauseboard.h"
 #include "game/scenario.h"
 #include "keyboardhandler.hpp"
 #include "mypushbottom.h"

@@ -41,6 +41,9 @@ void initScenarios(){
         .add(0, {530, 500}, *enemyPrototypes[0])
         .add(0, {550, 500}, *enemyPrototypes[0])
         .add(0, {500, 400}, *enemyPrototypes[0])
+        .add(0, {250, 100}, *enemyPrototypes[0])
+        .add(0, {300, 200}, *enemyPrototypes[0])
+        .add(0, {600, 300}, *enemyPrototypes[0])
         .add(0, {540, 300}, *enemyPrototypes[0])
         .add(0, {550, 200}, *enemyPrototypes[0])
         .add(5, {10, 10}, *enemyPrototypes[0]); //屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT) 左右是x，上下是y

@@ -25,4 +25,5 @@ Bullet::Bullet(LivingEntity *e)
 {
     //default asset.
     this->setPixmap(QPixmap(":/game/assets/bullet.png"));
+    this->setShapeMode(QGraphicsPixmapItem::BoundingRectShape); // for performance
 }

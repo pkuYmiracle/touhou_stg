@@ -39,5 +39,36 @@
         <file>game/assets/small_enemy04.png</file>
         <file>game/assets/small_enemy05.png</file>
         <file>game/assets/small_enemy06.png</file>
+        <file>game/assets/sound/se_graze.wav</file>
+        <file>game/assets/sound/se_bonus.wav</file>
+        <file>game/assets/sound/se_bonus2.wav</file>
+        <file>game/assets/sound/se_border.wav</file>
+        <file>game/assets/sound/se_cancel00.wav</file>
+        <file>game/assets/sound/se_cat00.wav</file>
+        <file>game/assets/sound/se_damage00.wav</file>
+        <file>game/assets/sound/se_enep00.wav</file>
+        <file>game/assets/sound/se_enep01.wav</file>
+        <file>game/assets/sound/se_extend.wav</file>
+        <file>game/assets/sound/se_gun00.wav</file>
+        <file>game/assets/sound/se_item00.wav</file>
+        <file>game/assets/sound/se_kira00.wav</file>
+        <file>game/assets/sound/se_kira01.wav</file>
+        <file>game/assets/sound/se_kira02.wav</file>
+        <file>game/assets/sound/se_lazer00.wav</file>
+        <file>game/assets/sound/se_lazer01.wav</file>
+        <file>game/assets/sound/se_nep00.wav</file>
+        <file>game/assets/sound/se_ok00.wav</file>
+        <file>game/assets/sound/se_pause.wav</file>
+        <file>game/assets/sound/se_pldead00.wav</file>
+        <file>game/assets/sound/se_plst00.wav</file>
+        <file>game/assets/sound/se_power0.wav</file>
+        <file>game/assets/sound/se_power1.wav</file>
+        <file>game/assets/sound/se_powerup.wav</file>
+        <file>game/assets/sound/se_select00.wav</file>
+        <file>game/assets/sound/se_tan00.wav</file>
+        <file>game/assets/sound/se_tan01.wav</file>
+        <file>game/assets/sound/se_tan02.wav</file>
+        <file>game/assets/sound/se_timeout.wav</file>
+        <file>game/assets/sound/bgm (compressed).wav</file>
     </qresource>
 </RCC>

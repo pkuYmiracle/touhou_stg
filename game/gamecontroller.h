@@ -3,7 +3,9 @@
 
 #include "qdebug.h"
 #include <QGraphicsItem>
+#include <QMediaPlayer>
 #include <QObject>
+#include <QSound>
 #include <QTimer>
 
 class Scenario;
@@ -34,7 +36,7 @@ class GameController : public QObject {
                         info;//用于从之前选项中输入这个关卡的相关信息
     std::vector<QWidget*>
                         pauseboard_widgets;
-
+    QMediaPlayer            *bgm_player;
     void                update_game_info();
 public:
     explicit GameController(const std::vector<QString> &info_ls,QObject *parent = nullptr);

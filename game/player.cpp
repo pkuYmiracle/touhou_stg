@@ -6,6 +6,7 @@
 #include "qgraphicsscene.h"
 #include "qnamespace.h"
 #include <QDebug>
+#include <QSound>
 
 Player::Player(GameController *gc) : gc(gc)
 {
@@ -43,6 +44,8 @@ void Player::advance(int phase)
     if (kb->isKeyPressed(Qt::Key_Z)) {
         static int cnt = 0;
         if ((++cnt) == PLAYER_SHOOT_PERIOD) {
+//            static QSound *sound = new QSound(":/game/assets/sound/se_tan01.wav");
+//            sound->play();
             cnt = 0;
             Bullet *bullet = new Bullet(this);
             bullet->setAtk(PLAYER_ATK);

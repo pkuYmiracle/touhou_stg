@@ -15,7 +15,7 @@ class KeyboardHandler;
 class GameController : public QObject {
     QGraphicsView       *view;
     QGraphicsScene      *scene;
-    QTimer              *frameTimer;
+    QTimer              *frame_timer;
     Player              *player;
     KeyboardHandler     *kbhandler;
     Scenario            *scenario;
@@ -29,9 +29,11 @@ class GameController : public QObject {
         int     remainingTime; // if paused.
     };
     std::vector<Timer>  timers;
-    QGraphicsItem       *pause_sheild;
+    QGraphicsItem       *pause_shield;
     std::vector<QString>
                         info;//用于从之前选项中输入这个关卡的相关信息
+    std::vector<QWidget*>
+                        pauseboard_widgets;
 
     void                update_game_info();
 public:
@@ -55,6 +57,10 @@ public:
         timer->setInterval(interval);
         timer->start();
     }
+
+
+    void showPauseboard();
+
 };
 
 #endif

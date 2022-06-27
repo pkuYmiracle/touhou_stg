@@ -17,5 +17,27 @@
         <file>game/assets/playerbullet.png</file>
         <file>game/assets/bullet.png</file>
         <file>game/assets/enemy.png</file>
+        <file>game/assets/bullet_blue01.png</file>
+        <file>game/assets/bullet_blue02.png</file>
+        <file>game/assets/bullet_blue03.png</file>
+        <file>game/assets/bullet_blue04.png</file>
+        <file>game/assets/bullet_blue05.png</file>
+        <file>game/assets/bullet_red01.png</file>
+        <file>game/assets/bullet_red02.png</file>
+        <file>game/assets/bullet_red03.png</file>
+        <file>game/assets/bullet_red04.png</file>
+        <file>game/assets/bullet_red05.png</file>
+        <file>game/assets/button.png</file>
+        <file>game/assets/enemy01.png</file>
+        <file>game/assets/enemy02.png</file>
+        <file>game/assets/player01.png</file>
+        <file>game/assets/player02.png</file>
+        <file>game/assets/player03.png</file>
+        <file>game/assets/small_enemy01.png</file>
+        <file>game/assets/small_enemy02.png</file>
+        <file>game/assets/small_enemy03.png</file>
+        <file>game/assets/small_enemy04.png</file>
+        <file>game/assets/small_enemy05.png</file>
+        <file>game/assets/small_enemy06.png</file>
     </qresource>
 </RCC>

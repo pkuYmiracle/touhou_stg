@@ -1,8 +1,11 @@
 #include "gamecontroller.h"
+#include "baseboard.h"
 #include "game/bulletgroup.h"
 #include "game/enemyprototype.h"
+#include "game/pauseboard.h"
 #include "game/scenario.h"
 #include "keyboardhandler.hpp"
+#include "mypushbottom.h"
 #include "qnamespace.h"
 #include "game/config.h"
 #include <qgraphicsview.h>
@@ -15,7 +18,7 @@ GameController::GameController(const std::vector<QString> &info_ls,QObject *pare
     QObject(parent),
     view(new QGraphicsView()),
     scene(new QGraphicsScene(this)),
-    frameTimer(new QTimer(this)),
+    frame_timer(new QTimer(this)),
     player(new Player(this)),
     kbhandler(new KeyboardHandler(this)),
     level_name(new QGraphicsTextItem),
@@ -30,6 +33,7 @@ GameController::GameController(const std::vector<QString> &info_ls,QObject *pare
     initScenarios();
     QRect sceneRect = QRect(0, 0, WIDTH, HEIGHT);
     view->setScene(scene);
+//    view->setWindowFlag(Qt::FramelessWindowHint);
     player->setPos(GAME_BOARD_RECT.center());
     scene->setSceneRect(sceneRect);
     
@@ -65,7 +69,7 @@ GameController::GameController(const std::vector<QString> &info_ls,QObject *pare
         enemy_hp_show ->setRect(QRectF(850,600,200,50));
        scene->addItem(enemy_hp_show);
     scenario = new Scenario(scenarios[0]); // it can only copy before start.
-    QObject::connect(frameTimer, &QTimer::timeout, scene, [=]{
+    QObject::connect(frame_timer, &QTimer::timeout, scene, [=]{
         scene->advance();
         update_game_info();
     });
@@ -76,7 +80,7 @@ GameController::GameController(const std::vector<QString> &info_ls,QObject *pare
     //        view->setFixedSize(WIDTH, HEIGHT);
     view->setFixedSize(view->sizeHint());
     view->show();
-    frameTimer->start(1000 / FPS);
+    frame_timer->start(1000 / FPS);
 
     //test code.
     scenario->start(this);
@@ -100,27 +104,66 @@ QGraphicsScene *GameController::getScene() const
 }
 
 bool GameController::isPaused() {
-    return !frameTimer->isActive();
+    return !frame_timer->isActive();
 }
 
 void GameController::gameContinue() {
-    frameTimer->start();
+    for (auto widget : pauseboard_widgets) {
+        widget->hide();
+    }
+
+    frame_timer->start();
     for (auto &pair : timers) if (pair.timer->remainingTime() > 0) {
         pair.timer->setInterval(pair.remainingTime);
         pair.timer->start();
         pair.remainingTime = 0;
     }
-    scene->removeItem(this->pause_sheild);
+    scene->removeItem(this->pause_shield);
+}
+
+void GameController::showPauseboard() {
+    Mypushbottom *continue_button = new Mypushbottom(view, true,
+                                                  ":/game/assets/button.png",150);
+    Mypushbottom *mainmenu_button = new Mypushbottom(view, true,
+                                                  ":/game/assets/button.png",150); //TODO
+    continue_button->resize(500,100);
+    QPoint delta = {
+        continue_button->rect().width() / 2,
+        continue_button->rect().height() / 2
+    };
+    continue_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y());
+    continue_button->show();
+
+
+    mainmenu_button->resize(500,100);
+    mainmenu_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y() - 120);
+    mainmenu_button->show();
+
+    connect(continue_button, &Mypushbottom::clicked, continue_button, [&](){
+        QTimer::singleShot(300, this,[&](){
+            this->gameContinue();
+        });
+    });
+
+
+    connect(mainmenu_button, &Mypushbottom::clicked, mainmenu_button ,[&](){
+        QTimer::singleShot(300, this, [&](){
+            //@TODO
+        });
+    });
+
+
+    pauseboard_widgets = std::vector<QWidget*>({continue_button, mainmenu_button});
 }
 
 void GameController::pause() {
-    frameTimer->stop();
+    frame_timer->stop();
     for (auto &pair : timers) if (pair.timer->remainingTime() > 0) {
         pair.remainingTime = pair.timer->remainingTime();
         pair.timer->stop();
     }
-    this->pause_sheild = scene->addRect(scene->sceneRect(), QPen(), QBrush(QColor(255,255,255,100)));
-
+    this->pause_shield = scene->addRect(scene->sceneRect(), QPen(), QBrush(QColor(255,255,255,100)));
+    this->showPauseboard();
 }
 
 KeyboardHandler *GameController::getKbhandler() const

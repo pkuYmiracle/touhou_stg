@@ -3,6 +3,8 @@
 #include "qdebug.h"
 #include <QGraphicsScene>
 #include <assert.h>
+#include <QSound>
+#include <QMediaPlayer>
 
 float LivingEntity::getHp() const
 {
@@ -41,6 +43,20 @@ void LivingEntity::advance(int phase)
                 this->hp -= bullet->getAtk();
                 this->scene()->removeItem(bullet);
 //                bullet->deleteLater();
+
+
+                //player hitted sound effect
+                if (this->isPlayer()) {
+                    qDebug() << "wav" << endl;
+                    static bool inited = 0;
+                    static QMediaPlayer *player = new QMediaPlayer;
+                    if (!inited) {
+                        inited = 1;
+                        player->setMedia(QUrl("qrc:/game/assets/sound/se_damage00.wav"));
+                        player->setVolume(25);
+                    }
+                    player->play();
+                }
             }
         }
     }

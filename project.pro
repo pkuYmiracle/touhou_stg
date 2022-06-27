@@ -1,5 +1,4 @@
-QT       += core gui
-
+QT       += core gui multimedia
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
@@ -19,7 +18,6 @@ SOURCES += \
     game/entity.cpp \
     game/gamecontroller.cpp \
     game/livingentity.cpp \
-    game/pauseboard.cpp \
     game/player.cpp \
     game/scenario.cpp \
     game_board.cpp \
@@ -43,7 +41,6 @@ HEADERS += \
     game/entity.h \
     game/gamecontroller.h \
     game/livingentity.h \
-    game/pauseboard.h \
     game/player.h \
     game/scenario.h \
     game_board.h \

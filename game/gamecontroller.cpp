@@ -2,7 +2,6 @@
 #include "baseboard.h"
 #include "game/bulletgroup.h"
 #include "game/enemyprototype.h"
-#include "game/pauseboard.h"
 #include "game/scenario.h"
 #include "keyboardhandler.hpp"
 #include "mypushbottom.h"
@@ -26,7 +25,8 @@ GameController::GameController(const std::vector<QString> &info_ls,QObject *pare
     enemy_hp(new QGraphicsTextItem),
     player_hp_show(new QGraphicsRectItem),
     enemy_hp_show(new QGraphicsRectItem),
-    info(info_ls)
+    info(info_ls),
+    bgm_player(new QMediaPlayer)
 {
     initBulletGroups();
     initEnemyPrototypes();
@@ -82,9 +82,12 @@ GameController::GameController(const std::vector<QString> &info_ls,QObject *pare
     view->show();
     frame_timer->start(1000 / FPS);
 
+
+    bgm_player->setMedia(QUrl("qrc:/game/assets/sound/bgm (compressed).wav"));
+    bgm_player->setVolume(BGM_VOLUME);
+    bgm_player->play();
     //test code.
     scenario->start(this);
-
 }
 
 GameController::~GameController() {
@@ -108,6 +111,7 @@ bool GameController::isPaused() {
 }
 
 void GameController::gameContinue() {
+    bgm_player->play();
     for (auto widget : pauseboard_widgets) {
         widget->hide();
     }
@@ -125,7 +129,7 @@ void GameController::showPauseboard() {
     Mypushbottom *continue_button = new Mypushbottom(view, true,
                                                   ":/game/assets/button.png",150);
     Mypushbottom *mainmenu_button = new Mypushbottom(view, true,
-                                                  ":/game/assets/button.png",150); //TODO
+                                                  ":/game/assets/button.png",150); //@TODO: button assets
     continue_button->resize(500,100);
     QPoint delta = {
         continue_button->rect().width() / 2,
@@ -148,7 +152,7 @@ void GameController::showPauseboard() {
 
     connect(mainmenu_button, &Mypushbottom::clicked, mainmenu_button ,[&](){
         QTimer::singleShot(300, this, [&](){
-            //@TODO
+            //@TODO: impl return to main menu
         });
     });
 
@@ -157,6 +161,7 @@ void GameController::showPauseboard() {
 }
 
 void GameController::pause() {
+    bgm_player->pause();
     frame_timer->stop();
     for (auto &pair : timers) if (pair.timer->remainingTime() > 0) {
         pair.remainingTime = pair.timer->remainingTime();

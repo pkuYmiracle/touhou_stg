@@ -45,16 +45,29 @@ void LivingEntity::advance(int phase)
 //                bullet->deleteLater();
 
 
-                //player hitted sound effect
                 if (this->isPlayer()) {
-                    qDebug() << "wav" << endl;
+                    //player hitted sound effect
+
+                    static bool inited = 0;
+                    static QMediaPlayer *player = new QMediaPlayer;
+                    if (!inited) {
+                        inited = 1;
+                        player->setMedia(QUrl("qrc:/game/assets/sound/se_graze.wav"));
+                        player->setVolume(15);
+                    }
+                    player->stop();
+                    player->play();
+                } else {
+                    //enemy hitted sound effect
+
                     static bool inited = 0;
                     static QMediaPlayer *player = new QMediaPlayer;
                     if (!inited) {
                         inited = 1;
                         player->setMedia(QUrl("qrc:/game/assets/sound/se_damage00.wav"));
-                        player->setVolume(25);
+                        player->setVolume(60);
                     }
+                    player->stop();
                     player->play();
                 }
             }
@@ -64,6 +77,18 @@ void LivingEntity::advance(int phase)
     // die:
     if (this->hp <= 0) {
         this->scene()->removeItem(this);
-//        this->deleteLater();
+
+
+        //enemy die sound effect
+        if (this->isEnemy()) {
+            static bool inited = 0;
+            static QMediaPlayer *player = new QMediaPlayer;
+            if (!inited) {
+                inited = 1;
+                player->setMedia(QUrl("qrc:/game/assets/sound/se_damage00.wav"));
+                player->setVolume(25);
+            }
+            player->play();
+        }
     }
 }

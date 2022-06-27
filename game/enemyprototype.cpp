@@ -1,5 +1,6 @@
 #include "enemyprototype.h"
 #include "game/action.hpp"
+#include "game/config.h"
 #include "game/gamecontroller.h"
 #include "qdebug.h"
 #include "qgraphicsscene.h"
@@ -7,8 +8,18 @@
 #include <QTimer>
 #include <QObject>
 
-EnemyPrototype::EnemyPrototype(QString picUrl)
-    : actions(), picUrl(picUrl)
+int EnemyPrototype::getHp() const
+{
+    return hp;
+}
+
+void EnemyPrototype::setHp(int newHp)
+{
+    hp = newHp;
+}
+
+EnemyPrototype::EnemyPrototype(QString picUrl, int hp)
+    : actions(), picUrl(picUrl), hp(hp)
 {
 
 }
@@ -20,10 +31,12 @@ EnemyPrototype::EnemyPrototype(const EnemyPrototype &e)
         this->actions.push_back(a->clone());
     }
     picUrl = e.picUrl;
+    hp = e.hp;
 }
 
 EnemyPrototype::EnemyPrototype(EnemyPrototype &&e){
     picUrl = e.picUrl;
+    hp = e.hp;
     actions = std::move(e.actions);
 }
 
@@ -37,6 +50,7 @@ EnemyPrototype &EnemyPrototype::operator=(const EnemyPrototype &e)
     for (auto a : e.actions) {
         this->actions.push_back(a->clone());
     }
+    hp = e.hp;
     picUrl = e.picUrl;
     return *this;
 }
@@ -54,6 +68,7 @@ Enemy *EnemyPrototype::spawnIt(GameController *gc, QPointF initLoc) const
     Enemy *e = new Enemy();
     e->setPixmap(QPixmap(picUrl));
     e->setPos(initLoc);
+    e->setHp(this->hp);
 
     //a terrible impl.... but it works.
     for (auto act : actions) {

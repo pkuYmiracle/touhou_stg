@@ -14,9 +14,10 @@ class EnemyPrototype
     std::vector<Action*>
                     actions;
     QString         picUrl;
+    int             hp;
 
 public:
-    EnemyPrototype(QString picUrl = ":/game/assets/enemy.png");
+    EnemyPrototype(QString picUrl = ":/game/assets/enemy.png", int hp = ENEMY_HP);
 
     EnemyPrototype(const EnemyPrototype &e);
     EnemyPrototype(EnemyPrototype &&e);
@@ -29,6 +30,8 @@ public:
     Enemy *spawnIt(GameController *gc, QPointF initLoc) const;
 
     ~EnemyPrototype();
+    int getHp() const;
+    void setHp(int newHp);
 };
 
 extern std::vector<EnemyPrototype*> enemyPrototypes;

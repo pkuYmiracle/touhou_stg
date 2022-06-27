@@ -65,7 +65,7 @@ void LivingEntity::advance(int phase)
                     if (!inited) {
                         inited = 1;
                         player->setMedia(QUrl("qrc:/game/assets/sound/se_damage00.wav"));
-                        player->setVolume(60);
+                        player->setVolume(5);
                     }
                     player->stop();
                     player->play();
@@ -85,8 +85,8 @@ void LivingEntity::advance(int phase)
             static QMediaPlayer *player = new QMediaPlayer;
             if (!inited) {
                 inited = 1;
-                player->setMedia(QUrl("qrc:/game/assets/sound/se_damage00.wav"));
-                player->setVolume(25);
+                player->setMedia(QUrl("qrc:/game/assets/sound/se_enep00.wav"));
+                player->setVolume(10);
             }
             player->play();
         }

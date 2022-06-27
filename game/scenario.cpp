@@ -38,6 +38,11 @@ void initScenarios(){
     //一个关卡由很多enemy组成. 一个enemy由一个enemyPrototypes生成
     s
         .add(0, {500, 500}, *enemyPrototypes[0]) //在屏幕之外生成不会这么突兀
+        .add(0, {530, 500}, *enemyPrototypes[0])
+        .add(0, {550, 500}, *enemyPrototypes[0])
+        .add(0, {500, 400}, *enemyPrototypes[0])
+        .add(0, {540, 300}, *enemyPrototypes[0])
+        .add(0, {550, 200}, *enemyPrototypes[0])
         .add(5, {10, 10}, *enemyPrototypes[0]); //屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT) 左右是x，上下是y
 
     scenarios.push_back(s);

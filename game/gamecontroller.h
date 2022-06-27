@@ -4,7 +4,10 @@
 #include "qdebug.h"
 #include <QObject>
 #include <QTimer>
-
+#include <QString>
+#include <QGraphicsTextItem> 
+#include <QGraphicsRectItem>
+#include <QLabel>
 class Scenario;
 class Player;
 class QGraphicsScene;
@@ -18,10 +21,15 @@ class GameController : public QObject {
     Player              *player;
     KeyboardHandler     *kbhandler;
     Scenario            *scenario;
+    QGraphicsTextItem * level_name,*player_hp,*enemy_hp;
+    QGraphicsRectItem * player_hp_show,*enemy_hp_show;
+
     std::vector<QTimer*>
                         timers;
+   std::vector<QString> info;//用于从之前选项中输入这个关卡的相关信息
+   void update_game_info();
 public:
-    explicit GameController(QObject *parent = nullptr);
+    explicit GameController(const std::vector<QString> &info_ls,QObject *parent = nullptr);
 
     ~GameController();
     KeyboardHandler *getKbhandler() const;

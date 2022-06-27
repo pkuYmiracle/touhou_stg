@@ -100,17 +100,81 @@ EnemyPrototype::~EnemyPrototype() {
 
 
 std::vector<EnemyPrototype*> enemyPrototypes;
+
 void initEnemyPrototypes() {
     //以下是一个预置EP实例
-    EnemyPrototype *ep = new EnemyPrototype();
+    QString e_picUrl = ":/game/assets/enemy.png";//每一组怪的图
+    int e_hp = ENEMY_HP;//每一组怪的血
+    EnemyPrototype *ep = new EnemyPrototype(e_picUrl,e_hp);
     // 为一个EnemyPrototype设置动作序列，参数的意义具体见各个动作的构造函数
-    (*ep)   << (new Attack(bulletGroups[0], 1))
-            << (new Attack(bulletGroups[0], 1))
-            << (new Attack(bulletGroups[0], 1))
-            << (new Attack(bulletGroups[0], 1))
-            << (new Move({10, 10}, 10))
-            << (new Move({0, 0}, 0)) //停止
-            << (new Move({10, 10}, 100000)); //最后让他飞出屏幕就行
+    (*ep)   << (new Attack(bulletGroups[0], 2))
+            << (new Attack(bulletGroups[1], 2))
+            << (new Attack(bulletGroups[2], 2))
+            << (new Attack(bulletGroups[3], 2))
+            << (new Attack(bulletGroups[4], 2))
+            << (new Attack(bulletGroups[5], 2))
+            << (new Attack(bulletGroups[6], 2))
+            << (new Attack(bulletGroups[7], 2))
+            << (new Move({10, 10}, 1)); //最后让他飞出屏幕就行
     enemyPrototypes.push_back(ep);
+    e_picUrl = ":/game/assets/enemy07.png";
+    EnemyPrototype *ep1 = new EnemyPrototype(e_picUrl,e_hp);
+    (*ep1)  << (new Move({3, 3}, 1.3))
+            <<(new Attack(bulletGroups[4], 1.5))
+            << (new Move({0, 0}, 1.3))
+            <<(new Attack(bulletGroups[4], 0))
+            << (new Move({3, 3}, 0.4));
+    enemyPrototypes.push_back(ep1);
+
+
+    e_hp*=0.5;
+    e_picUrl = ":/game/assets/small_enemy04.png";
+    EnemyPrototype *eps2 = new EnemyPrototype(e_picUrl,e_hp);//small enemy
+    (*eps2)  << (new Move({4, 0}, 1.5))
+             <<(new Move({0, 0}, 0))
+            <<(new Attack(bulletGroups[5], 0.3))
+            <<(new Attack(bulletGroups[5], 0.3))
+            <<(new Attack(bulletGroups[5], 0.3))
+            <<(new Attack(bulletGroups[5], 0.3))
+            << (new Move({4, 0}, 1));
+
+    enemyPrototypes.push_back(eps2);
+    e_picUrl = ":/game/assets/enemy05.png";
+    EnemyPrototype *ep3 = new EnemyPrototype(e_picUrl,e_hp);
+    (*ep3)  << (new Move({-3, 3}, 0.7))
+            <<(new Attack(bulletGroups[6], 1.5))
+            << (new Move({0, 0}, 1))
+            <<(new Attack(bulletGroups[6], 0))
+            << (new Move({-3, -3}, 0.7));
+    enemyPrototypes.push_back(ep3);
+
+
+    e_hp*=2;
+    e_picUrl = ":/game/assets/small_enemy02.png";
+    EnemyPrototype *ep4 = new EnemyPrototype(e_picUrl,e_hp);
+    (*ep4)  << (new Move({0, 1.5}, 0.7))
+            <<(new Attack(bulletGroups[3], 1.5))
+            << (new Move({0, 0}, 1))
+            <<(new Attack(bulletGroups[3], 0))
+            << (new Move({-2, 1}, 0.7));
+    enemyPrototypes.push_back(ep4);
+    EnemyPrototype *ep5 = new EnemyPrototype(e_picUrl,e_hp);
+    (*ep5)  << (new Move({0, 1.5}, 0.7))
+            <<(new Attack(bulletGroups[3], 1.5))
+            << (new Move({0, 0}, 1))
+            <<(new Attack(bulletGroups[3], 0))
+            << (new Move({2, 1}, 0.7));
+    enemyPrototypes.push_back(ep5);
+
+
+    e_hp*=2;
+    e_picUrl=":/game/assets/enemy07.png";
+    EnemyPrototype *ep6 = new EnemyPrototype(e_picUrl,e_hp);
+    (*ep6)  << (new Move({3, 3}, 1.6))<< (new Move({0, 0}, 1))
+            <<(new Attack(bulletGroups[7], 1))
+            <<(new Attack(bulletGroups[7], 1))
+            <<(new Attack(bulletGroups[7], 0))
+            << (new Move({1.5, -1.5}, 0.7));
+    enemyPrototypes.push_back(ep6);
 }
 

@@ -19,14 +19,23 @@ class GameController : public QObject {
     Player              *player;
     KeyboardHandler     *kbhandler;
     Scenario            *scenario;
+    QGraphicsTextItem   *level_name,
+                        *player_hp,
+                        *enemy_hp;
+    QGraphicsRectItem   *player_hp_show,
+                        *enemy_hp_show;
     struct Timer{
         QTimer* timer;
         int     remainingTime; // if paused.
     };
     std::vector<Timer>  timers;
     QGraphicsItem       *pause_sheild;
+    std::vector<QString>
+                        info;//用于从之前选项中输入这个关卡的相关信息
+
+    void                update_game_info();
 public:
-    explicit GameController(QObject *parent = nullptr);
+    explicit GameController(const std::vector<QString> &info_ls,QObject *parent = nullptr);
 
     ~GameController();
     KeyboardHandler *getKbhandler() const;

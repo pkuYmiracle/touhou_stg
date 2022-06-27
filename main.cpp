@@ -3,14 +3,15 @@
 #include <QApplication>
 #include "game/gamecontroller.h"
 #include <QDebug>
-
+#include <QString>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
 //    Startboard w;
 //    w.show();
-
-    GameController gc;
+    std::vector<QString> lis;
+    lis.push_back(QString("first_level"));
+    GameController gc(lis);
     return a.exec();
 }

@@ -107,7 +107,7 @@ void initEnemyPrototypes() {
     int e_hp = ENEMY_HP;//每一组怪的血
     EnemyPrototype *ep = new EnemyPrototype(e_picUrl,e_hp);
     // 为一个EnemyPrototype设置动作序列，参数的意义具体见各个动作的构造函数
-<<<<<<< HEAD
+//<<<<<<< HEAD
     (*ep)   << (new Attack(bulletGroups[0], 2))
             << (new Attack(bulletGroups[1], 2))
             << (new Attack(bulletGroups[2], 2))
@@ -117,16 +117,16 @@ void initEnemyPrototypes() {
             << (new Attack(bulletGroups[6], 2))
             << (new Attack(bulletGroups[7], 2))
             << (new Move({10, 10}, 1)); //最后让他飞出屏幕就行
-=======
-    (*ep)   << (new Attack(bulletGroups[2], 1))
-            << (new Attack(bulletGroups[2], 1))
-            << (new Attack(bulletGroups[2], 1))
-            << (new Attack(bulletGroups[2], 1))
-//            << (new Move({10, 10}, 10))
-            << (new Move({0, 0}, 0)); //停止
-//            << (new Move({10, 10}, 100000)); //最后让他飞出屏幕就行
-    ep->setHp(20);
->>>>>>> 765137e9396f1d0b61eaf752d638d77c04a12590
+//=======
+//    (*ep)   << (new Attack(bulletGroups[2], 1))
+//            << (new Attack(bulletGroups[2], 1))
+//            << (new Attack(bulletGroups[2], 1))
+//            << (new Attack(bulletGroups[2], 1))
+////            << (new Move({10, 10}, 10))
+//            << (new Move({0, 0}, 0)); //停止
+////            << (new Move({10, 10}, 100000)); //最后让他飞出屏幕就行
+//    ep->setHp(20);
+//>>>>>>> 765137e9396f1d0b61eaf752d638d77c04a12590
     enemyPrototypes.push_back(ep);
     e_picUrl = ":/game/assets/enemy07.png";
     EnemyPrototype *ep1 = new EnemyPrototype(e_picUrl,e_hp);

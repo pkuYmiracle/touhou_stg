@@ -19,7 +19,7 @@ double pi=3.14;
 //     预置bullet groups，将会在GC开始时调用
 std::vector<BulletGroup> bulletGroups;
 void initBulletGroups() {
-    //为啥qt算不了这种啊for(int i=0;i<5;i++)bg_06.bullets.push_back(BulletPrototype({n1*cos(2*M_PI*i),n1*sin(2*M_PI*i)},{n2*cos(2*M_PI*i),n2*sin(2*M_PI*i)},bg_atk,bg_picUrl));
+    //为啥qt算不了这种啊
     //这是一个预置bulletGroups的实例
     BulletGroup bg;
     // 一个bulletGroups可以被某个LivingEntity发射，包含若干颗bullet.
@@ -97,4 +97,5 @@ void initBulletGroups() {
     bulletGroups.push_back(bg_08);
     bulletGroups.push_back(bg_09);
     bulletGroups.push_back(bg_10);
+
 }

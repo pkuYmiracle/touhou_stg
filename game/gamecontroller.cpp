@@ -12,6 +12,7 @@
 #include <QGraphicsTextItem> 
 #include <assert.h>
 #include <QDebug>
+#include <QTime>
 
 GameController::GameController(const std::vector<QString> &info_ls,QObject *parent ):
     QObject(parent),
@@ -38,7 +39,7 @@ GameController::GameController(const std::vector<QString> &info_ls,QObject *pare
     scene->setSceneRect(sceneRect);
     
     scene->addItem(player);
-    qDebug()<< "info_size:" << info.size() << endl;
+//    qDebug()<< "info_size:" << info.size() << endl;
     level_name ->setPlainText(info[0]);
     level_name ->setPos(QPointF(850,200));
     QFont font;
@@ -69,9 +70,17 @@ GameController::GameController(const std::vector<QString> &info_ls,QObject *pare
         enemy_hp_show ->setRect(QRectF(850,600,200,50));
        scene->addItem(enemy_hp_show);
     scenario = new Scenario(scenarios[0]); // it can only copy before start.
-    QObject::connect(frame_timer, &QTimer::timeout, scene, [=]{
+
+    static qreal last_calc_fps_time = QTime::currentTime().msecsSinceStartOfDay(), frame_cnt = 0;
+    QObject::connect(frame_timer, &QTimer::timeout, scene, [&]{
         scene->advance();
         update_game_info();
+        frame_cnt++;
+        if (QTime::currentTime().msecsSinceStartOfDay() - last_calc_fps_time > 1000) {
+            last_calc_fps_time = QTime::currentTime().msecsSinceStartOfDay();
+//            qDebug() << "fps: " << frame_cnt << endl;
+            frame_cnt = 0;
+        }
     });
     view->installEventFilter(kbhandler);
 
@@ -86,6 +95,10 @@ GameController::GameController(const std::vector<QString> &info_ls,QObject *pare
     bgm_player->setMedia(QUrl("qrc:/game/assets/sound/bgm (compressed).wav"));
     bgm_player->setVolume(BGM_VOLUME);
     bgm_player->play();
+//    scene->setItemIndexMethod(QGraphicsScene::NoIndex);
+    view->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+    view->setCacheMode(QGraphicsView::CacheBackground);
+
     //test code.
     scenario->start(this);
 }
@@ -155,7 +168,6 @@ void GameController::showPauseboard() {
             //@TODO: impl return to main menu
         });
     });
-
 
     pauseboard_widgets = std::vector<QWidget*>({continue_button, mainmenu_button});
 }

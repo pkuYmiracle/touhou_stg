@@ -39,7 +39,6 @@ void initScenarios(){
     //一个关卡由很多enemy组成. 一个enemy由一个enemyPrototypes生成
     s   .add(t_, {500, 500}, *enemyPrototypes[0]);t_=+15;//展示一下所有bulletgroup
     s
-//<<<<<<< HEAD
         .add(t_, {25, 25}, *enemyPrototypes[1]); //在屏幕之外生成不会这么突兀
         t_+=1;
     s    .add(t_, {800, 25}, *enemyPrototypes[3]);//屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT) 左右是x，上下是y
@@ -64,6 +63,16 @@ void initScenarios(){
 //        .add(0, {530, 500}, *enemyPrototypes[0])
 //        .add(0, {550, 500}, *enemyPrototypes[0])
 //        .add(0, {500, 400}, *enemyPrototypes[0])
+//        .add(0, {540, 300}, *enemyPrototypes[0])
+//        .add(0, {550, 200}, *enemyPrototypes[0])
+//        .add(5, {10, 10}, *enemyPrototypes[0]); //屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT) 左右是x，上下是y
+//        .add(0, {500, 500}, *enemyPrototypes[0]) //在屏幕之外生成不会这么突兀
+//        .add(0, {530, 500}, *enemyPrototypes[0])
+//        .add(0, {550, 500}, *enemyPrototypes[0])
+//        .add(0, {500, 400}, *enemyPrototypes[0])
+//        .add(0, {250, 100}, *enemyPrototypes[0])
+//        .add(0, {300, 200}, *enemyPrototypes[0])
+//        .add(0, {600, 300}, *enemyPrototypes[0])
 //        .add(0, {540, 300}, *enemyPrototypes[0])
 //        .add(0, {550, 200}, *enemyPrototypes[0])
 //        .add(5, {10, 10}, *enemyPrototypes[0]); //屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT) 左右是x，上下是y

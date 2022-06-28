@@ -36,16 +36,17 @@ void Player::advance(int phase)
     if (kb->isKeyPressed(Qt::Key_Right)) {
         speed += {+1, 0};
     }
+
+    qreal speed_rates = kb->isKeyPressed(Qt::Key_Shift) ? PLAYER_MOVING_SPEED / 3 : PLAYER_MOVING_SPEED;
+
     if (speed.length() != 0) {
-        speed *= PLAYER_MOVING_SPEED / speed.length();
+        speed *= speed_rates / speed.length();
     }
 
     //shoot
     if (kb->isKeyPressed(Qt::Key_Z)) {
         static int cnt = 0;
         if ((++cnt) == PLAYER_SHOOT_PERIOD) {
-//            static QSound *sound = new QSound(":/game/assets/sound/se_tan01.wav");
-//            sound->play();
             cnt = 0;
             Bullet *bullet = new Bullet(this);
             bullet->setAtk(PLAYER_ATK);

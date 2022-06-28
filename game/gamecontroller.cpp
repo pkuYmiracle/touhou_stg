@@ -32,7 +32,7 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     view(new QGraphicsView()),
     scene(new QGraphicsScene(this)),
     frame_timer(new QTimer(this)),
-    player(new Player(this)),
+    player(new Player(this,info_ls[2])),
     kbhandler(new KeyboardHandler(this)),
     level_name(new QGraphicsTextItem),
     player_hp(new QGraphicsTextItem),

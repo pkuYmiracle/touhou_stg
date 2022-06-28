@@ -8,9 +8,9 @@
 #include <QDebug>
 #include <QSound>
 
-Player::Player(GameController *gc) : gc(gc)
+Player::Player(GameController *gc,QString url) : gc(gc)
 {
-    this->setPixmap(QPixmap(":/game/assets/player.png"));
+    this->setPixmap(QPixmap(url));
     this->setHp(PLAYER_HP);
 }
 

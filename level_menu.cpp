@@ -52,6 +52,7 @@ Level_menu::Level_menu(QWidget *parent,int _id)
             std::vector<QString> lis;
             lis.push_back("level: "+QString::number(1+id));
             lis.push_back(QString::number(id));
+            lis.push_back(characters[pos]);
             GameController * gc = new GameController (lis,this);
 
              this->hide();
@@ -83,6 +84,7 @@ void Level_menu::turn_left()
             std::vector<QString> lis;
             lis.push_back("level: "+QString::number(1+id));
             lis.push_back(QString::number(id));
+            lis.push_back(characters[pos]);
             GameController * gc = new GameController (lis,this);
             this->hide();
         });
@@ -104,6 +106,7 @@ void Level_menu::turn_right()
             std::vector<QString> lis;
             lis.push_back("level: "+QString::number(1+id));
             lis.push_back(QString::number(id));
+            lis.push_back(characters[pos]);
             GameController * gc = new GameController (lis,this);
             this->hide();
 

@@ -50,93 +50,32 @@ Scenario Scenario::gen_random_scenario()
 {
     Scenario s;
     double t_=0;
-    qDebug() << "enemy_type_size:"<<enemyPrototypes.size() << endl;
-    //一个关卡由很多enemy组成. 一个enemy由一个enemyPrototypes生成
-    s   .add(t_, {500, 500}, *enemyPrototypes[0]);t_=+15;//展示一下所有bulletgroup
+    qDebug() << "gen_random_scenario:"<<"enemy_type_size:"<<enemyPrototypes_small.size() << endl;
+    //一个关卡由很多enemy组成. 一个enemy由一个enemyPrototypes生成d
+    s   .add(t_, {500, 500}, *enemyPrototypes_boss[0]);t_=+15;//展示一下所有bulletgroup
     s
-        .add(t_, {25, 25}, *enemyPrototypes[1]); //在屏幕之外生成不会这么突兀
+        .add(t_, {25, 25}, *enemyPrototypes_small[1]); //在屏幕之外生成不会这么突兀
         t_+=3;
-    s    .add(t_, {800, 25}, *enemyPrototypes[3]);//屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT) 左右是x，上下是y
+    s    .add(t_, {800, 25}, *enemyPrototypes_small[3]);//屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT) 左右是x，上下是y
         t_+=3;
     s
                 //下面这六只一起飞
-        .add(t_, {500, 0}, *enemyPrototypes[4])
-        .add(t_, {500, 0}, *enemyPrototypes[5])
-        .add(t_+0.5, {500, 0}, *enemyPrototypes[4])
-        .add(t_+0.5, {500, 0}, *enemyPrototypes[5])
-        .add(t_+1, {500, 0}, *enemyPrototypes[4])
-        .add(t_+1, {500, 0}, *enemyPrototypes[5]);
+        .add(t_, {500, 0}, *enemyPrototypes_small[4])
+        .add(t_, {500, 0}, *enemyPrototypes_small[5])
+        .add(t_+0.5, {500, 0}, *enemyPrototypes_small[4])
+        .add(t_+0.5, {500, 0}, *enemyPrototypes_small[5])
+        .add(t_+1, {500, 0}, *enemyPrototypes_small[4])
+        .add(t_+1, {500, 0}, *enemyPrototypes_small[5]);
         //
         t_+=5;
     s
-            .add(t_, {0, 300}, *enemyPrototypes[2])
-            .add(t_+0.7, {0, 450}, *enemyPrototypes[2])
-            .add(t_+1.4, {0, 600}, *enemyPrototypes[2]);
+            .add(t_, {0, 300}, *enemyPrototypes_small[2])
+            .add(t_+0.7, {0, 450}, *enemyPrototypes_small[2])
+            .add(t_+1.4, {0, 600}, *enemyPrototypes_small[2]);
         t_+=5;
-        s   .add(t_, {0, 100}, *enemyPrototypes[6]);
+        s   .add(t_, {0, 100}, *enemyPrototypes_small[6]);
         t_+=5;
-        s   .add(t_, {0, 100}, *enemyPrototypes[7]);
-       qDebug() << "gen_random_sc" << endl;
-       t_+=3;
-   s
-               //下面这六只一起飞
-       .add(t_, {500, 0}, *enemyPrototypes[4])
-       .add(t_, {500, 0}, *enemyPrototypes[5])
-       .add(t_+0.5, {500, 0}, *enemyPrototypes[4])
-       .add(t_+0.5, {500, 0}, *enemyPrototypes[5])
-       .add(t_+1, {500, 0}, *enemyPrototypes[4])
-       .add(t_+1, {500, 0}, *enemyPrototypes[5]);
-       //
-       t_+=5;
-   s
-           .add(t_, {0, 300}, *enemyPrototypes[2])
-           .add(t_+0.7, {0, 450}, *enemyPrototypes[2])
-           .add(t_+1.4, {0, 600}, *enemyPrototypes[2]);
-       t_+=5;
-       s   .add(t_, {0, 100}, *enemyPrototypes[6]);
-       t_+=5;
-       s   .add(t_, {0, 100}, *enemyPrototypes[7]);
-      qDebug() << "gen_random_sc" << endl;
-      t_+=3;
-  s
-              //下面这六只一起飞
-      .add(t_, {500, 0}, *enemyPrototypes[4])
-      .add(t_, {500, 0}, *enemyPrototypes[5])
-      .add(t_+0.5, {500, 0}, *enemyPrototypes[4])
-      .add(t_+0.5, {500, 0}, *enemyPrototypes[5])
-      .add(t_+1, {500, 0}, *enemyPrototypes[4])
-      .add(t_+1, {500, 0}, *enemyPrototypes[5]);
-      //
-      t_+=5;
-  s
-          .add(t_, {0, 300}, *enemyPrototypes[2])
-          .add(t_+0.7, {0, 450}, *enemyPrototypes[2])
-          .add(t_+1.4, {0, 600}, *enemyPrototypes[2]);
-      t_+=5;
-      s   .add(t_, {0, 100}, *enemyPrototypes[6]);
-      t_+=5;
-      s   .add(t_, {0, 100}, *enemyPrototypes[7]);
-     qDebug() << "gen_random_sc" << endl;
-     t_+=3;
- s
-             //下面这六只一起飞
-     .add(t_, {500, 0}, *enemyPrototypes[4])
-     .add(t_, {500, 0}, *enemyPrototypes[5])
-     .add(t_+0.5, {500, 0}, *enemyPrototypes[4])
-     .add(t_+0.5, {500, 0}, *enemyPrototypes[5])
-     .add(t_+1, {500, 0}, *enemyPrototypes[4])
-     .add(t_+1, {500, 0}, *enemyPrototypes[5]);
-     //
-     t_+=5;
- s
-         .add(t_, {0, 300}, *enemyPrototypes[2])
-         .add(t_+0.7, {0, 450}, *enemyPrototypes[2])
-         .add(t_+1.4, {0, 600}, *enemyPrototypes[2]);
-     t_+=5;
-     s   .add(t_, {0, 100}, *enemyPrototypes[6]);
-     t_+=5;
-     s   .add(t_, {0, 100}, *enemyPrototypes[7]);
-    qDebug() << "gen_random_sc" << endl;
+        s   .add(t_, {0, 100}, *enemyPrototypes_small[7]);
        return s;
 }
 std::vector<Scenario> scenarios;
@@ -144,48 +83,30 @@ void init_scenarios(){
     Scenario s;
     double t_=0;
     //一个关卡由很多enemy组成. 一个enemy由一个enemyPrototypes生成
-    s   .add(t_, {500, 500}, *enemyPrototypes[0]);t_=+15;//展示一下所有bulletgroup
+    s   .add(t_, {500, 500}, *enemyPrototypes_boss[0]);t_=+15;//展示一下所有bulletgroup
     s
-        .add(t_, {25, 25}, *enemyPrototypes[1]); //在屏幕之外生成不会这么突兀
+        .add(t_, {25, 25}, *enemyPrototypes_small[1]); //在屏幕之外生成不会这么突兀
         t_+=3;
-    s    .add(t_, {800, 25}, *enemyPrototypes[3]);//屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT) 左右是x，上下是y
+    s    .add(t_, {800, 25}, *enemyPrototypes_small[3]);//屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT) 左右是x，上下是y
         t_+=3;
     s
                 //下面这六只一起飞
-        .add(t_, {500, 0}, *enemyPrototypes[4])
-        .add(t_, {500, 0}, *enemyPrototypes[5])
-        .add(t_+0.5, {500, 0}, *enemyPrototypes[4])
-        .add(t_+0.5, {500, 0}, *enemyPrototypes[5])
-        .add(t_+1, {500, 0}, *enemyPrototypes[4])
-        .add(t_+1, {500, 0}, *enemyPrototypes[5]);
+        .add(t_, {500, 0}, *enemyPrototypes_small[4])
+        .add(t_, {500, 0}, *enemyPrototypes_small[5])
+        .add(t_+0.5, {500, 0}, *enemyPrototypes_small[4])
+        .add(t_+0.5, {500, 0}, *enemyPrototypes_small[5])
+        .add(t_+1, {500, 0}, *enemyPrototypes_small[4])
+        .add(t_+1, {500, 0}, *enemyPrototypes_small[5]);
         //
         t_+=5;
     s
-            .add(t_, {0, 300}, *enemyPrototypes[2])
-            .add(t_+0.7, {0, 450}, *enemyPrototypes[2])
-            .add(t_+1.4, {0, 600}, *enemyPrototypes[2]);
+            .add(t_, {0, 300}, *enemyPrototypes_small[2])
+            .add(t_+0.7, {0, 450}, *enemyPrototypes_small[2])
+            .add(t_+1.4, {0, 600}, *enemyPrototypes_small[2]);
         t_+=5;
-        s   .add(t_, {0, 100}, *enemyPrototypes[6]);
+        s   .add(t_, {0, 100}, *enemyPrototypes_small[6]);
         t_+=5;
-        s   .add(t_, {0, 100}, *enemyPrototypes[7]);
-    /*s   .add(t_, {0, 100}, *enemyPrototypes[6])
-        .add(0, {500, 500}, *enemyPrototypes[0]) //在屏幕之外生成不会这么突兀
-        .add(0, {530, 500}, *enemyPrototypes[0])
-        .add(0, {550, 500}, *enemyPrototypes[0])
-        .add(0, {500, 400}, *enemyPrototypes[0])
-        .add(0, {540, 300}, *enemyPrototypes[0])
-        .add(0, {550, 200}, *enemyPrototypes[0])
-        .add(5, {10, 10}, *enemyPrototypes[0]) //屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT) 左右是x，上下是y
-        .add(0, {500, 500}, *enemyPrototypes[0]) //在屏幕之外生成不会这么突兀
-        .add(0, {530, 500}, *enemyPrototypes[0])
-        .add(0, {550, 500}, *enemyPrototypes[0])
-        .add(0, {500, 400}, *enemyPrototypes[0])
-        .add(0, {250, 100}, *enemyPrototypes[0])
-        .add(0, {300, 200}, *enemyPrototypes[0])
-        .add(0, {600, 300}, *enemyPrototypes[0])
-        .add(0, {540, 300}, *enemyPrototypes[0])
-        .add(0, {550, 200}, *enemyPrototypes[0])
-        .add(5, {10, 10}, *enemyPrototypes[0]);*/ //屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT) 左右是x，上下是y
+        s   .add(t_, {0, 100}, *enemyPrototypes_small[7]);
         scenarios.push_back(s);
 }
 
@@ -202,7 +123,7 @@ qreal Scenario::get_hp_rate() const
 
 bool Scenario::is_end() const
 {
-
+   // qDebug() << "boss_count:" <<bosses.size() << endl;
     for (int i = 0 ; i < bosses.size(); i ++)
         if(bosses[i]->getHp() != 0)
                 return 0;

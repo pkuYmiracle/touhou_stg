@@ -34,7 +34,9 @@ public:
     void setHp(int newHp);
 };
 
-extern std::vector<EnemyPrototype*> enemyPrototypes;
+extern std::vector<EnemyPrototype*> enemyPrototypes_boss,enemyPrototypes_small;
 void initEnemyPrototypes();
+void init_boss();
+void init_small();
 
 #endif // ENEMYPROTOTYPE_H

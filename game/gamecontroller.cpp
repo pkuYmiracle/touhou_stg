@@ -154,7 +154,11 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
 
 GameController::~GameController() {
     view->deleteLater();
-    for (auto ep : enemyPrototypes) {
+    for (auto ep : enemyPrototypes_boss) {
+        delete ep;
+    }
+
+    for (auto ep : enemyPrototypes_small) {
         delete ep;
     }
     //其余成员被Qt自动析构.
@@ -213,6 +217,7 @@ void GameController::game_end(const bool &is_win) {
     this->pause_shield = scene->addRect(scene->sceneRect(), QPen(), QBrush(QColor(255,255,255,100)));
     if(is_win)
     {
+        qDebug() << "win!"<<endl;
         Mypushbottom * win_button = new Mypushbottom(view, true,
                                                      ":/game/assets/button.png",150);
        win_button->resize(500,100);
@@ -233,6 +238,7 @@ void GameController::game_end(const bool &is_win) {
     }
     else
     {
+        qDebug() << "loss!"<<endl;
         Mypushbottom * loss_button = new Mypushbottom(view, true,
                                                      ":/game/assets/button.png",150);
        loss_button->resize(500,100);

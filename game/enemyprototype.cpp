@@ -99,13 +99,12 @@ EnemyPrototype::~EnemyPrototype() {
 }
 
 
-std::vector<EnemyPrototype*> enemyPrototypes;
-
-void initEnemyPrototypes() {
-    //以下是一个预置EP实例
+std::vector<EnemyPrototype*> enemyPrototypes_boss,enemyPrototypes_small;
+void init_boss()
+{
     QString e_picUrl = ":/game/assets/enemy.png";//每一组怪的图
     int e_hp = ENEMY_HP;//每一组怪的血
-    EnemyPrototype *ep = new EnemyPrototype(e_picUrl,e_hp,1);
+    EnemyPrototype *ep = new EnemyPrototype(e_picUrl,e_hp,1); //最后一个参数为1：表示boss
     // 为一个EnemyPrototype设置动作序列，参数的意义具体见各个动作的构造函数
     (*ep)   << (new Attack(bulletGroups[0], 2))
             << (new Attack(bulletGroups[1], 2))
@@ -115,18 +114,21 @@ void initEnemyPrototypes() {
             << (new Attack(bulletGroups[5], 2))
             << (new Attack(bulletGroups[6], 2))
             << (new Attack(bulletGroups[7], 2));
-    enemyPrototypes.push_back(ep);
+    enemyPrototypes_boss.push_back(ep);
+}
+void init_small()
+{
 
-
-
-    e_picUrl = ":/game/assets/enemy07.png";
+    QString e_picUrl = ":/game/assets/enemy07.png";
+    int e_hp = ENEMY_HP;//每一组怪的血
     EnemyPrototype *ep1 = new EnemyPrototype(e_picUrl,e_hp);
     (*ep1)  << (new Move({3, 3}, 1.3))
             <<(new Attack(bulletGroups[4], 1.5))
             << (new Move({0, 0}, 1.3))
             <<(new Attack(bulletGroups[4], 0))
             << (new Move({3, 3}, 0.4));
-    enemyPrototypes.push_back(ep1);
+    enemyPrototypes_small.push_back(ep1);
+    enemyPrototypes_small.push_back(ep1);
 
 
     e_hp*=0.5;
@@ -140,7 +142,7 @@ void initEnemyPrototypes() {
             <<(new Attack(bulletGroups[5], 0.3))
             << (new Move({4, 0}, 1));
 
-    enemyPrototypes.push_back(eps2);
+    enemyPrototypes_small.push_back(eps2);
     e_picUrl = ":/game/assets/enemy05.png";
     EnemyPrototype *ep3 = new EnemyPrototype(e_picUrl,e_hp);
     (*ep3)  << (new Move({-3, 3}, 0.7))
@@ -148,7 +150,7 @@ void initEnemyPrototypes() {
             << (new Move({0, 0}, 1))
             <<(new Attack(bulletGroups[6], 0))
             << (new Move({-3, -3}, 0.7));
-    enemyPrototypes.push_back(ep3);
+    enemyPrototypes_small.push_back(ep3);
 
 
     e_hp*=2;
@@ -159,14 +161,14 @@ void initEnemyPrototypes() {
             << (new Move({0, 0}, 1))
             <<(new Attack(bulletGroups[3], 0))
             << (new Move({-2, 1}, 0.7));
-    enemyPrototypes.push_back(ep4);
+    enemyPrototypes_small.push_back(ep4);
     EnemyPrototype *ep5 = new EnemyPrototype(e_picUrl,e_hp);
     (*ep5)  << (new Move({0, 1.5}, 0.7))
             <<(new Attack(bulletGroups[3], 1.5))
             << (new Move({0, 0}, 1))
             <<(new Attack(bulletGroups[3], 0))
             << (new Move({2, 1}, 0.7));
-    enemyPrototypes.push_back(ep5);
+    enemyPrototypes_small.push_back(ep5);
 
 
     e_hp*=2;
@@ -177,7 +179,7 @@ void initEnemyPrototypes() {
             <<(new Attack(bulletGroups[7], 1))
             <<(new Attack(bulletGroups[7], 0))
             << (new Move({1.5, -1.5}, 0.7));
-    enemyPrototypes.push_back(ep6);
+    enemyPrototypes_small.push_back(ep6);
 
     e_picUrl=":/game/assets/enemy07.png";
     EnemyPrototype *ep7 = new EnemyPrototype(e_picUrl,e_hp);
@@ -186,6 +188,15 @@ void initEnemyPrototypes() {
             <<(new Attack(bulletGroups[8], 0.5))
             //<<(new Attack(bulletGroups[7], 0))
             << (new Move({1.5, -1.5}, 0.7));
-    enemyPrototypes.push_back(ep7);
+    enemyPrototypes_small.push_back(ep7);
+}
+void initEnemyPrototypes() {
+    init_boss();//生成boss
+    init_small();//生成小怪
+    //以下是一个预置EP实例
+
+
+
+
 }
 

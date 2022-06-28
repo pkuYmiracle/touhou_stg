@@ -19,7 +19,6 @@ double pi=3.14;
 //     预置bullet groups，将会在GC开始时调用
 std::vector<BulletGroup> bulletGroups;
 void initBulletGroups() {
-    //为啥qt算不了这种啊
     //这是一个预置bulletGroups的实例
     BulletGroup bg;
     // 一个bulletGroups可以被某个LivingEntity发射，包含若干颗bullet.
@@ -76,7 +75,7 @@ void initBulletGroups() {
     bg_yellow_star.bullets.push_back(BulletPrototype({2.94,-4.05},{1.18,-1.62},1,":/game/assets/bullet_yellow.png"));
     bg_yellow_star.bullets.push_back(BulletPrototype({4.76,1.55},{1.90,0.62},1,":/game/assets/bullet_yellow.png"));
     bulletGroups.push_back(bg_yellow_star);
-    double bg_atk = 1,n0=18,n1=5,n2=5;//n1是起始半径，n2控制速度，n0即将圆n0等分
+    double bg_atk = 2,n0=18,n1=5,n2=5;//n1是起始半径，n2控制速度，n0即将圆n0等分
     QString bg_picUrl = ":/game/assets/bullet_red02.png";
     BulletGroup bg_05,bg_06,bg_07,bg_08,bg_09,bg_10;
     bg_05.bullets.push_back(BulletPrototype({5,0},{-3,1.5},bg_atk,bg_picUrl));
@@ -94,6 +93,12 @@ void initBulletGroups() {
     n1=0;n2=2;
     for(int i=0;i<n0;i++)bg_07.bullets.push_back(BulletPrototype({static_cast<float>(n1*cos(2*pi*i/n0+pi/3)),static_cast<float>(n1*sin(2*pi*i/n0+pi/3))},{static_cast<float>(n2*cos(2*pi*i/n0+pi/3)),static_cast<float>(n2*sin(2*pi*i/n0+pi/3))},bg_atk,bg_picUrl));
     bulletGroups.push_back(bg_07);//三角
+    bg_picUrl=":/game/assets/bullet_red03.png";
+    n0=3;n2=2;
+    for(int i=0;i<n0;i++)bg_08.bullets.push_back(BulletPrototype({static_cast<float>(n1*cos(2*pi*i/n0)),static_cast<float>(n1*sin(2*pi*i/n0))},{static_cast<float>(n2*cos(2*pi*i/n0)),static_cast<float>(n2*sin(2*pi*i/n0))},bg_atk,bg_picUrl));
+    n1=0;n2=4;
+    for(int i=0;i<n0;i++)bg_08.bullets.push_back(BulletPrototype({static_cast<float>(n1*cos(2*pi*i/n0+pi/3)),static_cast<float>(n1*sin(2*pi*i/n0+pi/3))},{static_cast<float>(n2*cos(2*pi*i/n0+pi/3)),static_cast<float>(n2*sin(2*pi*i/n0+pi/3))},bg_atk,bg_picUrl));
+
     bulletGroups.push_back(bg_08);
     bulletGroups.push_back(bg_09);
     bulletGroups.push_back(bg_10);

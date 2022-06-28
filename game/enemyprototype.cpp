@@ -178,5 +178,14 @@ void initEnemyPrototypes() {
             <<(new Attack(bulletGroups[7], 0))
             << (new Move({1.5, -1.5}, 0.7));
     enemyPrototypes.push_back(ep6);
+
+    e_picUrl=":/game/assets/enemy07.png";
+    EnemyPrototype *ep7 = new EnemyPrototype(e_picUrl,e_hp);
+    (*ep7)  << (new Move({3, 3}, 1.6))<< (new Move({0, 0}, 1))
+            <<(new Attack(bulletGroups[7], 0))
+            <<(new Attack(bulletGroups[8], 0.5))
+            //<<(new Attack(bulletGroups[7], 0))
+            << (new Move({1.5, -1.5}, 0.7));
+    enemyPrototypes.push_back(ep7);
 }
 

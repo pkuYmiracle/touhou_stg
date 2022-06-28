@@ -5,7 +5,7 @@
 #include <QRectF>
 
 //GAME CONFIG
-const int WIDTH = 1200;
+const int WIDTH = 1100;
 const int HEIGHT = 1000;
 
 const QRectF GAME_BOARD_RECT = QRectF(0,0,800,1000) ; //游戏界面的大小，剩下的界面展示血量等信息

@@ -12,10 +12,23 @@
 #include <QGraphicsTextItem> 
 #include <assert.h>
 #include <QDebug>
+#include "level_menu.h"
 #include <QTime>
+#include "game/scenario.h"
 
-GameController::GameController(const std::vector<QString> &info_ls,QObject *parent ):
+
+void GameController:: init_scenario(){
+    int id = info[1].toInt();
+    qDebug() <<"new_level:"<<id<< ' '<<info[1] << endl;
+    if (id < scenarios.size())
+            this ->scenario = new Scenario (scenarios[0]);
+    else
+        this ->scenario = new Scenario (Scenario:: gen_random_scenario());
+}
+
+GameController::GameController(const std::vector<QString> &info_ls,Level_menu * from,QObject *parent ):
     QObject(parent),
+    father_widget(from),
     view(new QGraphicsView()),
     scene(new QGraphicsScene(this)),
     frame_timer(new QTimer(this)),
@@ -29,17 +42,16 @@ GameController::GameController(const std::vector<QString> &info_ls,QObject *pare
     info(info_ls),
     bgm_player(new QMediaPlayer)
 {
-    initBulletGroups();
-    initEnemyPrototypes();
-    initScenarios();
+    init_scenario();
     QRect sceneRect = QRect(0, 0, WIDTH, HEIGHT);
     view->setScene(scene);
 //    view->setWindowFlag(Qt::FramelessWindowHint);
-    player->setPos(GAME_BOARD_RECT.center());
+    player->setPos(GAME_BOARD_RECT.center().x() + 100,GAME_BOARD_RECT.center().y() + 200);
     scene->setSceneRect(sceneRect);
-    
+
     scene->addItem(player);
-//    qDebug()<< "info_size:" << info.size() << endl;
+    qDebug()<< "info_size:" << info.size() << endl;
+    qDebug()<< info[0]<< endl;
     level_name ->setPlainText(info[0]);
     level_name ->setPos(QPointF(850,200));
     QFont font;
@@ -69,12 +81,18 @@ GameController::GameController(const std::vector<QString> &info_ls,QObject *pare
         enemy_hp_show ->setBrush(QBrush(QColor(0,100,100)));
         enemy_hp_show ->setRect(QRectF(850,600,200,50));
        scene->addItem(enemy_hp_show);
-    scenario = new Scenario(scenarios[0]); // it can only copy before start.
-
     static qreal last_calc_fps_time = QTime::currentTime().msecsSinceStartOfDay(), frame_cnt = 0;
     QObject::connect(frame_timer, &QTimer::timeout, scene, [&]{
         scene->advance();
         update_game_info();
+        if(scenario->is_end())
+        {
+            game_end(1);
+        }
+        if(player->getHp()<=0)
+        {
+            game_end(0);
+        }
         frame_cnt++;
         if (QTime::currentTime().msecsSinceStartOfDay() - last_calc_fps_time > 1000) {
             last_calc_fps_time = QTime::currentTime().msecsSinceStartOfDay();
@@ -98,6 +116,37 @@ GameController::GameController(const std::vector<QString> &info_ls,QObject *pare
 //    scene->setItemIndexMethod(QGraphicsScene::NoIndex);
     view->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     view->setCacheMode(QGraphicsView::CacheBackground);
+    continue_button = new Mypushbottom(view, true,
+                                                 ":/game/assets/button.png",150);
+    main_menu_button = new Mypushbottom(view, true,
+                                                 ":/game/assets/button.png",150); //@TODO: button assets
+   continue_button->resize(500,100);
+   QPoint delta = {
+       continue_button->rect().width() / 2,
+       continue_button->rect().height() / 2
+   };
+   continue_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y());
+
+
+   main_menu_button->resize(500,100);
+   main_menu_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y() - 120);
+
+   connect(continue_button, &Mypushbottom::clicked, continue_button, [&](){
+       QTimer::singleShot(300, this,[&](){
+           this->gameContinue();
+       });
+   });
+
+
+   connect(main_menu_button, &Mypushbottom::clicked, main_menu_button ,[&](){
+       QTimer::singleShot(300, this, [&](){
+           father_widget ->show();
+
+           view ->hide();
+       });
+   });
+
+   pauseboard_widgets = std::vector<QWidget*>({continue_button, main_menu_button});
 
     //test code.
     scenario->start(this);
@@ -112,7 +161,7 @@ GameController::~GameController() {
 }
 void GameController::update_game_info(){
     player_hp_show ->setRect(QRectF(850,400,player->getHp()/PLAYER_HP * 200,50));
-    enemy_hp_show ->setRect(QRectF(850,600,200,50));
+    enemy_hp_show ->setRect(QRectF(850,600,scenario->get_hp_rate()*200,50));
 }
 QGraphicsScene *GameController::getScene() const
 {
@@ -139,37 +188,9 @@ void GameController::gameContinue() {
 }
 
 void GameController::showPauseboard() {
-    Mypushbottom *continue_button = new Mypushbottom(view, true,
-                                                  ":/game/assets/button.png",150);
-    Mypushbottom *mainmenu_button = new Mypushbottom(view, true,
-                                                  ":/game/assets/button.png",150); //@TODO: button assets
-    continue_button->resize(500,100);
-    QPoint delta = {
-        continue_button->rect().width() / 2,
-        continue_button->rect().height() / 2
-    };
-    continue_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y());
-    continue_button->show();
-
-
-    mainmenu_button->resize(500,100);
-    mainmenu_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y() - 120);
-    mainmenu_button->show();
-
-    connect(continue_button, &Mypushbottom::clicked, continue_button, [&](){
-        QTimer::singleShot(300, this,[&](){
-            this->gameContinue();
-        });
-    });
-
-
-    connect(mainmenu_button, &Mypushbottom::clicked, mainmenu_button ,[&](){
-        QTimer::singleShot(300, this, [&](){
-            //@TODO: impl return to main menu
-        });
-    });
-
-    pauseboard_widgets = std::vector<QWidget*>({continue_button, mainmenu_button});
+    for (auto widget : pauseboard_widgets) {
+        widget->show();
+    }
 }
 
 void GameController::pause() {
@@ -181,6 +202,54 @@ void GameController::pause() {
     }
     this->pause_shield = scene->addRect(scene->sceneRect(), QPen(), QBrush(QColor(255,255,255,100)));
     this->showPauseboard();
+}
+void GameController::game_end(const bool &is_win) {
+    bgm_player->pause();
+    frame_timer->stop();
+    for (auto &pair : timers) if (pair.timer->remainingTime() > 0) {
+        pair.remainingTime = pair.timer->remainingTime();
+        pair.timer->stop();
+    }
+    this->pause_shield = scene->addRect(scene->sceneRect(), QPen(), QBrush(QColor(255,255,255,100)));
+    if(is_win)
+    {
+        Mypushbottom * win_button = new Mypushbottom(view, true,
+                                                     ":/game/assets/button.png",150);
+       win_button->resize(500,100);
+       QPoint delta = {
+           win_button->rect().width() / 2,
+           win_button->rect().height() / 2
+       };
+       win_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y());
+       win_button ->show();
+       connect(win_button, &Mypushbottom::clicked, win_button ,[&](){
+           QTimer::singleShot(300, this, [&](){
+               father_widget ->show();
+
+               view ->hide();
+           });
+       });
+
+    }
+    else
+    {
+        Mypushbottom * loss_button = new Mypushbottom(view, true,
+                                                     ":/game/assets/button.png",150);
+       loss_button->resize(500,100);
+       QPoint delta = {
+           loss_button->rect().width() / 2,
+           loss_button->rect().height() / 2
+       };
+       loss_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y());
+       loss_button ->show();
+       connect(loss_button, &Mypushbottom::clicked, loss_button ,[&](){
+           QTimer::singleShot(300, this, [&](){
+               father_widget ->show();
+
+               view ->hide();
+           });
+       });
+    }
 }
 
 KeyboardHandler *GameController::getKbhandler() const

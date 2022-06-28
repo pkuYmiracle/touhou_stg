@@ -15,9 +15,9 @@ class EnemyPrototype
                     actions;
     QString         picUrl;
     int             hp;
-
 public:
-    EnemyPrototype(QString picUrl = ":/game/assets/enemy.png", int hp = ENEMY_HP);
+    bool is_boss;
+    EnemyPrototype(QString picUrl = ":/game/assets/enemy.png", int hp = ENEMY_HP,bool isboss = 0);
 
     EnemyPrototype(const EnemyPrototype &e);
     EnemyPrototype(EnemyPrototype &&e);

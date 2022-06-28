@@ -2,6 +2,7 @@
 #define GAME_BOARD_H
 
 #include "baseboard.h"
+#include "game/gamecontroller.h"
 #include<QString>
 class Game_board : public Baseboard
 {
@@ -9,8 +10,9 @@ class Game_board : public Baseboard
 private:
     QString load_path;
     int id;
+    GameController *gc;
 public:
-    explicit Game_board(QWidget *parent = nullptr,int _id = 0,QString pos = "");
+    explicit Game_board(QWidget *parent = nullptr,const std::vector<QString> & pos= {});
 
 signals:
 

@@ -3,12 +3,13 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QTimer>
+#include "game/gamecontroller.h"
 #include "game_board.h"
 Level_menu::Level_menu(QWidget *parent,int _id)
     : Baseboard{parent},id(_id),pos(0)
 {
-
-    this -> setWindowTitle("choose one level");
+    qDebug() << id << endl;
+    this -> setWindowTitle("choose one character");
 
     Mypushbottom *back_button = new Mypushbottom(this,true,
                                                   ":/backboard/back.png",150);
@@ -47,8 +48,12 @@ Level_menu::Level_menu(QWidget *parent,int _id)
     character_postion = new Mypushbottom(this,true,characters[pos],150);
     connect(character_postion,&Mypushbottom :: clicked,[&](){
         QTimer::singleShot(300,[&](){
-             Game_board * game = new Game_board(this,id,characters[pos]);
-             game ->show();
+            this->hide();
+            std::vector<QString> lis;
+            lis.push_back("level: "+QString::number(1+id));
+            lis.push_back(QString::number(id));
+            GameController * gc = new GameController (lis,this);
+
              this->hide();
         });
     });
@@ -74,9 +79,12 @@ void Level_menu::turn_left()
                                                   characters[pos],150);
     connect(character_postion,&Mypushbottom :: clicked,[&](){
         QTimer::singleShot(300,[&](){
-             Game_board * game = new Game_board(this,id,characters[pos]);
-             game ->show();
-             this->hide();
+            this->hide();
+            std::vector<QString> lis;
+            lis.push_back("level: "+QString::number(1+id));
+            lis.push_back(QString::number(id));
+            GameController * gc = new GameController (lis,this);
+            this->hide();
         });
     });
     character_postion->resize(500,600);
@@ -92,9 +100,13 @@ void Level_menu::turn_right()
                                                   characters[pos],150);
     connect(character_postion,&Mypushbottom :: clicked,[&](){
         QTimer::singleShot(300,[&](){
-             Game_board * game = new Game_board(this,id,characters[pos]);
-             game ->show();
-             this->hide();
+            this->hide();
+            std::vector<QString> lis;
+            lis.push_back("level: "+QString::number(1+id));
+            lis.push_back(QString::number(id));
+            GameController * gc = new GameController (lis,this);
+            this->hide();
+
         });
     });
     character_postion->resize(500,600);

@@ -18,8 +18,8 @@ void EnemyPrototype::setHp(int newHp)
     hp = newHp;
 }
 
-EnemyPrototype::EnemyPrototype(QString picUrl, int hp)
-    : actions(), picUrl(picUrl), hp(hp)
+EnemyPrototype::EnemyPrototype(QString picUrl, int hp,bool _is_boss)
+    : actions(), picUrl(picUrl), hp(hp),is_boss(_is_boss)
 {
 
 }
@@ -105,7 +105,7 @@ void initEnemyPrototypes() {
     //以下是一个预置EP实例
     QString e_picUrl = ":/game/assets/enemy.png";//每一组怪的图
     int e_hp = ENEMY_HP;//每一组怪的血
-    EnemyPrototype *ep = new EnemyPrototype(e_picUrl,e_hp);
+    EnemyPrototype *ep = new EnemyPrototype(e_picUrl,e_hp,1);
     // 为一个EnemyPrototype设置动作序列，参数的意义具体见各个动作的构造函数
     (*ep)   << (new Attack(bulletGroups[0], 2))
             << (new Attack(bulletGroups[1], 2))

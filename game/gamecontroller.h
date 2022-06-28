@@ -7,6 +7,8 @@
 #include <QObject>
 #include <QSound>
 #include <QTimer>
+#include "level_menu.h"
+#include "mypushbottom.h"
 
 class Scenario;
 class Player;
@@ -15,6 +17,7 @@ class QGraphicsView;
 
 class KeyboardHandler;
 class GameController : public QObject {
+    Level_menu * father_widget;
     QGraphicsView       *view;
     QGraphicsScene      *scene;
     QTimer              *frame_timer;
@@ -26,6 +29,7 @@ class GameController : public QObject {
                         *enemy_hp;
     QGraphicsRectItem   *player_hp_show,
                         *enemy_hp_show;
+    Mypushbottom *continue_button,*main_menu_button;
     struct Timer{
         QTimer* timer;
         int     remainingTime; // if paused.
@@ -38,8 +42,10 @@ class GameController : public QObject {
                         pauseboard_widgets;
     QMediaPlayer            *bgm_player;
     void                update_game_info();
+    void init_scenario();
+    void game_end(const bool &is_win);
 public:
-    explicit GameController(const std::vector<QString> &info_ls,QObject *parent = nullptr);
+    explicit GameController(const std::vector<QString> &info_ls,Level_menu * from,QObject *parent = nullptr);
 
     ~GameController();
     KeyboardHandler *getKbhandler() const;

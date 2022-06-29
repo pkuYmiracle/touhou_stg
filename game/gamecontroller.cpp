@@ -107,7 +107,6 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     //        view->setFixedSize(WIDTH, HEIGHT);
     view->setFixedSize(view->sizeHint());
     view->show();
-    frame_timer->start(1000 / FPS);
 
 
     bgm_player->setMedia(QUrl("qrc:/game/assets/sound/bgm (compressed).wav"));
@@ -148,6 +147,7 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
 
    pauseboard_widgets = std::vector<QWidget*>({continue_button, main_menu_button});
 
+   frame_timer->start(1000 / FPS);
     //test code.
     scenario->start(this);
 }

@@ -20,10 +20,12 @@
 void GameController:: init_scenario(){
     int id = info[1].toInt();
     qDebug() <<"new_level:"<<id<< ' '<<info[1] << endl;
+    scenarios[0].print_boss();
     if (id < scenarios.size())
             this ->scenario = new Scenario (scenarios[0]);
     else
         this ->scenario = new Scenario (Scenario:: gen_random_scenario());
+    this->scenario->print_boss();
 }
 
 GameController::GameController(const std::vector<QString> &info_ls,Level_menu * from,QObject *parent ):
@@ -42,7 +44,6 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     info(info_ls),
     bgm_player(new QMediaPlayer)
 {
-    init_scenario();
     QRect sceneRect = QRect(0, 0, WIDTH, HEIGHT);
     view->setScene(scene);
 //    view->setWindowFlag(Qt::FramelessWindowHint);
@@ -81,11 +82,12 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
         enemy_hp_show ->setBrush(QBrush(QColor(0,100,100)));
         enemy_hp_show ->setRect(QRectF(850,600,200,50));
        scene->addItem(enemy_hp_show);
+       init_scenario();
     static qreal last_calc_fps_time = QTime::currentTime().msecsSinceStartOfDay(), frame_cnt = 0;
     QObject::connect(frame_timer, &QTimer::timeout, scene, [&]{
         scene->advance();
         update_game_info();
-        if(scenario->is_end())
+        if(this->scenario->is_end())
         {
             game_end(1);
         }

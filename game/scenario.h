@@ -26,6 +26,7 @@ public:
     static Scenario  gen_random_scenario();
     bool is_end() const;
     qreal get_hp_rate() const;
+    void print_boss() const;//用于测试
 };
 extern std::vector<Scenario> scenarios;
 void init_scenarios();

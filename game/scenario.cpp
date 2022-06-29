@@ -25,7 +25,6 @@ void Scenario::start(GameController *gc) {
         if(p.second.is_boss == 1)
         {
             boss_number ++;
-            qDebug() << i <<"is boss"<<endl;
             gc->createOneShotTimer(p.first.first * 1000, gc, [cnt = p, gc, this]{
                 bosses.push_back(cnt.second.spawnIt(gc, cnt.first.second));
                 boss_hpes.push_back(bosses.back()->getHp());
@@ -104,6 +103,7 @@ void init_scenarios(){
         s   .add(t_, {0, 100}, *enemyPrototypes_small[6]);
         t_+=5;
         s   .add(t_, {0, 100}, *enemyPrototypes_small[7]);
+        s.print_boss();
         scenarios.push_back(s);
 }
 
@@ -116,6 +116,16 @@ qreal Scenario::get_hp_rate() const
               return (qreal)bosses[i]->getHp()/boss_hpes[i];
         }
     return 0;
+}
+
+void Scenario::print_boss() const
+{
+
+    for(int i = 0 ; i < enemySpawnConfig.size(); i ++) {
+         const auto &p = enemySpawnConfig[i];
+        if(p.second.is_boss == 1)
+            qDebug() << i <<"is boss"<<endl;
+    }
 }
 
 bool Scenario::is_end() const

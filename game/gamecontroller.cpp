@@ -37,10 +37,10 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     player(new Player(this,info_ls[2])),
     kbhandler(new KeyboardHandler(this)),
     level_name(new QGraphicsTextItem),
-    count_down(new QGraphicsTextItem),
-    esc_stop(new QGraphicsTextItem),
-    remain_boss_counts(new QGraphicsTextItem),
     last_time_count(new QGraphicsTextItem),
+    count_down(new QGraphicsTextItem),
+    remain_boss_counts(new QGraphicsTextItem),
+    esc_stop(new QGraphicsTextItem),
     player_hp_show(new QGraphicsRectItem),
     enemy_hp_show(new QGraphicsRectItem),
     info(info_ls),
@@ -193,7 +193,7 @@ void GameController::gameContinue() {
     }
 
     frame_timer->start();
-    for (auto &pair : timers) if (pair.timer->remainingTime() > 0) {
+    for (auto &pair : timers) if (pair.remainingTime > 0) {
         pair.timer->setInterval(pair.remainingTime);
         pair.timer->start();
         pair.remainingTime = 0;

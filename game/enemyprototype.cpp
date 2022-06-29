@@ -121,7 +121,7 @@ void init_boss()
     for (int i = 0; i < 10; i ++)
     {
         QString e_picUrl = ":/game/assets/enemy.png";//每一组怪的图
-        int e_hp = ENEMY_HP * (rand() % 2 + 1);//每一组怪的血
+        int e_hp = ENEMY_HP * (rand() % 3 + 1);//每一组怪的血
 
         EnemyPrototype *ep = new EnemyPrototype(e_picUrl,e_hp,1); //最后一个参数为1：表示boss
         // 为一个EnemyPrototype设置动作序列，参数的意义具体见各个动作的构造函数
@@ -129,16 +129,19 @@ void init_boss()
         {
             if(rand()%4)
             {
-                int id = rand()%bulletGroups.size(), t= rand()% + 1;
+                int id = rand()%bulletGroups.size();
+
+                qreal t = (qreal) (rand()%20 + 1);
+                t /= 10;
                 (*ep)   << (new Attack(bulletGroups[id], t));
             }
             else
             {
                 qreal t = (qreal) (rand()%20 + 1);
                 t /= 10;
-                qreal x = (qreal) (rand()%10 + 1);
+                qreal x = (qreal) (rand()%15 + 1);
                 x /= 10;
-                qreal y = (qreal) (rand()%10 + 1);
+                qreal y = (qreal) (rand()%15 + 1);
                 y /= 10;
                 *ep  << (new Move({x, y}, t));
                 *ep  << (new Move({0, 0}, t + 1));
@@ -223,10 +226,13 @@ void init_small()
     enemyPrototypes_small.push_back(ep7);
     std::vector<QString> pic_urls;
     pic_urls.push_back(":/game/assets/enemy07.png");
+    pic_urls.push_back(":/game/assets/enemy06.png");
     pic_urls.push_back(":/game/assets/enemy05.png");
     pic_urls.push_back(":/game/assets/enemy04.png");
+    pic_urls.push_back(":/game/assets/enemy03.png");
     pic_urls.push_back(":/game/assets/enemy02.png");
-    for (int i = 0; i < 10; i ++)
+    pic_urls.push_back(":/game/assets/enemy01.png");
+    for (int i = 0; i < 30; i ++)
     {
         QString e_picUrl = pic_urls[rand()%pic_urls.size()];//每一组怪的图
         qreal e_hp = ENEMY_HP ;//每一组怪的血
@@ -239,7 +245,10 @@ void init_small()
         {
             if(rand()%2)
             {
-                int id = rand()%bulletGroups.size(), t= rand()% + 1;
+                int id = rand()%bulletGroups.size();
+
+                qreal t = (qreal) (rand()%20 + 1);
+                t /= 10;
                 (*ep)   << (new Attack(bulletGroups[id], t));
             }
             else

@@ -292,11 +292,11 @@ void GameController::initSidebar()
     enemy_hp->setPos(QPointF(900,750));
 
     scene->addItem(enemy_hp);
-    player_hp_show ->setBrush(QBrush(QColor(200,0,0)));
     player_hp_show ->setRect(QRectF(900,600,200,30));
     scene->addItem(player_hp_show);
 
-    enemy_hp_show ->setBrush(QBrush(QColor(0,150,0)));
+    player_hp_show ->setBrush(QBrush(QColor(0,150,0)));
+    enemy_hp_show ->setBrush(QBrush(QColor(200,0,0)));
     enemy_hp_show ->setRect(QRectF(900,800,200,30));
     scene->addItem(enemy_hp_show);
     init_scenario();

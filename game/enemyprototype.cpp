@@ -91,6 +91,9 @@ Enemy *EnemyPrototype::spawnIt(GameController *gc, QPointF initLoc) const
         }
         nowTime += act->getDuration();
     }
+    if (this->is_boss) {
+        e->setScale(1.8);
+    }
     scene->addItem(e);
     return e;
 }

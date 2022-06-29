@@ -70,5 +70,7 @@
         <file>game/assets/sound/se_tan02.wav</file>
         <file>game/assets/sound/se_timeout.wav</file>
         <file>game/assets/sound/bgm (compressed).wav</file>
+        <file>people/slpl01a.png</file>
+        <file>people/slpl00a.png</file>
     </qresource>
 </RCC>

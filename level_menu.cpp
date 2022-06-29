@@ -41,7 +41,8 @@ Level_menu::Level_menu(QWidget *parent,int _id)
         });
     });
 
-    characters.push_back(":/people/orange.png");
+    characters.push_back(":/people/slpl00a.png");
+    characters.push_back(":/people/slpl01a.png");
     characters.push_back(":/people/qi.png");
     characters.push_back(":/people/wu.png");
 

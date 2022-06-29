@@ -95,5 +95,10 @@
         <file>game/assets/win.png</file>
         <file>game/assets/die.png</file>
         <file>game/assets/help.png</file>
+        <file>backboard/left.jpg</file>
+        <file>backboard/level_select.png</file>
+        <file>backboard/right.jpg</file>
+        <file>backboard/left.png</file>
+        <file>backboard/right.png</file>
     </qresource>
 </RCC>

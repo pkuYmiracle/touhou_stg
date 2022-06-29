@@ -310,7 +310,7 @@ void GameController::initSidebar()
     scene->addItem(enemy_hp_show);
     init_scenario();
     count_down ->setPlainText(QString::number(this->scenario->get_last_time()/100));
-    count_down ->setPos(QPointF(900,400));
+    count_down ->setPos(QPointF(940,400));
     count_down ->setFont(font);
     count_down->setDefaultTextColor(QColor(255,255,255));
     scene->addItem(count_down);

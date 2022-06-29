@@ -10,14 +10,16 @@ Level_menu::Level_menu(QWidget *parent,int _id)
     : Baseboard{parent},id(_id),pos(0)
 {
     qDebug() << id << endl;
-    this -> setWindowTitle("choose one character");
+    this -> setWindowTitle("choose one player");
 
     Mypushbottom *back_button = new Mypushbottom(this,true,
-                                                  ":/backboard/back.png",150);
+                                                  ":/backboard/left.png",150);
     back_button->resize(100,100);
     back_button->move(0,this->height()- back_button->height());
     connect(back_button,&Mypushbottom :: clicked,[&](){
-        emit back_clicked();
+        QTimer::singleShot(300,[&](){
+            emit back_clicked();
+        });
     });
 
     Mypushbottom *chose = new Mypushbottom(this,false,
@@ -26,7 +28,7 @@ Level_menu::Level_menu(QWidget *parent,int _id)
     chose->move(this->width()/4,this->height()/8);
 
     Mypushbottom *left_button = new Mypushbottom(this,true,
-                                                  ":/backboard/back.png",150);
+                                                  ":/backboard/left.png",150);
     left_button->resize(100,100);
     left_button->move(0,this->height()/2);
     connect(left_button,&Mypushbottom :: clicked,[&](){
@@ -37,7 +39,7 @@ Level_menu::Level_menu(QWidget *parent,int _id)
 
 
     Mypushbottom *right_button = new Mypushbottom(this,true,
-                                                  ":/backboard/back.png",150);
+                                                  ":/backboard/right.png",150);
     right_button->resize(100,100);
     right_button->move(this->width()-right_button->width(),this->height()/2);
     connect(right_button,&Mypushbottom :: clicked,[&](){

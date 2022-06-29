@@ -12,12 +12,18 @@ Select_level::Select_level(QWidget *parent)
     this -> setWindowTitle("choose one level");
 
     Mypushbottom *back_button = new Mypushbottom(this,true,
-                                                  ":/backboard/back.png",150);
+                                                  ":/backboard/left.png",150);
     back_button->resize(100,100);
     back_button->move(0,this->height()- back_button->height());
     connect(back_button,&Mypushbottom :: clicked,[&](){
         emit back_clicked();
     });
+
+    Mypushbottom *title = new Mypushbottom(this,false,
+                                                  ":/backboard/level_select.png",150);
+    title->resize(600,100);
+    title->move(100,150);
+
     std::vector<QString> level;
     level.push_back(":/game/assets/easy.png");
     level.push_back(":/game/assets/normal.png");

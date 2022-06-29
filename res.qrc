@@ -70,6 +70,16 @@
         <file>game/assets/sound/se_tan02.wav</file>
         <file>game/assets/sound/se_timeout.wav</file>
         <file>game/assets/sound/bgm (compressed).wav</file>
+        <file>game/assets/sidebar.jpg</file>
+        <file>game/assets/bullet_yellow.png</file>
+        <file>game/assets/bullet_yellow2.png</file>
+        <file>game/assets/enemy03.png</file>
+        <file>game/assets/enemy04.png</file>
+        <file>game/assets/enemy05.png</file>
+        <file>game/assets/enemy06.png</file>
+        <file>game/assets/enemy07.png</file>
+        <file>game/assets/enemyhp.png</file>
+        <file>game/assets/playerhp.png</file>
         <file>people/slpl01a.png</file>
         <file>people/slpl00a.png</file>
         <file>game/assets/lunatic.png</file>

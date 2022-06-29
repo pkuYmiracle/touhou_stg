@@ -2,6 +2,7 @@
 #define KEYBOARDHANDLER_HPP
 
 #include "game/player.h"
+#include "game/scenario.h"
 #include "gamecontroller.h"
 #include "qnamespace.h"
 #include <QObject>
@@ -36,6 +37,7 @@ protected:
 
             if (event->type() == QEvent::KeyPress && keyevent->key() == Qt::Key_Escape) {
                 GameController *gc = (GameController*) parent();
+                if (gc->getScenario()->is_end()) return true;
                 if (gc->isPaused()) {
                     gc->gameContinue();
                 } else {

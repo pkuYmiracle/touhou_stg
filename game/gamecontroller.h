@@ -47,6 +47,7 @@ class GameController : public QObject {
     void                update_game_info();
     void init_scenario();
     void game_end(const bool &is_win);
+    void initSidebar();
 public:
     explicit GameController(const std::vector<QString> &info_ls,Level_menu * from,QObject *parent = nullptr);
 
@@ -72,6 +73,7 @@ public:
 
     void showPauseboard();
 
+    Scenario *getScenario() const;
 };
 
 #endif

@@ -47,12 +47,13 @@ void Entity::advance(int phase)
             this->setPos(this->x() - getSpeed().x(), this->y());
         }
     } else {
-        this->setPos(getSpeed().toPointF() + this->pos());
-        if (GAME_BOARD_RECT.adjusted(-HIDEN_EDGE, -HIDEN_EDGE, HIDEN_EDGE, HIDEN_EDGE).intersects(
-                    this->mapRectToScene(this->boundingRect())) == false) {
-            scene()->removeItem(this);
-//            this->deleteLater();
-        }
+            this->setPos(getSpeed().toPointF() + this->pos());
+            if (GAME_BOARD_RECT.adjusted(-HIDEN_EDGE, -HIDEN_EDGE, HIDEN_EDGE, HIDEN_EDGE).intersects(
+                        this->mapRectToScene(this->boundingRect())) == false) {
+                scene()->removeItem(this);
+                this->deleteLater();
+            }
+//        }
     }
 }
 

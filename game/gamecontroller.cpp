@@ -37,8 +37,6 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     player(new Player(this,info_ls[2])),
     kbhandler(new KeyboardHandler(this)),
     level_name(new QGraphicsTextItem),
-    player_hp(new QGraphicsTextItem),
-    enemy_hp(new QGraphicsTextItem),
     count_down(new QGraphicsTextItem),
     remain_boss_counts(new QGraphicsTextItem),
     last_time_count(new QGraphicsTextItem),
@@ -54,56 +52,8 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     scene->setSceneRect(sceneRect);
 
     scene->addItem(player);
-    qDebug()<< "info_size:" << info.size() << endl;
-    qDebug()<< info[0]<< endl;
-    level_name ->setPlainText(info[0]);
-    level_name ->setPos(QPointF(850,100));
-    QFont font;
-    font.setPointSize(25);
-    level_name ->setFont(font);
 
-     scene->addItem(level_name);
-
-     last_time_count ->setPlainText("countdown:");
-     last_time_count ->setPos(QPointF(850,300));
-     last_time_count ->setFont(font);
-     scene->addItem(last_time_count);
-
-     player_hp ->setPlainText("player hp:");
-     player_hp ->setPos(QPointF(850,500));
-     player_hp ->setFont(font);
-
-
-
-      scene->addItem(player_hp);
-
-
-      enemy_hp ->setPlainText("boss hp:");
-      enemy_hp ->setPos(QPointF(850,700));
-      enemy_hp ->setFont(font);
-
-       scene->addItem(enemy_hp);
-        player_hp_show ->setBrush(QBrush(QColor(0,100,100)));
-        player_hp_show ->setRect(QRectF(850,600,200,50));
-       scene->addItem(player_hp_show);
-
-
-       scene->addItem(enemy_hp);
-        enemy_hp_show ->setBrush(QBrush(QColor(0,100,100)));
-        enemy_hp_show ->setRect(QRectF(850,800,200,50));
-       scene->addItem(enemy_hp_show);
-       init_scenario();
-
-       count_down ->setPlainText(QString::number(this->scenario->get_last_time()/100));
-       count_down ->setPos(QPointF(850,400));
-       count_down ->setFont(font);
-       scene->addItem(count_down);
-
-
-       remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" bosses left");
-       remain_boss_counts ->setPos(QPointF(850,200));
-       remain_boss_counts ->setFont(font);
-       scene->addItem(remain_boss_counts);
+    this->initSidebar();
     static qreal last_calc_fps_time = QTime::currentTime().msecsSinceStartOfDay(), frame_cnt = 0;
     QObject::connect(frame_timer, &QTimer::timeout, scene, [&]{
         scene->advance();
@@ -188,6 +138,11 @@ GameController::~GameController() {
     }
     //其余成员被Qt自动析构.
 }
+Scenario *GameController::getScenario() const
+{
+    return scenario;
+}
+
 void GameController::update_game_info(){
     player_hp_show ->setRect(QRectF(850,600,player->getHp()/PLAYER_HP * 200,50));
     enemy_hp_show ->setRect(QRectF(850,800,scenario->get_hp_rate()*200,50));
@@ -235,6 +190,7 @@ void GameController::pause() {
     this->pause_shield = scene->addRect(scene->sceneRect(), QPen(), QBrush(QColor(255,255,255,100)));
     this->showPauseboard();
 }
+
 void GameController::game_end(const bool &is_win) {
     bgm_player->pause();
     frame_timer->stop();
@@ -284,6 +240,60 @@ void GameController::game_end(const bool &is_win) {
            });
        });
     }
+}
+
+void GameController::initSidebar()
+{
+    scene->addRect(QRect(QPoint(850,0), QPoint(1200,1000)), QPen(), QBrush(QColor(0,0,0,255)));
+
+//    auto sidebar_background = scene->addPixmap(QPixmap(":/game/assets/sidebar.jpg"));
+//    sidebar_background->setPos(830, 0);
+
+    level_name ->setPlainText(info[0]);
+    level_name ->setPos(QPointF(850,100));
+    QFont font("Helvetica");
+    font.setPointSize(25);
+    level_name->setDefaultTextColor(QColor(255,255,255));
+    level_name ->setFont(font);
+    scene->addItem(level_name);
+
+    last_time_count ->setPlainText("Countdown");
+    last_time_count ->setPos(QPointF(850,300));
+    last_time_count->setDefaultTextColor(QColor(255,255,255));
+    last_time_count ->setFont(font);
+    scene->addItem(last_time_count);
+
+    auto player_hp = scene->addPixmap(QPixmap(":/game/assets/playerhp.png"));
+    player_hp->setScale(0.5);
+    player_hp->setPos(QPointF(850,530));
+
+    scene->addItem(player_hp);
+
+    auto enemy_hp = scene->addPixmap(QPixmap(":/game/assets/enemyhp.png"));
+    enemy_hp->setScale(0.5);
+    enemy_hp->setPos(QPointF(850,750));
+
+    scene->addItem(enemy_hp);
+    player_hp_show ->setBrush(QBrush(QColor(0,100,100)));
+    player_hp_show ->setRect(QRectF(850,600,200,30));
+    scene->addItem(player_hp_show);
+
+    scene->addItem(enemy_hp);
+    enemy_hp_show ->setBrush(QBrush(QColor(0,100,100)));
+    enemy_hp_show ->setRect(QRectF(850,800,200,30));
+    scene->addItem(enemy_hp_show);
+    init_scenario();
+    count_down ->setPlainText(QString::number(this->scenario->get_last_time()/100));
+    count_down ->setPos(QPointF(850,400));
+    count_down ->setFont(font);
+    count_down->setDefaultTextColor(QColor(255,255,255));
+    scene->addItem(count_down);
+
+    remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" bosses left");
+    remain_boss_counts ->setPos(QPointF(850,200));
+    remain_boss_counts ->setFont(font);
+    remain_boss_counts->setDefaultTextColor(QColor(255,255,255));
+    scene->addItem(remain_boss_counts);
 }
 
 KeyboardHandler *GameController::getKbhandler() const

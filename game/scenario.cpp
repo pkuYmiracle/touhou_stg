@@ -266,7 +266,7 @@ bool Scenario::is_win() const
     if(bosses.size() != boss_number)
             return 0;
     for (int i = 0 ; i < bosses.size(); i ++)
-        if(bosses[i]->getHp() != 0)
+        if(bosses[i]->getHp() > 0)
                 return 0;
     qDebug() <<"scenario_is_win" <<endl;
     return 1;

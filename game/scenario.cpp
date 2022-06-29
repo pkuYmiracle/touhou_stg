@@ -198,7 +198,7 @@ void init_scenarios(){
 qreal Scenario::get_hp_rate() const
 {
     for (int i = 0 ; i < bosses.size(); i ++)
-        if(bosses[i]->getHp() != 0)
+        if(bosses[i]->getHp() > 0)
         {
             //qDebug() <<"boss_id:" << i <<  "now_boss_hp:"<<bosses[i]->getHp()<<endl;
               return (qreal)bosses[i]->getHp()/boss_hpes[i];

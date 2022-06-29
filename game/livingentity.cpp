@@ -40,12 +40,21 @@ void LivingEntity::advance(int phase)
             if (!bullet) assert(0);
             if ((this->isPlayer() && bullet->getLauncher()->isEnemy())
                 || (this->isEnemy() && bullet->getLauncher()->isPlayer())) { //Player to Enemy, or, Enemy to Player
-                this->hp -= bullet->getAtk();
                 this->scene()->removeItem(bullet);
 //                bullet->deleteLater();
 
 
                 if (this->isPlayer()) {
+                    // smaller hit check area
+                    auto hitpoint = this->boundingRect();
+                    hitpoint.adjust(10,10,-10,-10);
+
+                    if (bullet->boundingRect().intersects(hitpoint) == false) {
+                        continue;
+                    }
+
+
+                    this->hp -= bullet->getAtk();
                     //player hitted sound effect
 
                     static bool inited = 0;
@@ -58,6 +67,7 @@ void LivingEntity::advance(int phase)
                     player->stop();
                     player->play();
                 } else {
+                    this->hp -= bullet->getAtk();
                     //enemy hitted sound effect
 
                     static bool inited = 0;

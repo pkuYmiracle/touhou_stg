@@ -10,8 +10,8 @@
 
 Player::Player(GameController *gc,QString url) : gc(gc)
 {
-    QPixmap Url = QPixmap(url);
-    Url = Url.scaled(50,50);
+    QPixmap Url = QPixmap(":/game/assets/player.png");
+    Url = Url.scaled(30,50);
     this->setPixmap(Url);
     this->setHp(PLAYER_HP);
 }

@@ -103,5 +103,7 @@
         <file>backboard/title.png</file>
         <file>backboard/ac.png</file>
         <file>backboard/tle.png</file>
+        <file>game/assets/bullet_blue06.png</file>
+        <file>game/assets/bullet_pink01.png</file>
     </qresource>
 </RCC>

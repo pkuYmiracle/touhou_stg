@@ -118,6 +118,35 @@ void init_boss()
             << (new Attack(bulletGroups[6], 2))
             << (new Attack(bulletGroups[7], 2));
     enemyPrototypes_boss.push_back(ep);
+    for (int i = 0; i < 10; i ++)
+    {
+        QString e_picUrl = ":/game/assets/enemy.png";//每一组怪的图
+        int e_hp = ENEMY_HP * (rand() % 2 + 1);//每一组怪的血
+
+        EnemyPrototype *ep = new EnemyPrototype(e_picUrl,e_hp,1); //最后一个参数为1：表示boss
+        // 为一个EnemyPrototype设置动作序列，参数的意义具体见各个动作的构造函数
+        for (int t = 0 ; t < 10 ; t ++)
+        {
+            if(rand()%4)
+            {
+                int id = rand()%bulletGroups.size(), t= rand()% + 1;
+                (*ep)   << (new Attack(bulletGroups[id], t));
+            }
+            else
+            {
+                qreal t = (qreal) (rand()%20 + 1);
+                t /= 10;
+                qreal x = (qreal) (rand()%10 + 1);
+                x /= 10;
+                qreal y = (qreal) (rand()%10 + 1);
+                y /= 10;
+                *ep  << (new Move({x, y}, t));
+                *ep  << (new Move({0, 0}, t + 1));
+
+            }
+        }
+        enemyPrototypes_boss.push_back(ep);
+    }
 }
 void init_small()
 {
@@ -192,6 +221,42 @@ void init_small()
             //<<(new Attack(bulletGroups[7], 0))
             << (new Move({1.5, -1.5}, 0.7));
     enemyPrototypes_small.push_back(ep7);
+    std::vector<QString> pic_urls;
+    pic_urls.push_back(":/game/assets/enemy07.png");
+    pic_urls.push_back(":/game/assets/enemy05.png");
+    pic_urls.push_back(":/game/assets/enemy04.png");
+    pic_urls.push_back(":/game/assets/enemy02.png");
+    for (int i = 0; i < 10; i ++)
+    {
+        QString e_picUrl = pic_urls[rand()%pic_urls.size()];//每一组怪的图
+        qreal e_hp = ENEMY_HP ;//每一组怪的血
+        e_hp *= (1+rand()%10);
+        e_hp /= 4;
+        EnemyPrototype *ep = new EnemyPrototype(e_picUrl,e_hp,0); //最后一个参数为0：表示小怪
+        // 为一个EnemyPrototype设置动作序列，参数的意义具体见各个动作的构造函数
+        for (int t = 0 ; t < 20 ; t ++)
+        {
+            if(rand()%2)
+            {
+                int id = rand()%bulletGroups.size(), t= rand()% + 1;
+                (*ep)   << (new Attack(bulletGroups[id], t));
+                id = rand()%bulletGroups.size();
+                (*ep)   << (new Attack(bulletGroups[id], t));
+            }
+            else
+            {
+                qreal t = (qreal) (rand()%20 + 1);
+                t /= 10;
+                qreal x = (qreal) (rand()%10 + 1);
+                x /= 10;
+                qreal y = (qreal) (rand()%10 + 1);
+                y /= 10;
+                *ep  << (new Move({x, y}, t));
+
+            }
+        }
+        enemyPrototypes_small.push_back(ep);
+    }
 }
 void initEnemyPrototypes() {
     init_boss();//生成boss

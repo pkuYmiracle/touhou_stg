@@ -166,7 +166,7 @@ void GameController::update_game_info(){
     player_hp_show ->setRect(QRectF(870,600,player->getHp()/PLAYER_HP * 200,50));
     enemy_hp_show ->setRect(QRectF(870,800,scenario->get_hp_rate()*200,50));
     count_down ->setPlainText(QString::number(this->scenario->get_last_time()/100));
-    remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" bosses left");
+    remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" round(s) left");
 
 }
 QGraphicsScene *GameController::getScene() const
@@ -308,8 +308,8 @@ void GameController::initSidebar()
     count_down->setDefaultTextColor(QColor(255,255,255));
     scene->addItem(count_down);
 
-    remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" bosses left");
-    remain_boss_counts ->setPos(QPointF(870,200));
+    remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" round(s) left");
+    remain_boss_counts ->setPos(QPointF(850,200));
     remain_boss_counts ->setFont(font);
     remain_boss_counts->setDefaultTextColor(QColor(255,255,255));
     scene->addItem(remain_boss_counts);

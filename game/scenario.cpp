@@ -70,7 +70,7 @@ Scenario Scenario::gen_random_scenario()
     double clk = 0;
     for(int boss_count = 1;boss_count <= 5;boss_count++) {
         int id = rand()%enemyPrototypes_boss.size();
-        int x = rand()%500,y = rand()%500;
+        int x =  rand()%400 + 50,y = rand()%400+50;
         s2   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_boss[id]);
         //接下来是小怪
         for (int i = 0 ; i < 8; i ++)
@@ -136,7 +136,7 @@ void init_scenarios(){
         double clk = 0;
     for(int boss_count = 1;boss_count <= 3;boss_count++) {
         int id = rand()%enemyPrototypes_boss.size();
-        int x = rand()%500,y = rand()%500;
+        int x = rand()%400 + 50,y = rand()%400+50;
         s2   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_boss[id]);
         //接下来是小怪
         for (int i = 0 ; i < 3; i ++)
@@ -166,7 +166,7 @@ void init_scenarios(){
     clk = 0;
     for(int boss_count = 1;boss_count <= 4;boss_count++) {
         int id = rand()%enemyPrototypes_boss.size();
-        int x = rand()%500,y = rand()%500;
+        int x =  rand()%400 + 50,y = rand()%400+50;
         s3   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_boss[id]);
         //接下来是小怪
         for (int i = 0 ; i < 4; i ++)

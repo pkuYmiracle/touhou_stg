@@ -3,6 +3,7 @@
 #include "game/gamecontroller.h"
 #include "qdebug.h"
 #include "game/enemy.h"
+#include "qtimer.h"
 
 Scenario::Scenario()
     : enemySpawnConfig(),boss_number(0),boss_id(0)
@@ -42,14 +43,24 @@ void Scenario::start(GameController *gc) {
         });
         }
     }
+    qDebug() << "boss time :" <<' ';
+    for (auto p : boss_time)
+        qDebug() << p << ' ';
+   qDebug() << endl;
     if(bosses.size())
     {
         boss_id = 0;
         if(boss_id + 1 < boss_time.size())
-                countdown = (boss_time[boss_id+1] - boss_time[boss_id]);
-       else countdown = 1000 * 100;
+        {
+            countdown = (boss_time[boss_id+1] - boss_time[boss_id] ) *70;
+            qDebug() << "QAQ一开始:"<<countdown<<endl;
+        }
+       else countdown = 1000 * 10;
     }
-    else countdown = 1000 * 100;
+    else {
+        countdown = 1000 * 10;
+        boss_id = -1;
+    }
 }
 
 
@@ -147,7 +158,7 @@ void init_scenarios(){
         x = rand()%500,y = rand()%500;
         s2   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
         }
-        clk += rand()%5+10;
+        clk += rand()%5+8;
     }
     scenarios.push_back(s2);
 
@@ -181,15 +192,33 @@ qreal Scenario::get_last_time() const
 
 void Scenario::advance()
 {
-    if(boss_id < bosses.size() && bosses[boss_id]->getHp() <= 0)
+    if(boss_id == -1 && bosses.size())
+    {
+        boss_id = 0;
+        if(boss_id + 1 < boss_time.size())
+        {
+            countdown = (boss_time[boss_id+1] - boss_time[boss_id] ) *70;
+            qDebug() << "一开始:"<<countdown<<endl;
+        }
+       else countdown = 1000 * 10;
+    }
+    else if(bosses.size() && boss_id < bosses.size() && bosses[boss_id]->getHp() <= 0)
     {
         if(boss_id + 1 < boss_time.size())
-                countdown = (boss_time[boss_id+1] - boss_time[boss_id]);
-       else countdown = 1000 * 100;
+            countdown += (boss_time[boss_id+1] - boss_time[boss_id] ) *70;
+       else countdown = 1000 * 10;
         boss_id ++;
     }
     countdown --;
-    qDebug() << "countdown:" << countdown <<endl;
+    // qDebug() << "countdown:" << countdown <<endl;
+}
+
+int Scenario::remain_boss_count() const
+{
+    int res = boss_number;
+    for (int i = 0 ; i < bosses.size();i ++ )
+            if(bosses[i]->getHp()<=0) res --;
+   return res;
 }
 
 bool Scenario::is_lose() const

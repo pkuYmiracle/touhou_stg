@@ -22,7 +22,7 @@ void GameController:: init_scenario(){
     qDebug() <<"new_level:"<<id<< ' '<<info[1] << endl;
     scenarios[0].print_boss();
     if (id < scenarios.size())
-            this ->scenario = new Scenario (scenarios[0]);
+            this ->scenario = new Scenario (scenarios[id]);
     else
         this ->scenario = new Scenario (Scenario:: gen_random_scenario());
     this->scenario->print_boss();
@@ -40,6 +40,7 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     player_hp(new QGraphicsTextItem),
     enemy_hp(new QGraphicsTextItem),
     count_down(new QGraphicsTextItem),
+    remain_boss_counts(new QGraphicsTextItem),
     last_time_count(new QGraphicsTextItem),
     player_hp_show(new QGraphicsRectItem),
     enemy_hp_show(new QGraphicsRectItem),
@@ -56,7 +57,7 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     qDebug()<< "info_size:" << info.size() << endl;
     qDebug()<< info[0]<< endl;
     level_name ->setPlainText(info[0]);
-    level_name ->setPos(QPointF(850,200));
+    level_name ->setPos(QPointF(850,100));
     QFont font;
     font.setPointSize(25);
     level_name ->setFont(font);
@@ -77,7 +78,7 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
       scene->addItem(player_hp);
 
 
-      enemy_hp ->setPlainText("enemy hp:");
+      enemy_hp ->setPlainText("boss hp:");
       enemy_hp ->setPos(QPointF(850,700));
       enemy_hp ->setFont(font);
 
@@ -93,10 +94,16 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
        scene->addItem(enemy_hp_show);
        init_scenario();
 
-       count_down ->setPlainText(QString::number(this->scenario->get_last_time()));
+       count_down ->setPlainText(QString::number(this->scenario->get_last_time()/100));
        count_down ->setPos(QPointF(850,400));
        count_down ->setFont(font);
        scene->addItem(count_down);
+
+
+       remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" bosses left");
+       remain_boss_counts ->setPos(QPointF(850,200));
+       remain_boss_counts ->setFont(font);
+       scene->addItem(remain_boss_counts);
     static qreal last_calc_fps_time = QTime::currentTime().msecsSinceStartOfDay(), frame_cnt = 0;
     QObject::connect(frame_timer, &QTimer::timeout, scene, [&]{
         scene->advance();
@@ -184,7 +191,9 @@ GameController::~GameController() {
 void GameController::update_game_info(){
     player_hp_show ->setRect(QRectF(850,600,player->getHp()/PLAYER_HP * 200,50));
     enemy_hp_show ->setRect(QRectF(850,800,scenario->get_hp_rate()*200,50));
-    count_down ->setPlainText(QString::number(this->scenario->get_last_time()));
+    count_down ->setPlainText(QString::number(this->scenario->get_last_time()/100));
+    remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" bosses left");
+
 }
 QGraphicsScene *GameController::getScene() const
 {

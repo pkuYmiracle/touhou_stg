@@ -32,6 +32,7 @@ public:
     void print_boss() const;//用于测试
     qreal get_last_time() const;//显示倒计时
     void advance();
+    int remain_boss_count() const;
 };
 extern std::vector<Scenario> scenarios;
 void init_scenarios();

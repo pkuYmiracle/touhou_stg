@@ -28,7 +28,8 @@ class GameController : public QObject {
                         *player_hp,
                         *enemy_hp,
                         *last_time_count,
-                        *count_down;
+                        *count_down,
+                        *remain_boss_counts;
     QGraphicsRectItem   *player_hp_show,
                         *enemy_hp_show;
     Mypushbottom *continue_button,*main_menu_button;

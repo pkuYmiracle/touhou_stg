@@ -90,5 +90,6 @@
         <file>people/big1.png</file>
         <file>people/big2.png</file>
         <file>people/big3.png</file>
+        <file>game/assets/help.png</file>
     </qresource>
 </RCC>

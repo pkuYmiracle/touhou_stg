@@ -29,10 +29,11 @@ class GameController : public QObject {
                         *enemy_hp,
                         *last_time_count,
                         *count_down,
-                        *remain_boss_counts;
+                        *remain_boss_counts,
+                        *esc_stop;
     QGraphicsRectItem   *player_hp_show,
                         *enemy_hp_show;
-    Mypushbottom *continue_button,*main_menu_button;
+    Mypushbottom *continue_button,*main_menu_button,*help_button;
     struct Timer{
         QTimer* timer;
         int     remainingTime; // if paused.

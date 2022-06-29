@@ -10,7 +10,12 @@ Startboard::Startboard(QWidget *parent)
                                                   ":/backboard/start.png",150);
     start_button->resize(200,200);
     start_button->move((this->width() - start_button->width())/2,this->height()
-                                                                 *3/4 - start_button->height()/2);
+                                                                 /2 );
+    Mypushbutton *title_button = new Mypushbutton(this,false,
+                                                  ":/backboard/title.png",150);
+    title_button->resize(600,100);
+    title_button->move((this->width() - title_button->width())/2,this->height()
+                                                                 *2/7 - title_button->height()/2);
     connect(start_button,&Mypushbutton :: clicked,[&](){
         QTimer::singleShot(300,[&](){
             this -> hide();

@@ -100,5 +100,6 @@
         <file>backboard/right.jpg</file>
         <file>backboard/left.png</file>
         <file>backboard/right.png</file>
+        <file>backboard/title.png</file>
     </qresource>
 </RCC>

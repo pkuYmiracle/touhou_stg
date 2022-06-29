@@ -77,7 +77,7 @@ void initBulletGroups() {
     bulletGroups.push_back(bg_yellow_star);
     double bg_atk = 2,n0=18,n1=5,n2=5;//n1是起始半径，n2控制速度，n0即将圆n0等分
     QString bg_picUrl = ":/game/assets/bullet_red02.png";
-    BulletGroup bg_05,bg_06,bg_07,bg_08,bg_09,bg_10;
+    BulletGroup bg_05,bg_06,bg_07,bg_08,bg_09,bg_10,bg_11,bg_12;
     bg_05.bullets.push_back(BulletPrototype({5,0},{-3,1.5},bg_atk,bg_picUrl));
     bg_05.bullets.push_back(BulletPrototype({5,0},{3,1.5},bg_atk,bg_picUrl));
 
@@ -101,7 +101,35 @@ void initBulletGroups() {
 
     bulletGroups.push_back(bg_08);
 
-    bulletGroups.push_back(bg_09);//玩家的
-    bulletGroups.push_back(bg_10);
+    //玩家的bg_09 to bg_12
+    bg_picUrl=":/game/assets/bullet_red05";
+    bg_09.bullets.push_back(BulletPrototype({0,-8},{0,-4},bg_atk,bg_picUrl));
+    bg_picUrl=":/game/assets/bullet_red03";
+    bg_atk=1;
+    bg_09.bullets.push_back(BulletPrototype({-4,-4},{-3,-4},bg_atk,bg_picUrl));
+    bg_09.bullets.push_back(BulletPrototype({4,-4},{3,-4},bg_atk,bg_picUrl));
+    bulletGroups.push_back(bg_09);//三个方向的
+    bg_picUrl=":/game/assets/bullet_blue05";
+    bg_atk=2;
+    bg_10.bullets.push_back(BulletPrototype({0,-8},{0,-4},bg_atk,bg_picUrl));
+    bulletGroups.push_back(bg_10);//一个方向但是攻击力强的蓝色圆
+    bg_picUrl=":/game/assets/bullet_pink01";
+    bg_atk=0.6;
+    bg_11.bullets.push_back(BulletPrototype({0.00,-5.00},{0.00,-4.00},bg_atk,bg_picUrl));
+    bg_11.bullets.push_back(BulletPrototype({4.76,-1.55},{3.80,-1.24},bg_atk,bg_picUrl));
+    bg_11.bullets.push_back(BulletPrototype({2.94,4.05},{2.35,3.24},bg_atk,bg_picUrl));
+    bg_11.bullets.push_back(BulletPrototype({-2.94,4.05},{-2.35,3.24},bg_atk,bg_picUrl));
+    bg_11.bullets.push_back(BulletPrototype({-4.76,-1.55},{-3.80,-1.24},bg_atk,bg_picUrl));
+    bg_11.bullets.push_back(BulletPrototype({0.00,5.00},{0.00,2.00},bg_atk,bg_picUrl));
+    bg_11.bullets.push_back(BulletPrototype({-4.76,1.55},{-1.90,0.62},bg_atk,bg_picUrl));
+    bg_11.bullets.push_back(BulletPrototype({-2.94,-4.05},{-1.18,-1.62},bg_atk,bg_picUrl));
+    bg_11.bullets.push_back(BulletPrototype({2.94,-4.05},{1.18,-1.62},bg_atk,bg_picUrl));
+    bg_11.bullets.push_back(BulletPrototype({4.76,1.55},{1.90,0.62},bg_atk,bg_picUrl));
+    bulletGroups.push_back(bg_11);//鸡肋的粉色星星
+    bg_picUrl=":/game/assets/bullet_blue06";
+    bg_atk=0.6;
+    n0=12;n1=7;n2=5;
+    for(int i=6;i<n0;i++)bg_12.bullets.push_back(BulletPrototype({static_cast<float>(n1*cos(2*pi*i/n0)),static_cast<float>(n1*sin(2*pi*i/n0))},{static_cast<float>(n2*cos(2*pi*i/n0)),static_cast<float>(n2*sin(2*pi*i/n0))},bg_atk,bg_picUrl));
+    bulletGroups.push_back(bg_11);//鸡肋的蓝色扇
 
 }

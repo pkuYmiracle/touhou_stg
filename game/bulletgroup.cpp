@@ -100,7 +100,8 @@ void initBulletGroups() {
     for(int i=0;i<n0;i++)bg_08.bullets.push_back(BulletPrototype({static_cast<float>(n1*cos(2*pi*i/n0+pi/3)),static_cast<float>(n1*sin(2*pi*i/n0+pi/3))},{static_cast<float>(n2*cos(2*pi*i/n0+pi/3)),static_cast<float>(n2*sin(2*pi*i/n0+pi/3))},bg_atk,bg_picUrl));
 
     bulletGroups.push_back(bg_08);
-    bulletGroups.push_back(bg_09);
+
+    bulletGroups.push_back(bg_09);//玩家的
     bulletGroups.push_back(bg_10);
 
 }

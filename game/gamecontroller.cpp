@@ -163,8 +163,8 @@ Scenario *GameController::getScenario() const
 }
 
 void GameController::update_game_info(){
-    player_hp_show ->setRect(QRectF(850,600,player->getHp()/PLAYER_HP * 200,50));
-    enemy_hp_show ->setRect(QRectF(850,800,scenario->get_hp_rate()*200,50));
+    player_hp_show ->setRect(QRectF(870,600,player->getHp()/PLAYER_HP * 200,50));
+    enemy_hp_show ->setRect(QRectF(870,800,scenario->get_hp_rate()*200,50));
     count_down ->setPlainText(QString::number(this->scenario->get_last_time()/100));
     remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" bosses left");
 
@@ -284,32 +284,32 @@ void GameController::initSidebar()
 
     auto player_hp = scene->addPixmap(QPixmap(":/game/assets/playerhp.png"));
     player_hp->setScale(0.5);
-    player_hp->setPos(QPointF(850,530));
+    player_hp->setPos(QPointF(870,530));
 
     scene->addItem(player_hp);
 
     auto enemy_hp = scene->addPixmap(QPixmap(":/game/assets/enemyhp.png"));
     enemy_hp->setScale(0.5);
-    enemy_hp->setPos(QPointF(850,750));
+    enemy_hp->setPos(QPointF(870,750));
 
     scene->addItem(enemy_hp);
     player_hp_show ->setBrush(QBrush(QColor(0,100,100)));
-    player_hp_show ->setRect(QRectF(850,600,200,30));
+    player_hp_show ->setRect(QRectF(870,600,200,30));
     scene->addItem(player_hp_show);
 
     scene->addItem(enemy_hp);
     enemy_hp_show ->setBrush(QBrush(QColor(0,100,100)));
-    enemy_hp_show ->setRect(QRectF(850,800,200,30));
+    enemy_hp_show ->setRect(QRectF(870,800,200,30));
     scene->addItem(enemy_hp_show);
     init_scenario();
     count_down ->setPlainText(QString::number(this->scenario->get_last_time()/100));
-    count_down ->setPos(QPointF(850,400));
+    count_down ->setPos(QPointF(870,400));
     count_down ->setFont(font);
     count_down->setDefaultTextColor(QColor(255,255,255));
     scene->addItem(count_down);
 
     remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" bosses left");
-    remain_boss_counts ->setPos(QPointF(850,200));
+    remain_boss_counts ->setPos(QPointF(870,200));
     remain_boss_counts ->setFont(font);
     remain_boss_counts->setDefaultTextColor(QColor(255,255,255));
     scene->addItem(remain_boss_counts);

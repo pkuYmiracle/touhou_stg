@@ -5,6 +5,7 @@
 #include <QTimer>
 #include "game/gamecontroller.h"
 #include "game_board.h"
+#include <QLabel>
 Level_menu::Level_menu(QWidget *parent,int _id)
     : Baseboard{parent},id(_id),pos(0)
 {
@@ -19,6 +20,10 @@ Level_menu::Level_menu(QWidget *parent,int _id)
         emit back_clicked();
     });
 
+    Mypushbottom *chose = new Mypushbottom(this,false,
+                                                  ":/backboard/player_select.png",150);
+    chose->resize(400,100);
+    chose->move(this->width()/4,this->height()/8);
 
     Mypushbottom *left_button = new Mypushbottom(this,true,
                                                   ":/backboard/back.png",150);
@@ -41,10 +46,14 @@ Level_menu::Level_menu(QWidget *parent,int _id)
         });
     });
 
-    characters.push_back(":/people/slpl00a.png");
+    characters.push_back(":/people/big1.png");
+    characters.push_back(":/people/big2.png");
+    characters.push_back(":/people/big3.png");
     characters.push_back(":/people/slpl01a.png");
-    characters.push_back(":/people/qi.png");
-    characters.push_back(":/people/wu.png");
+    nxt_board_urls.push_back(":/game/assets/player01.png");
+    nxt_board_urls.push_back(":/game/assets/player.png");
+    nxt_board_urls.push_back(":/game/assets/player02.png");
+    nxt_board_urls.push_back(":/game/assets/player03.png");
 
     character_postion = new Mypushbottom(this,true,characters[pos],150);
     connect(character_postion,&Mypushbottom :: clicked,[&](){
@@ -55,14 +64,14 @@ Level_menu::Level_menu(QWidget *parent,int _id)
             std::vector<QString> lis;
             lis.push_back("level: "+QString::number(1+id));
             lis.push_back(QString::number(id));
-            lis.push_back(characters[pos]);
+            lis.push_back(nxt_board_urls[pos]);
             GameController * gc = new GameController (lis,this);
 
              this->hide();
         });
     });
-    character_postion->resize(500,600);
-    character_postion->move(100 + 50 ,this->height()/2 - character_postion->height()/2);
+    character_postion->resize(400,500);
+    character_postion->move(100 + 100 ,this->height()/2 - character_postion->height()/2);
 
 }
 
@@ -89,14 +98,15 @@ void Level_menu::turn_left()
             std::vector<QString> lis;
             lis.push_back("level: "+QString::number(1+id));
             lis.push_back(QString::number(id));
-            lis.push_back(characters[pos]);
+            lis.push_back(nxt_board_urls[pos]);
             GameController * gc = new GameController (lis,this);
 
              this->hide();
         });
     });
-    character_postion->resize(500,600);
-    character_postion->move(100 + 50 ,this->height()/2 - character_postion->height()/2);
+    character_postion->resize(400,500);
+    character_postion->move(100 + 100 ,this->height()/2 - character_postion->height()/2);
+
     character_postion->show();
 }
 void Level_menu::turn_right()
@@ -114,15 +124,16 @@ void Level_menu::turn_right()
             std::vector<QString> lis;
             lis.push_back("level: "+QString::number(1+id));
             lis.push_back(QString::number(id));
-            lis.push_back(characters[pos]);
+            lis.push_back(nxt_board_urls[pos]);
             GameController * gc = new GameController (lis,this);
 
              this->hide();
 
         });
     });
-    character_postion->resize(500,600);
-    character_postion->move(100 + 50 ,this->height()/2 - character_postion->height()/2);
+    character_postion->resize(400,500);
+    character_postion->move(100 + 100 ,this->height()/2 - character_postion->height()/2);
+
     character_postion->show();
 
 }

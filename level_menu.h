@@ -10,7 +10,9 @@ class Level_menu : public Baseboard
     Q_OBJECT
 private:
     int id,pos;
-    std :: vector<QString> characters,nxt_board_urls;
+    std::vector<QString>    characters,
+                            nxt_board_urls;
+    std::vector<int>        bulletGroupId;
     Mypushbottom * character_postion;
 public:
     explicit Level_menu(QWidget *parent = nullptr,int _id = 0);

@@ -28,7 +28,7 @@ void GameController:: init_scenario(){
     this->scenario->print_boss();
 }
 
-GameController::GameController(const std::vector<QString> &info_ls,Level_menu * from,QObject *parent ):
+GameController::GameController(const std::vector<QString> &info_ls, Level_menu * from, BulletGroup *player_bullet, QObject *parent):
     QObject(parent),
     father_widget(from),
     view(new QGraphicsView()),
@@ -46,6 +46,7 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     info(info_ls),
     bgm_player(new QMediaPlayer)
 {
+    player->setBulletGroup(player_bullet);
     QRect sceneRect = QRect(0, 0, WIDTH, HEIGHT);
     view->setScene(scene);
 //    view->setWindowFlag(Qt::FramelessWindowHint);
@@ -57,7 +58,6 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     this->initSidebar();
     static qreal last_calc_fps_time = QTime::currentTime().msecsSinceStartOfDay(), frame_cnt = 0;
     QObject::connect(frame_timer, &QTimer::timeout, scene, [&]{
-
         if(player->getHp()<=0)
         {
                     game_end(0);
@@ -292,15 +292,13 @@ void GameController::initSidebar()
     auto player_hp = scene->addPixmap(QPixmap(":/game/assets/playerhp.png"));
     player_hp->setScale(0.5);
     player_hp->setPos(QPointF(900,530));
-
     scene->addItem(player_hp);
 
     auto enemy_hp = scene->addPixmap(QPixmap(":/game/assets/enemyhp.png"));
     enemy_hp->setScale(0.5);
     enemy_hp->setPos(QPointF(900,700));
-
-
     scene->addItem(enemy_hp);
+
     player_hp_show ->setBrush(QBrush(QColor(0,150,0)));
     player_hp_show ->setRect(QRectF(900,600,200,30));
     scene->addItem(player_hp_show);
@@ -315,7 +313,7 @@ void GameController::initSidebar()
     count_down->setDefaultTextColor(QColor(255,255,255));
     scene->addItem(count_down);
 
-    esc_stop ->setPlainText("Esc: 暂停");
+    esc_stop ->setPlainText("按Esc键暂停");
     esc_stop ->setPos(QPointF(900,850));
     esc_stop->setDefaultTextColor(QColor(255,255,255));
     esc_stop ->setFont(font);

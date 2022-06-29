@@ -7,13 +7,26 @@
 #include "qnamespace.h"
 #include <QDebug>
 #include <QSound>
+#include <assert.h>
 
-Player::Player(GameController *gc,QString url) : gc(gc)
+BulletGroup *Player::getBulletGroup() const
 {
-    QPixmap Url = QPixmap(":/game/assets/player.png");
-    Url = Url.scaled(30,50);
-    this->setPixmap(Url);
+    return bulletGroup;
+}
+
+void Player::setBulletGroup(BulletGroup *newBulletGroup)
+{
+    bulletGroup = newBulletGroup;
+}
+
+Player::Player(GameController *gc, QString pixmap_url)
+    : gc(gc)
+{
+    QPixmap pixmap = QPixmap(pixmap_url);
+    pixmap = pixmap.scaled(30,50);
+    this->setPixmap(pixmap);
     this->setHp(PLAYER_HP);
+    bulletGroup = 0;
 }
 
 void Player::advance(int phase)
@@ -50,11 +63,14 @@ void Player::advance(int phase)
         static int cnt = 0;
         if ((++cnt) == PLAYER_SHOOT_PERIOD) {
             cnt = 0;
-            Bullet *bullet = new Bullet(this);
-            bullet->setAtk(PLAYER_ATK);
-            bullet->setPos(x(), y() - bullet->boundingRect().height());
-            bullet->setSpeed(QVector2D(0, -BULLET_SPEED));
-            this->scene()->addItem(bullet);
+
+            assert(this->bulletGroup != 0);
+            this->bulletGroup->spawnBulletGroupFrom(this);
+//            Bullet *bullet = new Bullet(this);
+//            bullet->setAtk(PLAYER_ATK);
+//            bullet->setPos(x(), y() - bullet->boundingRect().height());
+//            bullet->setSpeed(QVector2D(0, -BULLET_SPEED));
+//            this->scene()->addItem(bullet);
         }
     }
 }

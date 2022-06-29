@@ -10,6 +10,7 @@
 #include "level_menu.h"
 #include "mypushbottom.h"
 
+class BulletGroup;
 class Scenario;
 class Player;
 class QGraphicsScene;
@@ -50,7 +51,7 @@ class GameController : public QObject {
     void game_end(const bool &is_win);
     void initSidebar();
 public:
-    explicit GameController(const std::vector<QString> &info_ls,Level_menu * from,QObject *parent = nullptr);
+    explicit GameController(const std::vector<QString> &info_ls,Level_menu * from, BulletGroup *player_bullet, QObject *parent = nullptr);
 
     ~GameController();
     KeyboardHandler *getKbhandler() const;

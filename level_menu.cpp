@@ -1,4 +1,5 @@
 #include "level_menu.h"
+#include "game/bulletgroup.h"
 #include "mypushbottom.h"
 #include <QPainter>
 #include <QPixmap>
@@ -54,6 +55,7 @@ Level_menu::Level_menu(QWidget *parent,int _id)
     nxt_board_urls.push_back(":/game/assets/player.png");
     nxt_board_urls.push_back(":/game/assets/player02.png");
     nxt_board_urls.push_back(":/game/assets/player03.png");
+    bulletGroupId = {0, 1, 2, 3};
 
     character_postion = new Mypushbottom(this,true,characters[pos],150);
     connect(character_postion,&Mypushbottom :: clicked,[&](){
@@ -65,7 +67,7 @@ Level_menu::Level_menu(QWidget *parent,int _id)
             lis.push_back("level: "+QString::number(1+id));
             lis.push_back(QString::number(id));
             lis.push_back(nxt_board_urls[pos]);
-            GameController * gc = new GameController (lis,this);
+            GameController * gc = new GameController(lis, this, &bulletGroups[bulletGroupId[pos]]);
 
              this->hide();
         });
@@ -99,7 +101,7 @@ void Level_menu::turn_left()
             lis.push_back("level: "+QString::number(1+id));
             lis.push_back(QString::number(id));
             lis.push_back(nxt_board_urls[pos]);
-            GameController * gc = new GameController (lis,this);
+            GameController * gc = new GameController(lis, this, &bulletGroups[bulletGroupId[pos]]);
 
              this->hide();
         });
@@ -125,7 +127,7 @@ void Level_menu::turn_right()
             lis.push_back("level: "+QString::number(1+id));
             lis.push_back(QString::number(id));
             lis.push_back(nxt_board_urls[pos]);
-            GameController * gc = new GameController (lis,this);
+            GameController * gc = new GameController(lis, this, &bulletGroups[bulletGroupId[pos]]);
 
              this->hide();
 

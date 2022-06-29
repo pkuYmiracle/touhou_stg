@@ -22,10 +22,11 @@ void Scenario::start(GameController *gc) {
 
         if(p.second.is_boss == 1)
         {
-            gc->createOneShotTimer(p.first.first * 1000, gc, [p, gc, this]{
-                enemies.push_back(p.second.spawnIt(gc, p.first.second));
-                bosses.push_back(enemies.back());
-                boss_hpes.push_back(bosses.back()->getHp());
+            Enemy * e = p.second.spawnIt(gc, p.first.second);
+            bosses.push_back(e);
+            boss_hpes.push_back(bosses.back()->getHp());
+            gc->createOneShotTimer(p.first.first * 1000, gc, [e, this]{
+                enemies.push_back(e);
             });
         }
         else

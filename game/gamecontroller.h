@@ -26,7 +26,9 @@ class GameController : public QObject {
     Scenario            *scenario;
     QGraphicsTextItem   *level_name,
                         *player_hp,
-                        *enemy_hp;
+                        *enemy_hp,
+                        *last_time_count,
+                        *count_down;
     QGraphicsRectItem   *player_hp_show,
                         *enemy_hp_show;
     Mypushbottom *continue_button,*main_menu_button;

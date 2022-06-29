@@ -22,6 +22,7 @@ public:
     Scenario();
     int boss_id;//记录目前是第多少个boss
     QVector<qreal> boss_time;//记录boss出现的时间
+    qreal countdown;
     //time for secs.
     Scenario&   add(qreal time, QPointF loc, const EnemyPrototype &ep);
     void        start(GameController *gc);
@@ -30,6 +31,7 @@ public:
     qreal get_hp_rate() const;
     void print_boss() const;//用于测试
     qreal get_last_time() const;//显示倒计时
+    void advance();
 };
 extern std::vector<Scenario> scenarios;
 void init_scenarios();

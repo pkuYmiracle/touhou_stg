@@ -42,6 +42,14 @@ void Scenario::start(GameController *gc) {
         });
         }
     }
+    if(bosses.size())
+    {
+        boss_id = 0;
+        if(boss_id + 1 < boss_time.size())
+                countdown = (boss_time[boss_id+1] - boss_time[boss_id]);
+       else countdown = 1000 * 1000;
+    }
+    else countdown = 1000 * 1000;
 }
 
 
@@ -166,16 +174,30 @@ void Scenario::print_boss() const
     }
 }
 
+qreal Scenario::get_last_time() const
+{
+    return countdown;
+}
+
+void Scenario::advance()
+{
+    if(boss_id < bosses.size() && bosses[boss_id]->getHp() <= 0)
+    {
+        if(boss_id + 1 < boss_time.size())
+                countdown = (boss_time[boss_id+1] - boss_time[boss_id]);
+       else countdown = 1000 * 1000;
+        boss_id ++;
+    }
+    countdown --;
+    qDebug() << "countdown:" << countdown <<endl;
+}
+
 bool Scenario::is_lose() const
 {
    // qDebug() << "boss_count:" <<bosses.size() <<"/"<<boss_number<< endl;
-    if(bosses.size() != boss_number)
-            return 0;
-    for (int i = 0 ; i < bosses.size(); i ++)
-        if(bosses[i]->getHp() != 0)
-                return 0;
-    qDebug() <<"scenario_is_lose" <<endl;
-    return 1;
+    if(countdown < 0)
+            return 1;
+    return 0;
 }
 
 bool Scenario::is_win() const

@@ -39,6 +39,8 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     level_name(new QGraphicsTextItem),
     player_hp(new QGraphicsTextItem),
     enemy_hp(new QGraphicsTextItem),
+    count_down(new QGraphicsTextItem),
+    last_time_count(new QGraphicsTextItem),
     player_hp_show(new QGraphicsRectItem),
     enemy_hp_show(new QGraphicsRectItem),
     info(info_ls),
@@ -61,31 +63,44 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
 
      scene->addItem(level_name);
 
+     last_time_count ->setPlainText("countdown:");
+     last_time_count ->setPos(QPointF(850,300));
+     last_time_count ->setFont(font);
+     scene->addItem(last_time_count);
+
      player_hp ->setPlainText("player hp:");
-     player_hp ->setPos(QPointF(850,300));
+     player_hp ->setPos(QPointF(850,500));
      player_hp ->setFont(font);
+
+
 
       scene->addItem(player_hp);
 
 
       enemy_hp ->setPlainText("enemy hp:");
-      enemy_hp ->setPos(QPointF(850,500));
+      enemy_hp ->setPos(QPointF(850,700));
       enemy_hp ->setFont(font);
 
        scene->addItem(enemy_hp);
         player_hp_show ->setBrush(QBrush(QColor(0,100,100)));
-        player_hp_show ->setRect(QRectF(850,400,200,50));
+        player_hp_show ->setRect(QRectF(850,600,200,50));
        scene->addItem(player_hp_show);
 
 
        scene->addItem(enemy_hp);
         enemy_hp_show ->setBrush(QBrush(QColor(0,100,100)));
-        enemy_hp_show ->setRect(QRectF(850,600,200,50));
+        enemy_hp_show ->setRect(QRectF(850,800,200,50));
        scene->addItem(enemy_hp_show);
        init_scenario();
+
+       count_down ->setPlainText(QString::number(this->scenario->get_last_time()));
+       count_down ->setPos(QPointF(850,400));
+       count_down ->setFont(font);
+       scene->addItem(count_down);
     static qreal last_calc_fps_time = QTime::currentTime().msecsSinceStartOfDay(), frame_cnt = 0;
     QObject::connect(frame_timer, &QTimer::timeout, scene, [&]{
         scene->advance();
+        scenario->advance();
         update_game_info();
         int flag = this->scenario->is_end();
         if(flag == 1)
@@ -167,8 +182,9 @@ GameController::~GameController() {
     //其余成员被Qt自动析构.
 }
 void GameController::update_game_info(){
-    player_hp_show ->setRect(QRectF(850,400,player->getHp()/PLAYER_HP * 200,50));
-    enemy_hp_show ->setRect(QRectF(850,600,scenario->get_hp_rate()*200,50));
+    player_hp_show ->setRect(QRectF(850,600,player->getHp()/PLAYER_HP * 200,50));
+    enemy_hp_show ->setRect(QRectF(850,800,scenario->get_hp_rate()*200,50));
+    count_down ->setPlainText(QString::number(this->scenario->get_last_time()));
 }
 QGraphicsScene *GameController::getScene() const
 {

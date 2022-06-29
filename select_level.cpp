@@ -18,10 +18,15 @@ Select_level::Select_level(QWidget *parent)
     connect(back_button,&Mypushbottom :: clicked,[&](){
         emit back_clicked();
     });
-    for (int i = 0 ; i < 9; i ++) {
-          this -> list_bottom.push_back(new Mypushbottom(this,true, ":/backboard/back.png",150));
-          this -> list_bottom[i]->resize(100,100);
-          this -> list_bottom[i]->move(  i % 3 * 200 + 130,i/3 * 200 + 200);
+    std::vector<QString> level;
+    level.push_back(":/game/assets/easy.png");
+    level.push_back(":/game/assets/normal.png");
+    level.push_back(":/game/assets/hard.png");
+    level.push_back(":/game/assets/lunatic.png");
+    for (int i = 0 ; i < 4; i ++) {
+          this -> list_bottom.push_back(new Mypushbottom(this,true, level[i],150));
+          this -> list_bottom[i]->resize(600,100);
+          this -> list_bottom[i]->move(  100,  i * 130 +200);
           connect(this -> list_bottom[i],&Mypushbottom :: clicked,[=](){
 
               QTimer::singleShot(300,[&](){

@@ -262,7 +262,7 @@ bool Scenario::is_lose() const
 
 bool Scenario::is_win() const
 {
-   // qDebug() << "boss_count:" <<bosses.size() <<"/"<<boss_number<< endl;
+    qDebug() << "boss_count:" <<bosses.size() <<":" <<boss_id<<"/"<<boss_number<< endl;
     if(bosses.size() != boss_number)
             return 0;
     for (int i = 0 ; i < bosses.size(); i ++)

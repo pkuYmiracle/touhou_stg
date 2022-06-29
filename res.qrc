@@ -86,5 +86,9 @@
         <file>game/assets/hard.png</file>
         <file>game/assets/normal.png</file>
         <file>game/assets/easy.png</file>
+        <file>backboard/player_select.png</file>
+        <file>people/big1.png</file>
+        <file>people/big2.png</file>
+        <file>people/big3.png</file>
     </qresource>
 </RCC>

@@ -1,5 +1,5 @@
 #include "level_menu.h"
-#include "mypushbottom.h"
+#include "mypushbutton.h"
 #include <QPainter>
 #include <QPixmap>
 #include <QTimer>
@@ -12,37 +12,37 @@ Level_menu::Level_menu(QWidget *parent,int _id)
     qDebug() << id << endl;
     this -> setWindowTitle("choose one player");
 
-    Mypushbottom *back_button = new Mypushbottom(this,true,
-                                                  ":/backboard/left.png",150);
-    back_button->resize(100,100);
+    Mypushbutton *back_button = new Mypushbutton(this,true,
+                                                  ":/backboard/back.png",150);
+    back_button->resize(150,130);
     back_button->move(0,this->height()- back_button->height());
-    connect(back_button,&Mypushbottom :: clicked,[&](){
+    connect(back_button,&Mypushbutton :: clicked,[&](){
         QTimer::singleShot(300,[&](){
             emit back_clicked();
         });
     });
 
-    Mypushbottom *chose = new Mypushbottom(this,false,
+    Mypushbutton *chose = new Mypushbutton(this,false,
                                                   ":/backboard/player_select.png",150);
     chose->resize(400,100);
     chose->move(this->width()/4,this->height()/8);
 
-    Mypushbottom *left_button = new Mypushbottom(this,true,
+    Mypushbutton *left_button = new Mypushbutton(this,true,
                                                   ":/backboard/left.png",150);
     left_button->resize(100,100);
     left_button->move(0,this->height()/2);
-    connect(left_button,&Mypushbottom :: clicked,[&](){
+    connect(left_button,&Mypushbutton :: clicked,[&](){
         QTimer::singleShot(300,[&](){
             this -> turn_left();
         });
     });
 
 
-    Mypushbottom *right_button = new Mypushbottom(this,true,
+    Mypushbutton *right_button = new Mypushbutton(this,true,
                                                   ":/backboard/right.png",150);
     right_button->resize(100,100);
     right_button->move(this->width()-right_button->width(),this->height()/2);
-    connect(right_button,&Mypushbottom :: clicked,[&](){
+    connect(right_button,&Mypushbutton :: clicked,[&](){
         QTimer::singleShot(300,[&](){
             this -> turn_right();
         });
@@ -57,8 +57,8 @@ Level_menu::Level_menu(QWidget *parent,int _id)
     nxt_board_urls.push_back(":/game/assets/player02.png");
     nxt_board_urls.push_back(":/game/assets/player03.png");
 
-    character_postion = new Mypushbottom(this,true,characters[pos],150);
-    connect(character_postion,&Mypushbottom :: clicked,[&](){
+    character_postion = new Mypushbutton(this,true,characters[pos],150);
+    connect(character_postion,&Mypushbutton :: clicked,[&](){
         QTimer::singleShot(300,[&](){
 
             qDebug() << "game_start"<<endl;
@@ -90,9 +90,9 @@ void Level_menu::turn_left()
     pos = (pos + characters.size() - 1) %  characters.size();
     delete character_postion;
 
-    character_postion = new Mypushbottom(this,true,
+    character_postion = new Mypushbutton(this,true,
                                                   characters[pos],150);
-    connect(character_postion,&Mypushbottom :: clicked,[&](){
+    connect(character_postion,&Mypushbutton :: clicked,[&](){
         QTimer::singleShot(300,[&](){
 
             qDebug() << "game_start"<<endl;
@@ -116,9 +116,9 @@ void Level_menu::turn_right()
 
     pos = (pos + characters.size() + 1) %  characters.size();
     delete character_postion;
-    character_postion = new Mypushbottom(this,true,
+    character_postion = new Mypushbutton(this,true,
                                                   characters[pos],150);
-    connect(character_postion,&Mypushbottom :: clicked,[&](){
+    connect(character_postion,&Mypushbutton :: clicked,[&](){
         QTimer::singleShot(300,[&](){
 
             qDebug() << "game_start"<<endl;

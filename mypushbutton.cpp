@@ -1,17 +1,17 @@
-#include "mypushbottom.h"
+#include "mypushbutton.h"
 #include<QPushButton>
 #include<QPainter>
 #include<QPropertyAnimation>
 #include<QPixmap>
 #include<QTimer>
-Mypushbottom::Mypushbottom(QWidget *parent,bool up_down ,QString _load_path,int updowntime)
+Mypushbutton::Mypushbutton(QWidget *parent,bool up_down ,QString _load_path,int updowntime)
     : QPushButton{parent},is_up_down(up_down),load_path(_load_path),up_down_time(updowntime)
 {
     if(up_down)
-        connect (this,&Mypushbottom::clicked,this,&Mypushbottom::when_clicked);
+        connect (this,&Mypushbutton::clicked,this,&Mypushbutton::when_clicked);
 }
 
-void Mypushbottom::paintEvent(QPaintEvent *event)
+void Mypushbutton::paintEvent(QPaintEvent *event)
 {
    QPainter painter(this);
    QPixmap pixmap;
@@ -20,7 +20,7 @@ void Mypushbottom::paintEvent(QPaintEvent *event)
 
 }
 
-void Mypushbottom::move_down()
+void Mypushbutton::move_down()
 {
     QPropertyAnimation * animation = new QPropertyAnimation(this,"geometry",this);
     animation ->setStartValue(this->geometry());
@@ -29,7 +29,7 @@ void Mypushbottom::move_down()
     animation ->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
-void Mypushbottom::move_up()
+void Mypushbutton::move_up()
 {
 
     QPropertyAnimation * animation = new QPropertyAnimation(this,"geometry",this);
@@ -39,7 +39,7 @@ void Mypushbottom::move_up()
     animation ->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
-void Mypushbottom::when_clicked()
+void Mypushbutton::when_clicked()
 {
    setEnabled(false);
    move_down();

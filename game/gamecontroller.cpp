@@ -87,11 +87,12 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     QObject::connect(frame_timer, &QTimer::timeout, scene, [&]{
         scene->advance();
         update_game_info();
-        if(this->scenario->is_end())
+        int flag = this->scenario->is_end();
+        if(flag == 1)
         {
             game_end(1);
         }
-        if(player->getHp()<=0)
+        if(flag == -1 || player->getHp()<=0)
         {
             game_end(0);
         }

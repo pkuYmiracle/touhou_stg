@@ -5,7 +5,7 @@
 #include "game/enemy.h"
 
 Scenario::Scenario()
-    : enemySpawnConfig(),boss_number(0)
+    : enemySpawnConfig(),boss_number(0),boss_id(0)
 {
 
 }
@@ -15,6 +15,8 @@ Scenario::Scenario()
 Scenario &Scenario::add(qreal time, QPointF loc, const EnemyPrototype &ep) {
     //qDebug()<<ep.is_boss<<endl;
     enemySpawnConfig.push_back({{time, loc}, ep});
+    if(ep.is_boss)
+            boss_time.push_back(time);
     return *this;
 }
 
@@ -104,7 +106,6 @@ void init_scenarios(){
         s   .add(t_, {0, 100}, *enemyPrototypes_small[6]);
         t_+=5;
         s   .add(t_, {0, 100}, *enemyPrototypes_small[7]);
-        s.print_boss();
 
         scenarios.push_back(s);
 
@@ -165,7 +166,7 @@ void Scenario::print_boss() const
     }
 }
 
-bool Scenario::is_end() const
+bool Scenario::is_lose() const
 {
    // qDebug() << "boss_count:" <<bosses.size() <<"/"<<boss_number<< endl;
     if(bosses.size() != boss_number)
@@ -173,6 +174,27 @@ bool Scenario::is_end() const
     for (int i = 0 ; i < bosses.size(); i ++)
         if(bosses[i]->getHp() != 0)
                 return 0;
-    qDebug() <<"scenario_is_end" <<endl;
+    qDebug() <<"scenario_is_lose" <<endl;
     return 1;
+}
+
+bool Scenario::is_win() const
+{
+   // qDebug() << "boss_count:" <<bosses.size() <<"/"<<boss_number<< endl;
+    if(bosses.size() != boss_number)
+            return 0;
+    for (int i = 0 ; i < bosses.size(); i ++)
+        if(bosses[i]->getHp() != 0)
+                return 0;
+    qDebug() <<"scenario_is_win" <<endl;
+    return 1;
+}
+
+int Scenario::is_end() const
+{
+    return 0;
+   // qDebug() << "boss_count:" <<bosses.size() <<"/"<<boss_number<< endl;
+    if(is_lose()) return -1;
+    if(is_win())  return 1;
+    return 0;
 }

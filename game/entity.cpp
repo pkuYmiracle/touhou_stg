@@ -51,9 +51,8 @@ void Entity::advance(int phase)
             if (GAME_BOARD_RECT.adjusted(-HIDEN_EDGE, -HIDEN_EDGE, HIDEN_EDGE, HIDEN_EDGE).intersects(
                         this->mapRectToScene(this->boundingRect())) == false) {
                 scene()->removeItem(this);
-                this->deleteLater();
+//                this->deleteLater();
             }
-//        }
     }
 }
 

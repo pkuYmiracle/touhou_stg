@@ -56,17 +56,36 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     this->initSidebar();
     static qreal last_calc_fps_time = QTime::currentTime().msecsSinceStartOfDay(), frame_cnt = 0;
     QObject::connect(frame_timer, &QTimer::timeout, scene, [&]{
+
+        if(player->getHp()<=0)
+        {
+                    game_end(0);
+        }
         scene->advance();
+
+        if(player->getHp()<=0)
+        {
+                    game_end(0);
+        }
         scenario->advance();
+
+        if(player->getHp()<=0)
+        {
+                    game_end(0);
+        }
         update_game_info();
         int flag = this->scenario->is_end();
         if(flag == 1)
         {
             game_end(1);
         }
-        if(flag == -1 || player->getHp()<=0)
+        if(flag == -1)
         {
             game_end(0);
+        }
+        if(player->getHp()<=0)
+        {
+                    game_end(0);
         }
         frame_cnt++;
         if (QTime::currentTime().msecsSinceStartOfDay() - last_calc_fps_time > 1000) {

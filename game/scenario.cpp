@@ -134,26 +134,26 @@ void init_scenarios(){
 
         Scenario s2;
         double clk = 0;
-    for(int boss_count = 1;boss_count <= 5;boss_count++) {
+    for(int boss_count = 1;boss_count <= 3;boss_count++) {
         int id = rand()%enemyPrototypes_boss.size();
         int x = rand()%500,y = rand()%500;
         s2   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_boss[id]);
         //接下来是小怪
-        for (int i = 0 ; i < 8; i ++)
+        for (int i = 0 ; i < 3; i ++)
         {
         id = rand()%enemyPrototypes_small.size();
         x = rand()%500,y = rand()%500;
         s2   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
         }
         clk += rand()%5;
-        for (int i = 0 ; i < 7; i ++)
+        for (int i = 0 ; i < 3; i ++)
         {
         id = rand()%enemyPrototypes_small.size();
         x = rand()%500,y = rand()%500;
         s2   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
         }
         clk += rand()%5;
-        for (int i = 0 ; i < 7; i ++)
+        for (int i = 0 ; i < 3; i ++)
         {
         id = rand()%enemyPrototypes_small.size();
         x = rand()%500,y = rand()%500;
@@ -162,6 +162,36 @@ void init_scenarios(){
         clk += rand()%5+8;
     }
     scenarios.push_back(s2);
+    Scenario s3;
+    clk = 0;
+    for(int boss_count = 1;boss_count <= 4;boss_count++) {
+        int id = rand()%enemyPrototypes_boss.size();
+        int x = rand()%500,y = rand()%500;
+        s3   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_boss[id]);
+        //接下来是小怪
+        for (int i = 0 ; i < 4; i ++)
+        {
+        id = rand()%enemyPrototypes_small.size();
+        x = rand()%500,y = rand()%500;
+        s3   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
+        }
+        clk += rand()%5;
+        for (int i = 0 ; i < 4; i ++)
+        {
+        id = rand()%enemyPrototypes_small.size();
+        x = rand()%500,y = rand()%500;
+        s3   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
+        }
+        clk += rand()%5;
+        for (int i = 0 ; i < 5; i ++)
+        {
+        id = rand()%enemyPrototypes_small.size();
+        x = rand()%500,y = rand()%500;
+        s3   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
+        }
+        clk += rand()%5+8;
+    }
+    scenarios.push_back(s3);
 
 }
 

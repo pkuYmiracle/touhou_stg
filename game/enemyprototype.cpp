@@ -234,13 +234,12 @@ void init_small()
         e_hp /= 4;
         EnemyPrototype *ep = new EnemyPrototype(e_picUrl,e_hp,0); //最后一个参数为0：表示小怪
         // 为一个EnemyPrototype设置动作序列，参数的意义具体见各个动作的构造函数
-        for (int t = 0 ; t < 20 ; t ++)
+        int T = rand()%10+5;
+        for (int t = 0 ; t < T ; t ++)
         {
             if(rand()%2)
             {
                 int id = rand()%bulletGroups.size(), t= rand()% + 1;
-                (*ep)   << (new Attack(bulletGroups[id], t));
-                id = rand()%bulletGroups.size();
                 (*ep)   << (new Attack(bulletGroups[id], t));
             }
             else

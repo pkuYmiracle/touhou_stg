@@ -47,9 +47,9 @@ void Scenario::start(GameController *gc) {
         boss_id = 0;
         if(boss_id + 1 < boss_time.size())
                 countdown = (boss_time[boss_id+1] - boss_time[boss_id]);
-       else countdown = 1000 * 1000;
+       else countdown = 1000 * 100;
     }
-    else countdown = 1000 * 1000;
+    else countdown = 1000 * 100;
 }
 
 
@@ -185,7 +185,7 @@ void Scenario::advance()
     {
         if(boss_id + 1 < boss_time.size())
                 countdown = (boss_time[boss_id+1] - boss_time[boss_id]);
-       else countdown = 1000 * 1000;
+       else countdown = 1000 * 100;
         boss_id ++;
     }
     countdown --;
@@ -214,7 +214,6 @@ bool Scenario::is_win() const
 
 int Scenario::is_end() const
 {
-    return 0;
    // qDebug() << "boss_count:" <<bosses.size() <<"/"<<boss_number<< endl;
     if(is_lose()) return -1;
     if(is_win())  return 1;

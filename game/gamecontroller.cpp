@@ -4,7 +4,7 @@
 #include "game/enemyprototype.h"
 #include "game/scenario.h"
 #include "keyboardhandler.hpp"
-#include "mypushbottom.h"
+#include "mypushbutton.h"
 #include "qnamespace.h"
 #include "game/config.h"
 #include <qgraphicsview.h>
@@ -37,10 +37,10 @@ GameController::GameController(const std::vector<QString> &info_ls, Level_menu *
     player(new Player(this,info_ls[2])),
     kbhandler(new KeyboardHandler(this)),
     level_name(new QGraphicsTextItem),
-    count_down(new QGraphicsTextItem),
-    esc_stop(new QGraphicsTextItem),
-    remain_boss_counts(new QGraphicsTextItem),
     last_time_count(new QGraphicsTextItem),
+    count_down(new QGraphicsTextItem),
+    remain_boss_counts(new QGraphicsTextItem),
+    esc_stop(new QGraphicsTextItem),
     player_hp_show(new QGraphicsRectItem),
     enemy_hp_show(new QGraphicsRectItem),
     info(info_ls),
@@ -110,12 +110,12 @@ GameController::GameController(const std::vector<QString> &info_ls, Level_menu *
 //    scene->setItemIndexMethod(QGraphicsScene::NoIndex);
     view->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     view->setCacheMode(QGraphicsView::CacheBackground);
-    continue_button = new Mypushbottom(view, true,
+    continue_button = new Mypushbutton(view, true,
                                                  ":/game/assets/continue.png",150);
-    main_menu_button = new Mypushbottom(view, true,
+    main_menu_button = new Mypushbutton(view, true,
                                                  ":/game/assets/backmain.png",150);
 
-    help_button = new Mypushbottom(view, false,
+    help_button = new Mypushbutton(view, false,
                                                  ":/game/assets/help.png",150);
     help_button->resize(500,400);
 
@@ -132,14 +132,14 @@ GameController::GameController(const std::vector<QString> &info_ls, Level_menu *
    main_menu_button->resize(500,100);
    main_menu_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y() +420);
 
-   connect(continue_button, &Mypushbottom::clicked, continue_button, [&](){
+   connect(continue_button, &Mypushbutton::clicked, continue_button, [&](){
        QTimer::singleShot(300, this,[&](){
            this->gameContinue();
        });
    });
 
 
-   connect(main_menu_button, &Mypushbottom::clicked, main_menu_button ,[&](){
+   connect(main_menu_button, &Mypushbutton::clicked, main_menu_button ,[&](){
        QTimer::singleShot(300, this, [&](){
            father_widget ->show();
 
@@ -170,7 +170,8 @@ Scenario *GameController::getScenario() const
 }
 
 void GameController::update_game_info(){
-    player_hp_show ->setRect(QRectF(915,600,player->getHp()/PLAYER_HP * 200,50));
+    qreal cur_hp= fmax(0,player->getHp());
+    player_hp_show ->setRect(QRectF(915,600,cur_hp/PLAYER_HP * 200,50));
     enemy_hp_show ->setRect(QRectF(915,750,scenario->get_hp_rate()*200,50));
     count_down ->setPlainText(QString::number(this->scenario->get_last_time()/100));
     remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" boss left");
@@ -192,7 +193,7 @@ void GameController::gameContinue() {
     }
 
     frame_timer->start();
-    for (auto &pair : timers) if (pair.timer->remainingTime() > 0) {
+    for (auto &pair : timers) if (pair.remainingTime > 0) {
         pair.timer->setInterval(pair.remainingTime);
         pair.timer->start();
         pair.remainingTime = 0;
@@ -228,16 +229,21 @@ void GameController::game_end(const bool &is_win) {
     if(is_win)
     {
         qDebug() << "win!"<<endl;
-        Mypushbottom * win_button = new Mypushbottom(view, true,
+        Mypushbutton * win_button = new Mypushbutton(view, false,
                                                      ":/game/assets/win.png",150);
        win_button->resize(500,100);
        QPoint delta = {
            win_button->rect().width() / 2,
            win_button->rect().height() / 2
        };
-       win_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y());
+       win_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y() - 100);
        win_button ->show();
-       connect(win_button, &Mypushbottom::clicked, win_button ,[&](){
+        Mypushbutton * back_button = new Mypushbutton(view, true,
+                                                     ":/backboard/back.png",150);
+        back_button->resize(250,200);
+        back_button->move(view->width() / 2 - delta.x()+60, view->height() / 2 - delta.y() + 50);
+       back_button ->show();
+       connect(back_button, &Mypushbutton::clicked, back_button ,[&](){
            QTimer::singleShot(300, this, [&](){
                father_widget ->show();
 
@@ -249,16 +255,21 @@ void GameController::game_end(const bool &is_win) {
     else
     {
         qDebug() << "loss!"<<endl;
-        Mypushbottom * loss_button = new Mypushbottom(view, true,
+        Mypushbutton * lose_button = new Mypushbutton(view, false,
                                                      ":/game/assets/die.png",150);
-       loss_button->resize(500,100);
+       lose_button->resize(500,100);
        QPoint delta = {
-           loss_button->rect().width() / 2,
-           loss_button->rect().height() / 2
+           lose_button->rect().width() / 2,
+           lose_button->rect().height() / 2
        };
-       loss_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y());
-       loss_button ->show();
-       connect(loss_button, &Mypushbottom::clicked, loss_button ,[&](){
+       lose_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y() - 100);
+       lose_button ->show();
+        Mypushbutton * back_button = new Mypushbutton(view, true,
+                                                     ":/backboard/back.png",150);
+       back_button->resize(250,200);
+       back_button->move(view->width() / 2 - delta.x()+60, view->height() / 2 - delta.y() + 50);
+       back_button ->show();
+       connect(back_button, &Mypushbutton::clicked, back_button ,[&](){
            QTimer::singleShot(300, this, [&](){
                father_widget ->show();
 
@@ -308,7 +319,7 @@ void GameController::initSidebar()
     scene->addItem(enemy_hp_show);
     init_scenario();
     count_down ->setPlainText(QString::number(this->scenario->get_last_time()/100));
-    count_down ->setPos(QPointF(900,400));
+    count_down ->setPos(QPointF(940,400));
     count_down ->setFont(font);
     count_down->setDefaultTextColor(QColor(255,255,255));
     scene->addItem(count_down);

@@ -24,7 +24,7 @@ SOURCES += \
     level_menu.cpp \
     main.cpp \
     baseboard.cpp \
-    mypushbottom.cpp \
+    mypushbutton.cpp \
     select_level.cpp \
     startboard.cpp \
 
@@ -43,7 +43,7 @@ HEADERS += \
     game/player.h \
     game/scenario.h \
     level_menu.h \
-    mypushbottom.h \
+    mypushbutton.h \
     select_level.h \
     startboard.h \
     baseboard.h \

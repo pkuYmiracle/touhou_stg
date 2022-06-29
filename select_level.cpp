@@ -1,6 +1,6 @@
 #include "baseboard.h"
 #include "select_level.h"
-#include <mypushbottom.h>
+#include <mypushbutton.h>
 #include <QTimer>
 #include <QPainter>
 #include <QPixmap>
@@ -11,23 +11,29 @@ Select_level::Select_level(QWidget *parent)
 {
     this -> setWindowTitle("choose one level");
 
-    Mypushbottom *back_button = new Mypushbottom(this,true,
+    Mypushbutton *back_button = new Mypushbutton(this,true,
                                                   ":/backboard/back.png",150);
-    back_button->resize(100,100);
+    back_button->resize(150,130);
     back_button->move(0,this->height()- back_button->height());
-    connect(back_button,&Mypushbottom :: clicked,[&](){
+    connect(back_button,&Mypushbutton :: clicked,[&](){
         emit back_clicked();
     });
+
+    Mypushbutton *title = new Mypushbutton(this,false,
+                                                  ":/backboard/level_select.png",150);
+    title->resize(600,100);
+    title->move(100,150);
+
     std::vector<QString> level;
     level.push_back(":/game/assets/easy.png");
     level.push_back(":/game/assets/normal.png");
     level.push_back(":/game/assets/hard.png");
     level.push_back(":/game/assets/lunatic.png");
     for (int i = 0 ; i < 4; i ++) {
-          this -> list_bottom.push_back(new Mypushbottom(this,true, level[i],150));
+          this -> list_bottom.push_back(new Mypushbutton(this,true, level[i],150));
           this -> list_bottom[i]->resize(600,100);
           this -> list_bottom[i]->move(  100,  i * 130 +300);
-          connect(this -> list_bottom[i],&Mypushbottom :: clicked,[=](){
+          connect(this -> list_bottom[i],&Mypushbutton :: clicked,[=](){
 
               QTimer::singleShot(300,[&](){
                   Level_menu *level_menu = new Level_menu(this,i);

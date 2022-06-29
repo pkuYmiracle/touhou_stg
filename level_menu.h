@@ -4,7 +4,7 @@
 #include <baseboard.h>
 #include <vector>
 #include <QString>
-#include "mypushbottom.h"
+#include "mypushbutton.h"
 class Level_menu : public Baseboard
 {
     Q_OBJECT
@@ -13,7 +13,7 @@ private:
     std::vector<QString>    characters,
                             nxt_board_urls;
     std::vector<int>        bulletGroupId;
-    Mypushbottom * character_postion;
+    Mypushbutton            *character_postion;
 public:
     explicit Level_menu(QWidget *parent = nullptr,int _id = 0);
 

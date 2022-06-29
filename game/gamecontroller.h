@@ -8,7 +8,7 @@
 #include <QSound>
 #include <QTimer>
 #include "level_menu.h"
-#include "mypushbottom.h"
+#include "mypushbutton.h"
 
 class BulletGroup;
 class Scenario;
@@ -34,7 +34,7 @@ class GameController : public QObject {
                         *esc_stop;
     QGraphicsRectItem   *player_hp_show,
                         *enemy_hp_show;
-    Mypushbottom *continue_button,*main_menu_button,*help_button;
+    Mypushbutton *continue_button,*main_menu_button,*help_button;
     struct Timer{
         QTimer* timer;
         int     remainingTime; // if paused.

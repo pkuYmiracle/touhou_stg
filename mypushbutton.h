@@ -1,9 +1,9 @@
-#ifndef MYPUSHBOTTOM_H
-#define MYPUSHBOTTOM_H
+#ifndef MYPUSHBUTTON_H
+#define MYPUSHBUTTON_H
 
 #include<QPushButton>
 #include<QString>
-class Mypushbottom : public QPushButton
+class Mypushbutton : public QPushButton
 {
     Q_OBJECT
 private:
@@ -11,7 +11,7 @@ private:
     bool is_up_down;
     int up_down_time;
 public:
-    explicit Mypushbottom(QWidget *parent = nullptr,bool up_down = 1,QString _load_path = "",int up_down_time = 100);
+    explicit Mypushbutton(QWidget *parent = nullptr,bool up_down = 1,QString _load_path = "",int up_down_time = 100);
 private:
     virtual void paintEvent(QPaintEvent * event);
     void move_down();
@@ -23,4 +23,4 @@ signals:
 
 };
 
-#endif // MYPUSHBOTTOM_H
+#endif // MYPUSHBUTTON_H

@@ -5,7 +5,7 @@
 #include <baseboard.h>
 #include <vector>
 #include<level_menu.h>
-#include<mypushbottom.h>
+#include<mypushbutton.h>
 
 class Select_level : public Baseboard
 {
@@ -19,7 +19,7 @@ signals:
 protected:
     virtual void paintEvent(QPaintEvent * event);
 private:
-    std :: vector<Mypushbottom*> list_bottom;
+    std :: vector<Mypushbutton*> list_bottom;
 };
 
 #endif // SELECT_LEVEL_H

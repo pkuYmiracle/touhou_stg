@@ -94,5 +94,6 @@
         <file>game/assets/continue.png</file>
         <file>game/assets/win.png</file>
         <file>game/assets/die.png</file>
+        <file>game/assets/help.png</file>
     </qresource>
 </RCC>

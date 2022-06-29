@@ -38,6 +38,7 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     kbhandler(new KeyboardHandler(this)),
     level_name(new QGraphicsTextItem),
     count_down(new QGraphicsTextItem),
+    esc_stop(new QGraphicsTextItem),
     remain_boss_counts(new QGraphicsTextItem),
     last_time_count(new QGraphicsTextItem),
     player_hp_show(new QGraphicsRectItem),
@@ -113,16 +114,23 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
                                                  ":/game/assets/continue.png",150);
     main_menu_button = new Mypushbottom(view, true,
                                                  ":/game/assets/backmain.png",150);
-   continue_button->resize(300,70);
-   QPoint delta = {
-       continue_button->rect().width() / 2,
-       continue_button->rect().height() / 2
-   };
-   continue_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y());
+
+    help_button = new Mypushbottom(view, false,
+                                                 ":/game/assets/help.png",150);
+    help_button->resize(500,400);
+
+    QPoint delta = {
+        help_button->rect().width() / 2,
+        help_button->rect().height() / 2
+    };
+
+    help_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y()-120);
+   continue_button->resize(500,100);
+   continue_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y()+300);
 
 
-   main_menu_button->resize(300,70);
-   main_menu_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y() - 120);
+   main_menu_button->resize(500,100);
+   main_menu_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y() +420);
 
    connect(continue_button, &Mypushbottom::clicked, continue_button, [&](){
        QTimer::singleShot(300, this,[&](){
@@ -139,7 +147,7 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
        });
    });
 
-   pauseboard_widgets = std::vector<QWidget*>({continue_button, main_menu_button});
+   pauseboard_widgets = std::vector<QWidget*>({continue_button, main_menu_button,help_button});
    frame_timer->start(1000 / FPS);
     //test code.
     scenario->start(this);
@@ -163,7 +171,7 @@ Scenario *GameController::getScenario() const
 
 void GameController::update_game_info(){
     player_hp_show ->setRect(QRectF(915,600,player->getHp()/PLAYER_HP * 200,50));
-    enemy_hp_show ->setRect(QRectF(915,800,scenario->get_hp_rate()*200,50));
+    enemy_hp_show ->setRect(QRectF(915,750,scenario->get_hp_rate()*200,50));
     count_down ->setPlainText(QString::number(this->scenario->get_last_time()/100));
     remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" boss left");
 
@@ -289,15 +297,16 @@ void GameController::initSidebar()
 
     auto enemy_hp = scene->addPixmap(QPixmap(":/game/assets/enemyhp.png"));
     enemy_hp->setScale(0.5);
-    enemy_hp->setPos(QPointF(900,750));
+    enemy_hp->setPos(QPointF(900,700));
+
 
     scene->addItem(enemy_hp);
+    player_hp_show ->setBrush(QBrush(QColor(0,150,0)));
     player_hp_show ->setRect(QRectF(900,600,200,30));
     scene->addItem(player_hp_show);
 
-    player_hp_show ->setBrush(QBrush(QColor(0,150,0)));
     enemy_hp_show ->setBrush(QBrush(QColor(200,0,0)));
-    enemy_hp_show ->setRect(QRectF(900,800,200,30));
+    enemy_hp_show ->setRect(QRectF(900,750,200,30));
     scene->addItem(enemy_hp_show);
     init_scenario();
     count_down ->setPlainText(QString::number(this->scenario->get_last_time()/100));
@@ -305,6 +314,12 @@ void GameController::initSidebar()
     count_down ->setFont(font);
     count_down->setDefaultTextColor(QColor(255,255,255));
     scene->addItem(count_down);
+
+    esc_stop ->setPlainText("Esc: 暂停");
+    esc_stop ->setPos(QPointF(900,850));
+    esc_stop->setDefaultTextColor(QColor(255,255,255));
+    esc_stop ->setFont(font);
+    scene->addItem(esc_stop);
 
     remain_boss_counts ->setPlainText(QString::number(this->scenario->remain_boss_count())+" boss left");
     remain_boss_counts ->setPos(QPointF(880,200));

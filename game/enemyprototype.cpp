@@ -121,7 +121,7 @@ void init_small()
 
     QString e_picUrl = ":/game/assets/enemy07.png";
     int e_hp = ENEMY_HP;//每一组怪的血
-    EnemyPrototype *ep1 = new EnemyPrototype(e_picUrl,e_hp);
+    EnemyPrototype *ep1 = new EnemyPrototype(e_picUrl,e_hp,0);//small enemy
     (*ep1)  << (new Move({3, 3}, 1.3))
             <<(new Attack(bulletGroups[4], 1.5))
             << (new Move({0, 0}, 1.3))
@@ -133,7 +133,7 @@ void init_small()
 
     e_hp*=0.5;
     e_picUrl = ":/game/assets/small_enemy04.png";
-    EnemyPrototype *eps2 = new EnemyPrototype(e_picUrl,e_hp);//small enemy
+    EnemyPrototype *eps2 = new EnemyPrototype(e_picUrl,e_hp,0);//small enemy
     (*eps2)  << (new Move({4, 0}, 1.5))
              <<(new Move({0, 0}, 0))
             <<(new Attack(bulletGroups[5], 0.3))
@@ -144,7 +144,7 @@ void init_small()
 
     enemyPrototypes_small.push_back(eps2);
     e_picUrl = ":/game/assets/enemy05.png";
-    EnemyPrototype *ep3 = new EnemyPrototype(e_picUrl,e_hp);
+    EnemyPrototype *ep3 = new EnemyPrototype(e_picUrl,e_hp,0);//small enemy
     (*ep3)  << (new Move({-3, 3}, 0.7))
             <<(new Attack(bulletGroups[6], 1.5))
             << (new Move({0, 0}, 1))
@@ -155,14 +155,14 @@ void init_small()
 
     e_hp*=2;
     e_picUrl = ":/game/assets/small_enemy02.png";
-    EnemyPrototype *ep4 = new EnemyPrototype(e_picUrl,e_hp);
+    EnemyPrototype *ep4 = new EnemyPrototype(e_picUrl,e_hp,0);//small enemy
     (*ep4)  << (new Move({0, 1.5}, 0.7))
             <<(new Attack(bulletGroups[3], 1.5))
             << (new Move({0, 0}, 1))
             <<(new Attack(bulletGroups[3], 0))
             << (new Move({-2, 1}, 0.7));
     enemyPrototypes_small.push_back(ep4);
-    EnemyPrototype *ep5 = new EnemyPrototype(e_picUrl,e_hp);
+    EnemyPrototype *ep5 = new EnemyPrototype(e_picUrl,e_hp,0);//small enemy
     (*ep5)  << (new Move({0, 1.5}, 0.7))
             <<(new Attack(bulletGroups[3], 1.5))
             << (new Move({0, 0}, 1))
@@ -173,7 +173,7 @@ void init_small()
 
     e_hp*=2;
     e_picUrl=":/game/assets/enemy07.png";
-    EnemyPrototype *ep6 = new EnemyPrototype(e_picUrl,e_hp);
+    EnemyPrototype *ep6 = new EnemyPrototype(e_picUrl,e_hp,0);//small enemy
     (*ep6)  << (new Move({3, 3}, 1.6))<< (new Move({0, 0}, 1))
             <<(new Attack(bulletGroups[7], 1))
             <<(new Attack(bulletGroups[7], 1))
@@ -182,7 +182,7 @@ void init_small()
     enemyPrototypes_small.push_back(ep6);
 
     e_picUrl=":/game/assets/enemy07.png";
-    EnemyPrototype *ep7 = new EnemyPrototype(e_picUrl,e_hp);
+    EnemyPrototype *ep7 = new EnemyPrototype(e_picUrl,e_hp,0);//small enemy
     (*ep7)  << (new Move({3, 3}, 1.6))<< (new Move({0, 0}, 1))
             <<(new Attack(bulletGroups[7], 0))
             <<(new Attack(bulletGroups[8], 0.5))

@@ -5,46 +5,41 @@
 #include "game/enemy.h"
 
 Scenario::Scenario()
-    : enemySpawnConfig(), enemies(),boss_number(0)
+    : enemySpawnConfig(),boss_number(0)
 {
 
 }
 
 // loc: 生成的初始位置
 // ep:  使用的EnemyPrototypes
-Scenario &Scenario::add(qreal time, QPointF loc, EnemyPrototype &ep) {
+Scenario &Scenario::add(qreal time, QPointF loc, const EnemyPrototype &ep) {
     enemySpawnConfig.push_back({{time, loc}, ep});
     return *this;
 }
 
 void Scenario::start(GameController *gc) {
+    qDebug() << "Scenario::start"<<bosses.size()<<' ' << enemySpawnConfig.size()<<endl;
     boss_number = 0;
-    for(const auto &p : enemySpawnConfig) {
-
+    for(int i = 0 ; i < enemySpawnConfig.size(); i ++) {
+         const auto &p = enemySpawnConfig[i];
         if(p.second.is_boss == 1)
         {
             boss_number ++;
-            gc->createOneShotTimer(p.first.first * 1000, gc, [p,gc, this]{
-                enemies.push_back(p.second.spawnIt(gc, p.first.second));
-                bosses.push_back(enemies.back());
+            qDebug() << i <<"is boss"<<endl;
+            gc->createOneShotTimer(p.first.first * 1000, gc, [cnt = p, gc, this]{
+                bosses.push_back(cnt.second.spawnIt(gc, cnt.first.second));
                 boss_hpes.push_back(bosses.back()->getHp());
-            });
+
+        });
         }
         else
         {
-            gc->createOneShotTimer(p.first.first * 1000, gc, [p, gc, this]{
-                enemies.push_back(p.second.spawnIt(gc, p.first.second));
+            gc->createOneShotTimer(p.first.first * 1000, gc, [cnt = p, gc, this]{
+                cnt.second.spawnIt(gc, cnt.first.second);
 
         });
         }
     }
-}
-
-bool Scenario::isCompleted() const {
-    for (auto e : enemies) {
-        if (e->scene() == 0) return false;
-    }
-    return true;
 }
 
 
@@ -117,7 +112,7 @@ qreal Scenario::get_hp_rate() const
     for (int i = 0 ; i < bosses.size(); i ++)
         if(bosses[i]->getHp() != 0)
         {
-            qDebug() <<"boss_id:" << i <<  "now_boss_hp:"<<bosses[i]->getHp()<<endl;
+            //qDebug() <<"boss_id:" << i <<  "now_boss_hp:"<<bosses[i]->getHp()<<endl;
               return (qreal)bosses[i]->getHp()/boss_hpes[i];
         }
     return 0;
@@ -125,7 +120,7 @@ qreal Scenario::get_hp_rate() const
 
 bool Scenario::is_end() const
 {
-    qDebug() << "boss_count:" <<bosses.size() <<"/"<<boss_number<< endl;
+   // qDebug() << "boss_count:" <<bosses.size() <<"/"<<boss_number<< endl;
     if(bosses.size() != boss_number)
             return 0;
     for (int i = 0 ; i < bosses.size(); i ++)

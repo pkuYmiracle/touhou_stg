@@ -12,7 +12,7 @@ class Scenario
 {
     //dont learn me.
     QVector<QPair<QPair<qreal, QPointF>, EnemyPrototype>> enemySpawnConfig;
-    QVector<Enemy*> enemies,bosses,smalles;
+    QVector<Enemy*> bosses,smalles;
     QVector<qreal>boss_hpes;
     int boss_number;
     //((time, loc), ep)
@@ -20,7 +20,7 @@ public:
     Scenario();
 
     //time for secs.
-    Scenario&   add(qreal time, QPointF loc, EnemyPrototype &ep);
+    Scenario&   add(qreal time, QPointF loc, const EnemyPrototype &ep);
     bool        isCompleted() const;
     void        start(GameController *gc);
     static Scenario  gen_random_scenario();

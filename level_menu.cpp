@@ -48,6 +48,8 @@ Level_menu::Level_menu(QWidget *parent,int _id)
     character_postion = new Mypushbottom(this,true,characters[pos],150);
     connect(character_postion,&Mypushbottom :: clicked,[&](){
         QTimer::singleShot(300,[&](){
+
+            qDebug() << "game_start"<<endl;
             this->hide();
             std::vector<QString> lis;
             lis.push_back("level: "+QString::number(1+id));
@@ -80,13 +82,16 @@ void Level_menu::turn_left()
                                                   characters[pos],150);
     connect(character_postion,&Mypushbottom :: clicked,[&](){
         QTimer::singleShot(300,[&](){
+
+            qDebug() << "game_start"<<endl;
             this->hide();
             std::vector<QString> lis;
             lis.push_back("level: "+QString::number(1+id));
             lis.push_back(QString::number(id));
             lis.push_back(characters[pos]);
             GameController * gc = new GameController (lis,this);
-            this->hide();
+
+             this->hide();
         });
     });
     character_postion->resize(500,600);
@@ -102,13 +107,16 @@ void Level_menu::turn_right()
                                                   characters[pos],150);
     connect(character_postion,&Mypushbottom :: clicked,[&](){
         QTimer::singleShot(300,[&](){
+
+            qDebug() << "game_start"<<endl;
             this->hide();
             std::vector<QString> lis;
             lis.push_back("level: "+QString::number(1+id));
             lis.push_back(QString::number(id));
             lis.push_back(characters[pos]);
             GameController * gc = new GameController (lis,this);
-            this->hide();
+
+             this->hide();
 
         });
     });

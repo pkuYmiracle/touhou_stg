@@ -57,7 +57,7 @@ Level_menu::Level_menu(QWidget *parent,int _id)
     nxt_board_urls.push_back(":/game/assets/player.png");
     nxt_board_urls.push_back(":/game/assets/player02.png");
     nxt_board_urls.push_back(":/game/assets/player03.png");
-    bulletGroupId = {0, 1, 2, 3};
+    bulletGroupId = {9, 10, 11, 12};
 
     character_postion = new Mypushbutton(this,true,characters[pos],150);
     connect(character_postion,&Mypushbutton :: clicked,[&](){

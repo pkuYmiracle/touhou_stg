@@ -110,10 +110,10 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
     view->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     view->setCacheMode(QGraphicsView::CacheBackground);
     continue_button = new Mypushbottom(view, true,
-                                                 ":/game/assets/button.png",150);
+                                                 ":/game/assets/continue.png",150);
     main_menu_button = new Mypushbottom(view, true,
-                                                 ":/game/assets/button.png",150); //@TODO: button assets
-   continue_button->resize(500,100);
+                                                 ":/game/assets/backmain.png",150);
+   continue_button->resize(300,70);
    QPoint delta = {
        continue_button->rect().width() / 2,
        continue_button->rect().height() / 2
@@ -121,7 +121,7 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
    continue_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y());
 
 
-   main_menu_button->resize(500,100);
+   main_menu_button->resize(300,70);
    main_menu_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y() - 120);
 
    connect(continue_button, &Mypushbottom::clicked, continue_button, [&](){
@@ -140,7 +140,6 @@ GameController::GameController(const std::vector<QString> &info_ls,Level_menu * 
    });
 
    pauseboard_widgets = std::vector<QWidget*>({continue_button, main_menu_button});
-
    frame_timer->start(1000 / FPS);
     //test code.
     scenario->start(this);
@@ -222,7 +221,7 @@ void GameController::game_end(const bool &is_win) {
     {
         qDebug() << "win!"<<endl;
         Mypushbottom * win_button = new Mypushbottom(view, true,
-                                                     ":/game/assets/button.png",150);
+                                                     ":/game/assets/win.png",150);
        win_button->resize(500,100);
        QPoint delta = {
            win_button->rect().width() / 2,
@@ -243,7 +242,7 @@ void GameController::game_end(const bool &is_win) {
     {
         qDebug() << "loss!"<<endl;
         Mypushbottom * loss_button = new Mypushbottom(view, true,
-                                                     ":/game/assets/button.png",150);
+                                                     ":/game/assets/die.png",150);
        loss_button->resize(500,100);
        QPoint delta = {
            loss_button->rect().width() / 2,

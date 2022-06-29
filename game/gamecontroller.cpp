@@ -60,19 +60,19 @@ GameController::GameController(const std::vector<QString> &info_ls, Level_menu *
     QObject::connect(frame_timer, &QTimer::timeout, scene, [&]{
         if(player->getHp()<=0)
         {
-                    game_end(0);
+                    game_end(-1);
         }
         scene->advance();
 
         if(player->getHp()<=0)
         {
-                    game_end(0);
+                    game_end(-1);
         }
         scenario->advance();
 
         if(player->getHp()<=0)
         {
-                    game_end(0);
+                    game_end(-1);
         }
         update_game_info();
         int flag = this->scenario->is_end();
@@ -86,7 +86,7 @@ GameController::GameController(const std::vector<QString> &info_ls, Level_menu *
         }
         if(player->getHp()<=0)
         {
-                    game_end(0);
+                    game_end(-1);
         }
         frame_cnt++;
         if (QTime::currentTime().msecsSinceStartOfDay() - last_calc_fps_time > 1000) {
@@ -218,7 +218,7 @@ void GameController::pause() {
     this->showPauseboard();
 }
 
-void GameController::game_end(const bool &is_win) {
+void GameController::game_end(const int &is_win) {
     bgm_player->pause();
     frame_timer->stop();
     for (auto &pair : timers) if (pair.timer->remainingTime() > 0) {
@@ -226,11 +226,11 @@ void GameController::game_end(const bool &is_win) {
         pair.timer->stop();
     }
     this->pause_shield = scene->addRect(scene->sceneRect(), QPen(), QBrush(QColor(255,255,255,100)));
-    if(is_win)
+    if(is_win == 1)
     {
         qDebug() << "win!"<<endl;
         Mypushbutton * win_button = new Mypushbutton(view, false,
-                                                     ":/game/assets/win.png",150);
+                                                     ":/backboard/ac.png",150);
        win_button->resize(500,100);
        QPoint delta = {
            win_button->rect().width() / 2,
@@ -252,11 +252,36 @@ void GameController::game_end(const bool &is_win) {
        });
 
     }
-    else
+    else if(is_win == -1 )
     {
         qDebug() << "loss!"<<endl;
         Mypushbutton * lose_button = new Mypushbutton(view, false,
                                                      ":/game/assets/die.png",150);
+       lose_button->resize(500,100);
+       QPoint delta = {
+           lose_button->rect().width() / 2,
+           lose_button->rect().height() / 2
+       };
+       lose_button->move(view->width() / 2 - delta.x(), view->height() / 2 - delta.y() - 100);
+       lose_button ->show();
+        Mypushbutton * back_button = new Mypushbutton(view, true,
+                                                     ":/backboard/back.png",150);
+       back_button->resize(250,200);
+       back_button->move(view->width() / 2 - delta.x()+60, view->height() / 2 - delta.y() + 50);
+       back_button ->show();
+       connect(back_button, &Mypushbutton::clicked, back_button ,[&](){
+           QTimer::singleShot(300, this, [&](){
+               father_widget ->show();
+
+               view ->hide();
+           });
+       });
+    }
+    else
+    {
+        qDebug() << "loss!"<<endl;
+        Mypushbutton * lose_button = new Mypushbutton(view, false,
+                                                     ":/backboard/tle.png",150);
        lose_button->resize(500,100);
        QPoint delta = {
            lose_button->rect().width() / 2,

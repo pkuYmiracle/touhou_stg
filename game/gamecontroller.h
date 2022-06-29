@@ -48,7 +48,7 @@ class GameController : public QObject {
     QMediaPlayer            *bgm_player;
     void                update_game_info();
     void init_scenario();
-    void game_end(const bool &is_win);
+    void game_end(const int &is_win);
     void initSidebar();
 public:
     explicit GameController(const std::vector<QString> &info_ls,Level_menu * from, BulletGroup *player_bullet, QObject *parent = nullptr);

@@ -26,7 +26,7 @@ Select_level::Select_level(QWidget *parent)
     for (int i = 0 ; i < 4; i ++) {
           this -> list_bottom.push_back(new Mypushbottom(this,true, level[i],150));
           this -> list_bottom[i]->resize(600,100);
-          this -> list_bottom[i]->move(  100,  i * 130 +200);
+          this -> list_bottom[i]->move(  100,  i * 130 +300);
           connect(this -> list_bottom[i],&Mypushbottom :: clicked,[=](){
 
               QTimer::singleShot(300,[&](){

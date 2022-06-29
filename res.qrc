@@ -72,5 +72,9 @@
         <file>game/assets/sound/bgm (compressed).wav</file>
         <file>people/slpl01a.png</file>
         <file>people/slpl00a.png</file>
+        <file>game/assets/lunatic.png</file>
+        <file>game/assets/hard.png</file>
+        <file>game/assets/normal.png</file>
+        <file>game/assets/easy.png</file>
     </qresource>
 </RCC>

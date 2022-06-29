@@ -13,6 +13,7 @@ Scenario::Scenario()
 // loc: 生成的初始位置
 // ep:  使用的EnemyPrototypes
 Scenario &Scenario::add(qreal time, QPointF loc, const EnemyPrototype &ep) {
+    //qDebug()<<ep.is_boss<<endl;
     enemySpawnConfig.push_back({{time, loc}, ep});
     return *this;
 }
@@ -104,7 +105,43 @@ void init_scenarios(){
         t_+=5;
         s   .add(t_, {0, 100}, *enemyPrototypes_small[7]);
         s.print_boss();
+
         scenarios.push_back(s);
+
+
+        // 关卡2：
+
+        Scenario s2;
+        double clk = 0;
+    for(int boss_count = 1;boss_count <= 5;boss_count++) {
+        int id = rand()%enemyPrototypes_boss.size();
+        int x = rand()%500,y = rand()%500;
+        s2   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_boss[id]);
+        //接下来是小怪
+        for (int i = 0 ; i < 4; i ++)
+        {
+        id = rand()%enemyPrototypes_small.size();
+        x = rand()%500,y = rand()%500;
+        s2   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
+        }
+        clk += rand()%5;
+        for (int i = 0 ; i < 4; i ++)
+        {
+        id = rand()%enemyPrototypes_small.size();
+        x = rand()%500,y = rand()%500;
+        s2   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
+        }
+        clk += rand()%5;
+        for (int i = 0 ; i < 4; i ++)
+        {
+        id = rand()%enemyPrototypes_small.size();
+        x = rand()%500,y = rand()%500;
+        s2   .add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
+        }
+        clk += rand()%5+10;
+    }
+    scenarios.push_back(s2);
+
 }
 
 qreal Scenario::get_hp_rate() const
@@ -120,7 +157,7 @@ qreal Scenario::get_hp_rate() const
 
 void Scenario::print_boss() const
 {
-
+    qDebug() << "print_boss"<<endl;
     for(int i = 0 ; i < enemySpawnConfig.size(); i ++) {
          const auto &p = enemySpawnConfig[i];
         if(p.second.is_boss == 1)

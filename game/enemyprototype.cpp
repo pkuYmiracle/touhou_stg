@@ -27,6 +27,7 @@ EnemyPrototype::EnemyPrototype(QString picUrl, int hp,bool _is_boss)
 EnemyPrototype::EnemyPrototype(const EnemyPrototype &e)
 {
     actions.clear();
+    is_boss = e.is_boss;
     for (auto a : e.actions) {
         this->actions.push_back(a->clone());
     }
@@ -38,6 +39,7 @@ EnemyPrototype::EnemyPrototype(EnemyPrototype &&e){
     picUrl = e.picUrl;
     hp = e.hp;
     actions = std::move(e.actions);
+    is_boss = e.is_boss;
 }
 
 EnemyPrototype &EnemyPrototype::operator=(const EnemyPrototype &e)
@@ -52,6 +54,7 @@ EnemyPrototype &EnemyPrototype::operator=(const EnemyPrototype &e)
     }
     hp = e.hp;
     picUrl = e.picUrl;
+    is_boss = e.is_boss;
     return *this;
 }
 

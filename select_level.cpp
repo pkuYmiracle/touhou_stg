@@ -21,7 +21,7 @@ Select_level::Select_level(QWidget *parent)
     for (int i = 0 ; i < 9; i ++) {
           this -> list_bottom.push_back(new Mypushbottom(this,true, ":/backboard/back.png",150));
           this -> list_bottom[i]->resize(100,100);
-          this -> list_bottom[i]->move(i/3 * 200 + 130,  i % 3 * 200 + 200);
+          this -> list_bottom[i]->move(  i % 3 * 200 + 130,i/3 * 200 + 200);
           connect(this -> list_bottom[i],&Mypushbottom :: clicked,[=](){
 
               QTimer::singleShot(300,[&](){

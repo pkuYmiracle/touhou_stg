@@ -80,5 +80,7 @@
         <file>game/assets/enemy07.png</file>
         <file>game/assets/enemyhp.png</file>
         <file>game/assets/playerhp.png</file>
+        <file>people/slpl01a.png</file>
+        <file>people/slpl00a.png</file>
     </qresource>
 </RCC>

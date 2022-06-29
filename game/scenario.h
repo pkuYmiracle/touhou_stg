@@ -14,6 +14,7 @@ class Scenario
     QVector<QPair<QPair<qreal, QPointF>, EnemyPrototype>> enemySpawnConfig;
     QVector<Enemy*> enemies,bosses,smalles;
     QVector<qreal>boss_hpes;
+    int boss_number;
     //((time, loc), ep)
 public:
     Scenario();

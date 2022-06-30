@@ -1,6 +1,3 @@
 #include "bonus.h"
 
-Bonus::Bonus()
-{
-
-}
+Bonus::Bonus() {}

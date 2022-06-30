@@ -4,19 +4,22 @@
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class Baseboard; }
+namespace Ui {
+class Baseboard;
+}
 QT_END_NAMESPACE
 
-class Baseboard : public QMainWindow
-{
+class Baseboard : public QMainWindow {
     Q_OBJECT
 
 public:
     Baseboard(QWidget *parent = nullptr);
     ~Baseboard();
+
 protected:
-    virtual void paintEvent(QPaintEvent * event);
+    virtual void paintEvent(QPaintEvent *event);
+
 private:
     Ui::Baseboard *ui;
 };
-#endif // BASEBOARD_H
+#endif  // BASEBOARD_H

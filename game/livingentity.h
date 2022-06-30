@@ -10,7 +10,10 @@ class LivingEntity : public Entity {
 
 public:
     explicit LivingEntity();
-    //    处理子弹和生物的碰撞
+    ///
+    /// \brief advance 逐帧调用，碰撞检测与血量计算
+    /// \param phase
+    ///
     void advance(int phase) override;
 
     float getHp() const;

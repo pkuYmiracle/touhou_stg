@@ -8,7 +8,6 @@
 #include "qpoint.h"
 
 class GameController;
-//为了使用Action的多态而引出的一堆极其丑陋的代码
 class EnemyPrototype {
     std::vector<Action *> actions;
     QString picUrl;
@@ -25,8 +24,20 @@ public:
     EnemyPrototype &operator=(const EnemyPrototype &e);
     EnemyPrototype &operator=(EnemyPrototype &&e) = delete;
 
-    // it takes the ownership of *action.
+    ///
+    /// \brief operator << 为该原型添加一个动作
+    /// \param action
+    /// \return self
+    /// \attention it takes the ownership of *action.
+    ///
     EnemyPrototype &operator<<(Action *action);
+
+    ///
+    /// \brief spawnIt 在给定的初始位置实例化该EnemyPrototype
+    /// \param gc GameController实例
+    /// \param initLoc 初始位置
+    /// \return 指向Enemy实例的指针
+    ///
     Enemy *spawnIt(GameController *gc, QPointF initLoc) const;
 
     ~EnemyPrototype();

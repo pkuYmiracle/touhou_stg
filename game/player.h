@@ -9,14 +9,21 @@
 class GameController;
 class Player : public LivingEntity {
     GameController *gc;
+
+    ///
+    /// \brief bulletGroup 所发射的弹幕群
+    ///
     BulletGroup *bulletGroup;
 
 public:
     explicit Player(GameController *gc, QString url);
 
-    //  每frame调用一次
-    //  功能：发射子弹，更新速度向量
+    ///
+    /// \brief advance 逐帧调用，处理玩家输入
+    /// \param phase
+    ///
     void advance(int phase) override;
+
     BulletGroup *getBulletGroup() const;
     void setBulletGroup(BulletGroup *newBulletGroup);
 };

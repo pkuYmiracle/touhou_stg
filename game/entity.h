@@ -11,12 +11,13 @@
 class Entity : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 protected:
-    QVector2D speed = {0, 0};  // speed vector per frame.
+    /// 每帧的速度
+    QVector2D speed = {0, 0};
 public:
     explicit Entity();
     virtual ~Entity(){};
 
-    //实现位置的移动
+    /// 逐帧调用，实现位置移动
     void advance(int phase) override;
 
     bool isPlayer() const;

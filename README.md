@@ -23,4 +23,4 @@
 
 
 结构图（暂定，随时修改）
-<img src="http://assets.processon.com/chart_image/6277d8c31efad40df02af5ad.png?_=1653295454652" alt="设计结构图" style="zoom: 25%;" />
+<img src="https://i-s2.328888.xyz/2022/06/30/62bd9f0fc5214.png" alt="设计结构图" style="zoom: 25%;" />

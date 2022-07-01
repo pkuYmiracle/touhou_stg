@@ -16,7 +16,7 @@ public:
     ///
     void spawnBulletGroupFrom(LivingEntity *e) const;
 };
-extern std::vector<BulletGroup> bulletGroups;
+extern std::vector<BulletGroup> bulletGroups,player_bulletGroups,boss_bulletGroups;
 
 
 ///

@@ -43,12 +43,12 @@ void Scenario::start(GameController *gc) {
     if (bosses.size()) {
         boss_id = 0;
         if (boss_id + 1 < boss_time.size()) {
-            countdown = (boss_time[boss_id + 1] - boss_time[boss_id]) * 100;
+            countdown = (boss_time[boss_id + 1] - boss_time[boss_id]) * 200;
             qDebug() << "QAQ一开始:" << countdown << endl;
         } else
-            countdown = 1000 * 10;
+            countdown = 2500 ;
     } else {
-        countdown = 1000 * 10;
+        countdown = 2500 ;
         boss_id = -1;
     }
 }
@@ -56,24 +56,24 @@ void Scenario::start(GameController *gc) {
 Scenario Scenario::gen_random_scenario() {
     Scenario s2;
     double clk = 0;
-    for (int boss_count = 1; boss_count <= 5; boss_count++) {
+    for (int boss_count = 1; boss_count <= 7; boss_count++) {
         int id = rand() % enemyPrototypes_boss.size();
         int x = rand() % 400 + 50, y = rand() % 400 + 50;
         s2.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_boss[id]);
         //接下来是小怪
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 10; i++) {
             id = rand() % enemyPrototypes_small.size();
             x = rand() % 500, y = rand() % 500;
             s2.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
         }
         clk += rand() % 5;
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 9; i++) {
             id = rand() % enemyPrototypes_small.size();
             x = rand() % 500, y = rand() % 500;
             s2.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
         }
         clk += rand() % 5;
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 9; i++) {
             id = rand() % enemyPrototypes_small.size();
             x = rand() % 500, y = rand() % 500;
             s2.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
@@ -84,59 +84,55 @@ Scenario Scenario::gen_random_scenario() {
 }
 std::vector<Scenario> scenarios;
 void init_scenarios() {
-    Scenario s;
-    double t_ = 0;
-    //一个关卡由很多enemy组成. 一个enemy由一个enemyPrototypes生成
-    s.add(t_, {500, 500}, *enemyPrototypes_boss[0]);
-    t_ = +15;  //展示一下所有bulletgroup
-    s.add(t_, {25, 25},
-          *enemyPrototypes_small[1]);  //在屏幕之外生成不会这么突兀
-    t_ += 3;
-    s.add(t_, {800, 25}, *enemyPrototypes_small[3]);  //屏幕显示范围左上角(0,0)右下角(WIDTH,HEIGHT)
-                                                      //左右是x，上下是y
-    t_ += 3;
-    s
-        //下面这六只一起飞
-        .add(t_, {500, 0}, *enemyPrototypes_small[4])
-        .add(t_, {500, 0}, *enemyPrototypes_small[5])
-        .add(t_ + 0.5, {500, 0}, *enemyPrototypes_small[4])
-        .add(t_ + 0.5, {500, 0}, *enemyPrototypes_small[5])
-        .add(t_ + 1, {500, 0}, *enemyPrototypes_small[4])
-        .add(t_ + 1, {500, 0}, *enemyPrototypes_small[5]);
-    //
-    t_ += 5;
-    s.add(t_, {0, 300}, *enemyPrototypes_small[2])
-        .add(t_ + 0.7, {0, 450}, *enemyPrototypes_small[2])
-        .add(t_ + 1.4, {0, 600}, *enemyPrototypes_small[2]);
-    t_ += 5;
-    s.add(t_, {0, 100}, *enemyPrototypes_small[6]);
-    t_ += 5;
-    s.add(t_, {0, 100}, *enemyPrototypes_small[7]);
-
-    scenarios.push_back(s);
-
+    Scenario s1;
+    double clk = 0;
+    for (int boss_count = 1; boss_count <= 2; boss_count++) {
+        int id = rand() % enemyPrototypes_boss.size();
+        int x = rand() % 400 + 50, y = rand() % 400 + 50;
+        s1.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_boss[id]);
+        //接下来是小怪
+        for (int i = 0; i < 2; i++) {
+            id = rand() % enemyPrototypes_small.size();
+            x = rand() % 500, y = rand() % 500;
+            s1.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
+        }
+        clk += rand() % 5;
+        for (int i = 0; i < 3; i++) {
+            id = rand() % enemyPrototypes_small.size();
+            x = rand() % 500, y = rand() % 500;
+            s1.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
+        }
+        clk += rand() % 5;
+        for (int i = 0; i < 3; i++) {
+            id = rand() % enemyPrototypes_small.size();
+            x = rand() % 500, y = rand() % 500;
+            s1.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
+        }
+        clk += rand() % 5 + 8;
+    }
+    scenarios.push_back(s1);
     // 关卡2：
 
     Scenario s2;
-    double clk = 0;
-    for (int boss_count = 1; boss_count <= 3; boss_count++) {
+    clk = 0;
+    for (int boss_count = 1; boss_count <= 4; boss_count++) {
         int id = rand() % enemyPrototypes_boss.size();
         int x = rand() % 400 + 50, y = rand() % 400 + 50;
         s2.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_boss[id]);
         //接下来是小怪
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             id = rand() % enemyPrototypes_small.size();
             x = rand() % 500, y = rand() % 500;
             s2.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
         }
         clk += rand() % 5;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             id = rand() % enemyPrototypes_small.size();
             x = rand() % 500, y = rand() % 500;
             s2.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
         }
         clk += rand() % 5;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             id = rand() % enemyPrototypes_small.size();
             x = rand() % 500, y = rand() % 500;
             s2.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
@@ -146,7 +142,7 @@ void init_scenarios() {
     scenarios.push_back(s2);
     Scenario s3;
     clk = 0;
-    for (int boss_count = 1; boss_count <= 4; boss_count++) {
+    for (int boss_count = 1; boss_count <= 5; boss_count++) {
         int id = rand() % enemyPrototypes_boss.size();
         int x = rand() % 400 + 50, y = rand() % 400 + 50;
         s3.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_boss[id]);
@@ -157,7 +153,7 @@ void init_scenarios() {
             s3.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
         }
         clk += rand() % 5;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             id = rand() % enemyPrototypes_small.size();
             x = rand() % 500, y = rand() % 500;
             s3.add(clk, {(qreal)x, (qreal)y}, *enemyPrototypes_small[id]);
@@ -197,16 +193,16 @@ void Scenario::advance() {
     if (boss_id == -1 && bosses.size()) {
         boss_id = 0;
         if (boss_id + 1 < boss_time.size()) {
-            countdown = (boss_time[boss_id + 1] - boss_time[boss_id]) * 100;
+            countdown = (boss_time[boss_id + 1] - boss_time[boss_id]) * 200;
             qDebug() << "一开始:" << countdown << endl;
         } else
-            countdown = 1000 * 10;
+            countdown = 2500 ;
     } else if (bosses.size() && boss_id < bosses.size() &&
                bosses[boss_id]->getHp() <= 0) {
         if (boss_id + 1 < boss_time.size())
-            countdown += (boss_time[boss_id + 1] - boss_time[boss_id]) * 100;
+            countdown += (boss_time[boss_id + 1] - boss_time[boss_id]) * 200;
         else
-            countdown = 1000 * 10;
+            countdown = 2500 ;
         boss_id++;
     }
     countdown--;

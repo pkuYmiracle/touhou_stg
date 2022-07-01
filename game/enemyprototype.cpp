@@ -100,7 +100,7 @@ EnemyPrototype::~EnemyPrototype() {
 std::vector<EnemyPrototype *> enemyPrototypes_boss, enemyPrototypes_small;
 void init_boss() {
     QString e_picUrl = ":/game/assets/enemy.png";  //每一组怪的图
-    int e_hp = ENEMY_HP;                           //每一组怪的血
+    int e_hp = ENEMY_HP*2;                           //每一组怪的血
     EnemyPrototype *ep =
         new EnemyPrototype(e_picUrl, e_hp, 1);  //最后一个参数为1：表示boss
     // 为一个EnemyPrototype设置动作序列，参数的意义具体见各个动作的构造函数
@@ -115,12 +115,12 @@ void init_boss() {
     enemyPrototypes_boss.push_back(ep);
     for (int i = 0; i < 10; i++) {
         QString e_picUrl = ":/game/assets/enemy.png";  //每一组怪的图
-        int e_hp = ENEMY_HP * (rand() % 3 + 1);        //每一组怪的血
+        int e_hp = ENEMY_HP * (rand() % 3 + 2);        //每一组怪的血
 
         EnemyPrototype *ep =
             new EnemyPrototype(e_picUrl, e_hp, 1);  //最后一个参数为1：表示boss
         // 为一个EnemyPrototype设置动作序列，参数的意义具体见各个动作的构造函数
-        for (int t = 0; t < 10; t++) {
+        for (int t = 0; t < 30; t++) {
             if (rand() % 4) {
                 int id = rand() % bulletGroups.size();
 
@@ -137,13 +137,21 @@ void init_boss() {
                 *ep << (new Move({x, y}, t));
                 *ep << (new Move({0, 0}, t + 1));
             }
+            if(t % 3 == 0)
+            {
+                int id = rand() % boss_bulletGroups.size();
+
+                qreal t = (qreal)(rand() % 10 + 1);
+                t /= 10;
+                (*ep) << (new Attack(boss_bulletGroups[id], t));
+            }
         }
         enemyPrototypes_boss.push_back(ep);
     }
 }
 void init_small() {
     QString e_picUrl = ":/game/assets/enemy07.png";
-    int e_hp = ENEMY_HP;  //每一组怪的血
+    int e_hp = ENEMY_HP * 3;  //每一组怪的血
     EnemyPrototype *ep1 = new EnemyPrototype(e_picUrl, e_hp, 0);  // small enemy
     (*ep1) << (new Move({3, 3}, 1.3)) << (new Attack(bulletGroups[4], 1.5))
            << (new Move({0, 0}, 1.3)) << (new Attack(bulletGroups[4], 0))
@@ -207,15 +215,14 @@ void init_small() {
     pic_urls.push_back(":/game/assets/enemy03.png");
     pic_urls.push_back(":/game/assets/enemy02.png");
     pic_urls.push_back(":/game/assets/enemy01.png");
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < 40; i++) {
         QString e_picUrl = pic_urls[rand() % pic_urls.size()];  //每一组怪的图
         qreal e_hp = ENEMY_HP;  //每一组怪的血
-        e_hp *= (1 + rand() % 10);
-        e_hp /= 4;
+        e_hp *= (2 + rand() % 10);
         EnemyPrototype *ep =
             new EnemyPrototype(e_picUrl, e_hp, 0);  //最后一个参数为0：表示小怪
         // 为一个EnemyPrototype设置动作序列，参数的意义具体见各个动作的构造函数
-        int T = rand() % 10 + 5;
+        int T = rand() % (std::min(i + 2,10)) + 5;
         for (int t = 0; t < T; t++) {
             if (rand() % 2) {
                 int id = rand() % bulletGroups.size();

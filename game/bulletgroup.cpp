@@ -24,9 +24,20 @@ void generate_bg(BulletGroup &bg, double bg_atk, QString bg_picUrl, double n0,
              static_cast<float>(n2 * sin(2 * pi * i / n0 + n3))},
             bg_atk, bg_picUrl));
 }
-std::vector<BulletGroup> bulletGroups;
+std::vector<BulletGroup> bulletGroups,player_bulletGroups,boss_bulletGroups;;
 void initBulletGroups() {
     //这是一个预置bulletGroups的实例
+    std::vector<QString>Urls;
+    Urls.push_back(":/game/assets/bullet_blue01.png");
+    Urls.push_back(":/game/assets/bullet_blue02.png");
+    Urls.push_back(":/game/assets/bullet_blue03.png");
+    Urls.push_back(":/game/assets/bullet_blue04.png");
+    Urls.push_back(":/game/assets/bullet_blue05.png");
+    Urls.push_back(":/game/assets/bullet_blue06.png");
+    Urls.push_back(":/game/assets/bullet_yellow.png");
+    Urls.push_back(":/game/assets/bullet_yellow2.png");
+    Urls.push_back(":/game/assets/bullet_pink01.png");
+
     BulletGroup bg;
     // 一个bulletGroups可以被某个LivingEntity发射，包含若干颗bullet.
     // 每个bullet由一个bulletPrototype生成. 具体参数见构造函数
@@ -100,7 +111,7 @@ void initBulletGroups() {
     bulletGroups.push_back(bg_yellow_star);
     double bg_atk = 2, n0 = 18, n1 = 5,
            n2 = 5;  // n1是起始半径，n2控制速度，n0即将圆n0等分
-    QString bg_picUrl = ":/game/assets/bullet_red02.png";
+    QString bg_picUrl = ":/game/assets/bullet_yellow.png";
     BulletGroup bg_05, bg_06, bg_07, bg_08, bg_09, bg_10, bg_11, bg_12, bg_13;
     bg_05.bullets.push_back(
         BulletPrototype({5, 0}, {-3, 1.5}, bg_atk, bg_picUrl));
@@ -108,7 +119,7 @@ void initBulletGroups() {
         BulletPrototype({5, 0}, {3, 1.5}, bg_atk, bg_picUrl));
 
     bulletGroups.push_back(bg_05);  //左下+右下
-    bg_picUrl = ":/game/assets/bullet_red02.png";
+    bg_picUrl = ":/game/assets/bullet_yellow2.png";
     for (int i = 0; i < n0; i++)
         bg_06.bullets.push_back(
             BulletPrototype({static_cast<float>(n1 * cos(2 * pi * i / n0)),
@@ -126,7 +137,7 @@ void initBulletGroups() {
              static_cast<float>(n2 * sin(2 * pi * i / n0 + pi * 0.3))},
             bg_atk, bg_picUrl));
     bulletGroups.push_back(bg_06);  //两层红色圈
-    bg_picUrl = ":/game/assets/bullet_red03.png";
+    bg_picUrl = ":/game/assets/bullet_pink01.png";
     n0 = 3;
     n2 = 4;
     for (int i = 0; i < n0; i++)
@@ -146,7 +157,7 @@ void initBulletGroups() {
              static_cast<float>(n2 * sin(2 * pi * i / n0 + pi / 3))},
             bg_atk, bg_picUrl));
     bulletGroups.push_back(bg_07);  //三角
-    bg_picUrl = ":/game/assets/bullet_red03.png";
+    bg_picUrl = ":/game/assets/bullet_blue02.png";
     n0 = 3;
     n2 = 2;
     for (int i = 0; i < n0; i++)
@@ -169,10 +180,10 @@ void initBulletGroups() {
     bulletGroups.push_back(bg_08);
 
     //玩家的bg_09 to bg_12
-    bg_picUrl = ":/game/assets/bullet_red05";
+    bg_picUrl = ":/game/assets/bullet_yellow2";
     bg_09.bullets.push_back(
         BulletPrototype({0, -8}, {0, -4}, bg_atk, bg_picUrl));
-    bg_picUrl = ":/game/assets/bullet_red03";
+    bg_picUrl = ":/game/assets/bullet_yellow";
     bg_atk = 1;
     bg_09.bullets.push_back(
         BulletPrototype({-4, -4}, {-3, -4}, bg_atk, bg_picUrl));
@@ -180,12 +191,12 @@ void initBulletGroups() {
         BulletPrototype({4, -4}, {3, -4}, bg_atk, bg_picUrl));
     bulletGroups.push_back(bg_09);  //三个方向的
     bg_picUrl = ":/game/assets/bullet_blue05";
-    bg_atk = 1.5;
+    bg_atk = 1;
     bg_10.bullets.push_back(
         BulletPrototype({0, -8}, {0, -4}, bg_atk, bg_picUrl));
     bulletGroups.push_back(bg_10);  //一个方向但是攻击力强的蓝色圆
     bg_picUrl = ":/game/assets/bullet_pink01";
-    bg_atk = 0.6;
+    bg_atk = 0.4;
     bg_11.bullets.push_back(
         BulletPrototype({0.00, -5.00}, {0.00, -4.00}, bg_atk, bg_picUrl));
     bg_11.bullets.push_back(
@@ -208,7 +219,7 @@ void initBulletGroups() {
         BulletPrototype({4.76, 1.55}, {1.90, 0.62}, bg_atk, bg_picUrl));
     bulletGroups.push_back(bg_11);  //鸡肋的粉色星星
     bg_picUrl = ":/game/assets/bullet_blue06";
-    bg_atk = 0.6;
+    bg_atk = 0.4;
     n0 = 12;
     n1 = 7;
     n2 = 5;
@@ -220,6 +231,77 @@ void initBulletGroups() {
                              static_cast<float>(n2 * sin(2 * pi * i / n0))},
                             bg_atk, bg_picUrl));
     bulletGroups.push_back(bg_12);  //鸡肋的蓝色扇
-    generate_bg(bg_13, 0.35, ":/game/assets/bullet_yellow2", 10, 7, 5);
+    generate_bg(bg_13, 0.2, ":/game/assets/bullet_yellow2", 10, 7, 5);
     bulletGroups.push_back(bg_13);
+    player_bulletGroups.clear();
+
+    BulletGroup playb,smallb;
+    for (const auto &p : Urls){
+        smallb.bullets.clear();
+        generate_bg(smallb, 0.2, p, 10, 7, 5);
+        bulletGroups.push_back(smallb);
+    }
+    bg_picUrl = ":/game/assets/bullet_blue06";
+    bg_atk = 2.5;
+    n0 = 8;
+    n1 = 7;
+    n2 = 5;
+    for (int i = 5; i < n0; i++)
+        playb.bullets.push_back(
+            BulletPrototype({static_cast<float>(n1 * cos(2 * pi * i / n0)),
+                             static_cast<float>(n1 * sin(2 * pi * i / n0))},
+                            {static_cast<float>(n2 * cos(2 * pi * i / n0)),
+                             static_cast<float>(n2 * sin(2 * pi * i / n0))},
+                            bg_atk, bg_picUrl));
+   player_bulletGroups.push_back(playb);
+   playb.bullets.clear();
+   bg_picUrl = ":/game/assets/bullet_blue05";
+   bg_atk = 3;
+   playb.bullets.push_back(
+       BulletPrototype({0, -8}, {0, -4}, bg_atk, bg_picUrl));
+
+   player_bulletGroups.push_back(playb);
+
+
+   playb.bullets.clear();
+
+   generate_bg(playb, 2, ":/game/assets/bullet_yellow2", 9, 7, 5);
+   player_bulletGroups.push_back(playb);
+   playb.bullets.clear();
+   bg_picUrl = ":/game/assets/bullet_pink01";
+   bg_atk = 0.4;
+   playb.bullets.push_back(
+       BulletPrototype({0.00, -5.00}, {0.00, -4.00}, bg_atk, bg_picUrl));
+   playb.bullets.push_back(
+       BulletPrototype({4.76, -1.55}, {3.80, -1.24}, bg_atk, bg_picUrl));
+   playb.bullets.push_back(
+       BulletPrototype({2.94, 4.05}, {2.35, 3.24}, bg_atk, bg_picUrl));
+   playb.bullets.push_back(
+       BulletPrototype({-2.94, 4.05}, {-2.35, 3.24}, bg_atk, bg_picUrl));
+   playb.bullets.push_back(
+       BulletPrototype({-4.76, -1.55}, {-3.80, -1.24}, bg_atk, bg_picUrl));
+   playb.bullets.push_back(
+       BulletPrototype({0.00, 5.00}, {0.00, 2.00}, bg_atk, bg_picUrl));
+   playb.bullets.push_back(
+       BulletPrototype({-4.76, 1.55}, {-1.90, 0.62}, bg_atk, bg_picUrl));
+   playb.bullets.push_back(
+       BulletPrototype({-2.94, -4.05}, {-1.18, -1.62}, bg_atk, bg_picUrl));
+   playb.bullets.push_back(
+       BulletPrototype({2.94, -4.05}, {1.18, -1.62}, bg_atk, bg_picUrl));
+   playb.bullets.push_back(
+       BulletPrototype({4.76, 1.55}, {1.90, 0.62}, bg_atk, bg_picUrl));
+   player_bulletGroups.push_back(playb);
+
+   BulletGroup bossb;
+   Urls.clear();
+   Urls.push_back(":/game/assets/bullet_red02");
+   Urls.push_back(":/game/assets/bullet_red04");
+   Urls.push_back(":/game/assets/bullet_red05");
+   for (const auto &p : Urls){
+       bossb.bullets.clear();
+       generate_bg(bossb, 100, p, 10, 7, 5);
+       boss_bulletGroups.push_back(bossb);
+   }
+
+
 }

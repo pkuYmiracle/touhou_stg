@@ -30,13 +30,13 @@ void Entity::advance(int phase) {
     if (this->isPlayer()) {
         // Player要完整在框内.
         this->setPos(this->x(), this->y() + getSpeed().y());
-        if (GAME_BOARD_RECT.contains(
+        if (PLAYER_BOARD_RECT.contains(
                 this->mapRectToScene(this->boundingRect())) == false) {
             this->setPos(this->x(), this->y() - getSpeed().y());
         }
 
         this->setPos(this->x() + getSpeed().x(), this->y());
-        if (GAME_BOARD_RECT.contains(
+        if (PLAYER_BOARD_RECT.contains(
                 this->mapRectToScene(this->boundingRect())) == false) {
             this->setPos(this->x() - getSpeed().x(), this->y());
         }

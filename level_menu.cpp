@@ -61,7 +61,7 @@ Level_menu::Level_menu(QWidget *parent, int _id)
             lis.push_back(QString::number(id));
             lis.push_back(nxt_board_urls[pos]);
             GameController *gc = new GameController(
-                lis, this, &bulletGroups[bulletGroupId[pos]]);
+                lis, this, &player_bulletGroups[pos]);
 
             this->hide();
         });
@@ -90,7 +90,7 @@ void Level_menu::turn_left() {
             lis.push_back(QString::number(id));
             lis.push_back(nxt_board_urls[pos]);
             GameController *gc = new GameController(
-                lis, this, &bulletGroups[bulletGroupId[pos]]);
+                lis, this, &player_bulletGroups[pos]);
 
             this->hide();
         });
@@ -114,7 +114,7 @@ void Level_menu::turn_right() {
             lis.push_back(QString::number(id));
             lis.push_back(nxt_board_urls[pos]);
             GameController *gc = new GameController(
-                lis, this, &bulletGroups[bulletGroupId[pos]]);
+                lis, this, &player_bulletGroups[pos]);
 
             this->hide();
         });

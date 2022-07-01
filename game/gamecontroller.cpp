@@ -52,8 +52,8 @@ GameController::GameController(const std::vector<QString> &info_ls,
     QRect sceneRect = QRect(0, 0, WIDTH, HEIGHT);
     view->setScene(scene);
     //    view->setWindowFlag(Qt::FramelessWindowHint);
-    player->setPos(GAME_BOARD_RECT.center().x() + 100,
-                   GAME_BOARD_RECT.center().y() + 200);
+    player->setPos(GAME_BOARD_RECT.center().x() ,
+                   GAME_BOARD_RECT.center().y() + 400);
     scene->setSceneRect(sceneRect);
 
     scene->addItem(player);

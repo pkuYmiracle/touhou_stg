@@ -13,12 +13,11 @@
 - [x] 玩家的键盘操纵
 - [x] 弹幕系统
 - [x] 战斗逻辑（碰撞，血量，死亡）
-> 弹幕群与敌人动作、关卡预设样例参考GameController中`initBulletGroups`与`initEnemyPrototype`, `initScenario`函数的实现
+> 弹幕群与敌人动作、关卡预设样例参考GameController中`initBulletGroups`与`initEnemyPrototype`, `initScenario`函数的实现  
 
-待完成：
-- [ ] 关卡逻辑
-- [ ] 游戏结束后与界面的对接、暂停
-- [ ] bgm与背景图片
+- [x] 关卡逻辑
+- [x] 游戏结束后与界面的对接、暂停
+- [x] bgm与背景图片
 
 
 
